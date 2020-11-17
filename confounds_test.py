@@ -27,6 +27,9 @@ def load_video(infn, clipheight=None):
 vid = './bathsong.mp4'
 metadata, singlevideo, dur, fps= load_video(vid)
 
+for frame in singlevideo:
+    print(frame.shape)
+
 img = singlevideo[0,:,:,:]
 
 lab_img = color.rgb2lab(img)
