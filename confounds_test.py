@@ -2,13 +2,6 @@ import skvideo.io
 import numpy as np
 from skimage import color
 
-class RGB2Lab(object):
-    """Convert RGB PIL image to ndarray Lab."""
-    def __call__(self, img):
-        img = np.asarray(img, np.uint8)
-        img = color.rgb2lab(img)
-        return img
-
 def load_video(infn, clipheight=None):
     # Load metadata
     metadata = skvideo.io.ffprobe(infn)
@@ -36,5 +29,5 @@ metadata, singlevideo, dur, fps= load_video(vid)
 
 img = singlevideo[0,:,:,:]
 
-lab_img = RGB2Lab(img)
+lab_img = color.rgb2lab(img)
 print('Image converted')
