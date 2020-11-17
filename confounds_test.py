@@ -31,8 +31,5 @@ lab_vid = []
 for frame in singlevideo:
     lab_img = color.rgb2lab(frame)
     lab_vid.append(lab_img)
-print(len(lab_vid))
-print(type(lab_vid[0]))
 
-lab_arr = np.array(lab_vid)
-print(lab_arr.shape)
+lab_vid = np.array(lab_vid)
