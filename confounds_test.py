@@ -27,9 +27,10 @@ def load_video(infn, clipheight=None):
 vid = './bathsong.mp4'
 metadata, singlevideo, dur, fps= load_video(vid)
 
-lab_vid = []
-for frame in singlevideo:
-    lab_img = color.rgb2lab(frame)
-    lab_vid.append(lab_img)
+# Convert to LAB
+lab_vid = np.zeros(singlevideo.shape)
+for ind, frame in enumerate(singlevideo):
+    lab_vid[ind,:,:,:] = color.rgb2lab(frame)
 
-lab_vid = np.array(lab_vid)
+
+
