@@ -47,20 +47,21 @@ if __name__ == "__main__":
     movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
 
     for vid in os.listdir(vidPath):
-        #crop the video using ffmpeg command line
-        start = movie_times.loc[vid,'start']
-        end = movie_times.loc[vid,'end']
-        inPath = os.path.join(vidPath,vid)
-        outPath = f'{vidPath}/trimmed/{vid}'
+        if not os.path.isdir(f'{vidPath}/{vid}'):
+            #crop the video using ffmpeg command line
+            start = movie_times.loc[vid,'start']
+            end = movie_times.loc[vid,'end']
+            inPath = os.path.join(vidPath,vid)
+            outPath = f'{vidPath}/trimmed/{vid}'
 
-        crop(start,end,inPath,outPath)
-        print(f'{vid} trimmed')
+            crop(start,end,inPath,outPath)
+            print(f'{vid} trimmed')
 
-        #load the cropped video
-        metadata, singlevideo, dur, fps= load_video(outPath)
-        print(f'{vid} loaded')
+            #load the cropped video
+            metadata, singlevideo, dur, fps= load_video(outPath)
+            print(f'{vid} loaded')
 
-        # Convert to LAB
-        lab_vid = np.zeros(singlevideo.shape)
-        for ind, frame in enumerate(singlevideo):
-            lab_vid[ind,:,:,:] = color.rgb2lab(frame)
+            # Convert to LAB
+            lab_vid = np.zeros(singlevideo.shape)
+            for ind, frame in enumerate(singlevideo):
+                lab_vid[ind,:,:,:] = color.rgb2lab(frame)
