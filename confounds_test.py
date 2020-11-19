@@ -35,7 +35,7 @@ def crop(start,end,inPath,outPath):
     start: start time for trimmed video in form hh:mm:ss
     end: end time for trimmed video in form hh:mm:ss
     inPath: path to video to trim, include extension '*.mp4'
-    outPath: path to save trimmed video, include extenstion '*.mp4'
+    outPath: path to save trimmed video, include extension '*.mp4'
     """
     ffmpegCommand = "ffmpeg -i " + inPath + " -ss  " + start + " -to " + end + " -c copy " + outPath
     print(ffmpegCommand)
