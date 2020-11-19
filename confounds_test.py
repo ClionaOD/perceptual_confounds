@@ -1,3 +1,4 @@
+import os
 import skvideo.io
 import numpy as np
 from skimage import color
@@ -24,12 +25,31 @@ def load_video(infn, clipheight=None):
     
     return metadata,singlevideo,dur,fps
 
-vid = './bathsong.mp4'
+def runBash(command):
+    os.system(command)
+
+def crop(start,end,input,output):
+    """
+    args:
+    start: start time for trimmed video in form hh:mm:ss
+    end: end time for trimmed video in form hh:mm:ss
+    input: path to video to trim, include extension '*.mp4'
+    output: path to save trimmed video, include extenstion '*.mp4'
+    """
+    ffmpegCommand = "ffmpeg -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
+    print(ffmpegCommand)
+    runBash(ffmpegCommand)
+
+if __name__ == "__main__":
+    vidPath = ''
+
+    for vid in os.listdir('vidPath'):
+
+
+
 metadata, singlevideo, dur, fps= load_video(vid)
 
-lab_vid = []
-for frame in singlevideo:
-    lab_img = color.rgb2lab(frame)
-    lab_vid.append(lab_img)
-
-lab_vid = np.array(lab_vid)
+# Convert to LAB
+lab_vid = np.zeros(singlevideo.shape)
+for ind, frame in enumerate(singlevideo):
+    lab_vid[ind,:,:,:] = color.rgb2lab(frame)
