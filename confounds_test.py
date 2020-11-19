@@ -46,7 +46,7 @@ if __name__ == "__main__":
     vidPath = './test_stim'
     movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
 
-    for vid in os.listdir('vidPath'):
+    for vid in os.listdir(vidPath):
         #crop the video using ffmpeg command line
         start = movie_times.loc[vid,'start']
         end = movie_times.loc[vid,'end']
