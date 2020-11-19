@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 import skvideo.io
 import numpy as np
 from skimage import color
@@ -28,26 +29,38 @@ def load_video(infn, clipheight=None):
 def runBash(command):
     os.system(command)
 
-def crop(start,end,input,output):
+def crop(start,end,inPath,outPath):
     """
     args:
     start: start time for trimmed video in form hh:mm:ss
     end: end time for trimmed video in form hh:mm:ss
-    input: path to video to trim, include extension '*.mp4'
-    output: path to save trimmed video, include extenstion '*.mp4'
+    inPath: path to video to trim, include extension '*.mp4'
+    outPath: path to save trimmed video, include extenstion '*.mp4'
     """
-    ffmpegCommand = "ffmpeg -i " + input + " -ss  " + start + " -to " + end + " -c copy " + output
+    ffmpegCommand = "ffmpeg -i " + inPath + " -ss  " + start + " -to " + end + " -c copy " + outPath
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
 if __name__ == "__main__":
-    vidPath = ''
+    
+    vidPath = './test_stim'
+    movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
 
     for vid in os.listdir('vidPath'):
+        #crop the video using ffmpeg command line
+        start = movie_times.loc[vid,'start']
+        end = movie_times.loc[vid,'end']
+        inPath = os.path.join(vidPath,vid)
+        outPath = f'{vidPath}/trimmed/{vid}'
 
-metadata, singlevideo, dur, fps= load_video(vid)
+        crop(start,end,inPath,outPath)
+        print(f'{vid} trimmed')
 
-# Convert to LAB
-lab_vid = np.zeros(singlevideo.shape)
-for ind, frame in enumerate(singlevideo):
-    lab_vid[ind,:,:,:] = color.rgb2lab(frame)
+        #load the cropped video
+        metadata, singlevideo, dur, fps= load_video(outPath)
+        print(f'{vid} loaded')
+
+        # Convert to LAB
+        lab_vid = np.zeros(singlevideo.shape)
+        for ind, frame in enumerate(singlevideo):
+            lab_vid[ind,:,:,:] = color.rgb2lab(frame)
