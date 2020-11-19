@@ -45,8 +45,6 @@ if __name__ == "__main__":
 
     for vid in os.listdir('vidPath'):
 
-
-
 metadata, singlevideo, dur, fps= load_video(vid)
 
 # Convert to LAB
