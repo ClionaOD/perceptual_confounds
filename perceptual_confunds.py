@@ -1,4 +1,5 @@
 import os
+import pickle
 import pandas as pd
 import skvideo.io
 import numpy as np
@@ -89,6 +90,11 @@ def get_gcf(vidPath):
 
         print(f'{vid} mean gcf = {mean}')
 
+    with open('./framewise_dict.pickle','wb') as f:
+        pickle.dump(framewise_gcf, f)
+    with open('./mean_dict.pickle','wb') as f:
+        pickle.dump(mean_gcf, f)
+
     framewise_gcf = pd.DataFrame.from_dict(framewise_gcf)
     mean_gcf = pd.DataFrame.from_dict(mean_gcf)
 
@@ -100,7 +106,7 @@ if __name__ == "__main__":
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
-    crop_movies(vidPath, movie_times)
+    #crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_gcf(vidPath)
