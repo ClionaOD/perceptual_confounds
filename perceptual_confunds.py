@@ -1,5 +1,4 @@
 import os
-import pickle
 import pandas as pd
 import skvideo.io
 import numpy as np
@@ -79,7 +78,7 @@ def get_gcf(vidPath):
     for vid in os.listdir(f'{vidPath}/trimmed'):
         metadata, singlevideo, dur, fps = load_video(f'{vidPath}/trimmed/{vid}')
         print(f'{vid} loaded')
-
+        
         all_gcfs = np.zeros(singlevideo.shape[0])
         for idx, frame in enumerate(singlevideo):
             all_gcfs[idx] = compute_global_contrast_factor(frame)
@@ -90,13 +89,8 @@ def get_gcf(vidPath):
 
         print(f'{vid} mean gcf = {mean}')
 
-    with open('./framewise_dict.pickle','wb') as f:
-        pickle.dump(framewise_gcf, f)
-    with open('./mean_dict.pickle','wb') as f:
-        pickle.dump(mean_gcf, f)
-
-    framewise_gcf = pd.DataFrame.from_dict(framewise_gcf)
-    mean_gcf = pd.DataFrame.from_dict(mean_gcf)
+    framewise_gcf = pd.DataFrame.from_dict(framewise_gcf, orient='index')
+    mean_gcf = pd.DataFrame.from_dict(mean_gcf, orient='index')
 
     return framewise_gcf, mean_gcf
 
@@ -110,5 +104,5 @@ if __name__ == "__main__":
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_gcf(vidPath)
-    framewise_gcf.to_csv('./framewise_gcf.csv',index=False)
-    mean_gcf.to_csv('./mean_gcf.csv',index=False)
+    framewise_gcf.to_csv('./framewise_gcf.csv')
+    mean_gcf.to_csv('./mean_gcf.csv')
