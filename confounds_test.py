@@ -3,6 +3,7 @@ import pandas as pd
 import skvideo.io
 import numpy as np
 from skimage import color
+from gcf import compute_global_contrast_factor, compute_image_average_contrast
 
 def load_video(infn, clipheight=None):
     # Load metadata
@@ -41,11 +42,14 @@ def crop(start,end,inPath,outPath):
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
-if __name__ == "__main__":
+def crop_movies(vid_path, movie_times):
+    """
+    crop all videos in vidPath according to start/end in movie_times
     
-    vidPath = './test_stim'
-    movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
-
+    args: 
+    vid_path: the path to find videos to trim
+    movie_times: pandas dataframe containing cols:[vid_title, start_time, end_time]
+    """
     for vid in os.listdir(vidPath):
         if not os.path.isdir(f'{vidPath}/{vid}'):
             #crop the video using ffmpeg command line
@@ -57,11 +61,25 @@ if __name__ == "__main__":
             crop(start,end,inPath,outPath)
             print(f'{vid} trimmed')
 
-            #load the cropped video
-            metadata, singlevideo, dur, fps= load_video(outPath)
-            print(f'{vid} loaded')
+if __name__ == "__main__":
+    
+    vidPath = './test_stim'
+    movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
+    #crop all videos in vidPath according to start/end in movie_times
+    crop_movies(vidPath, movie_times)
+    
+    #load the cropped video
+    for vid in os.listdir(f'{vidPath}/trimmed'):
+        metadata, singlevideo, dur, fps= load_video(f'{vidPath}/trimmed/{vid}')
+        print(f'{vid} loaded')
 
-            # Convert to LAB
-            lab_vid = np.zeros(singlevideo.shape)
-            for ind, frame in enumerate(singlevideo):
-                lab_vid[ind,:,:,:] = color.rgb2lab(frame)
+        img = singlevideo[0,:,:,:]
+        gcf = compute_global_contrast_factor(img)
+        print(f'gcf for first frame is {gcf}')
+
+        
+    
+    # Convert to LAB
+    #lab_vid = np.zeros(singlevideo.shape)
+    #for ind, frame in enumerate(singlevideo):
+    #    lab_vid[ind,:,:,:] = color.rgb2lab(frame)
