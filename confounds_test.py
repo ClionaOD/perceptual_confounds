@@ -89,8 +89,8 @@ def get_gcf(vidPath):
 
         print(f'{vid} mean gcf = {mean_gcf}')
 
-    framewise_gcf = pd.DataFrame.from_dict(framewise_gcf)
-    mean_gcf = pd.DataFrame.from_dict(mean_gcf)
+    framewise_gcf = pd.DataFrame.from_records(framewise_gcf)
+    mean_gcf = pd.DataFrame.from_records(mean_gcf)
 
     return framewise_gcf, mean_gcf
 
