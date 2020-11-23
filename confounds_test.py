@@ -73,7 +73,7 @@ def get_gcf(vidPath):
     """
     
     framewise_gcf = {k:[] for k in os.listdir(f'{vidPath}/trimmed')}
-    mean_gcf = {k:0 for k in os.listdir(f'{vidPath}/trimmed')}
+    mean_gcf = {k:[] for k in os.listdir(f'{vidPath}/trimmed')}
     
     #load the cropped video
     for vid in os.listdir(f'{vidPath}/trimmed'):
@@ -85,12 +85,12 @@ def get_gcf(vidPath):
             all_gcfs[idx] = compute_global_contrast_factor(frame)
         
         framewise_gcf[vid] = all_gcfs
-        mean_gcf[vid] = np.mean(all_gcfs)
+        mean_gcf[vid] = [np.mean(all_gcfs)]
 
         print(f'{vid} mean gcf = {mean_gcf}')
 
-    framewise_gcf = pd.DataFrame.from_records(framewise_gcf)
-    mean_gcf = pd.DataFrame.from_records(mean_gcf)
+    framewise_gcf = pd.DataFrame.from_dict(framewise_gcf)
+    mean_gcf = pd.DataFrame.from_dict(mean_gcf)
 
     return framewise_gcf, mean_gcf
 
