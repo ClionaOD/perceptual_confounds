@@ -66,16 +66,22 @@ if __name__ == "__main__":
     vidPath = './test_stim'
     movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
     #crop all videos in vidPath according to start/end in movie_times
-    crop_movies(vidPath, movie_times)
+    #crop_movies(vidPath, movie_times)
+    
+    framewise_gcf = {k:[] for k in os.listdir(f'{vidPath}/trimmed')}
+    mean_gcf = {k:0 for k in os.listdir(f'{vidPath}/trimmed')}
     
     #load the cropped video
     for vid in os.listdir(f'{vidPath}/trimmed'):
-        metadata, singlevideo, dur, fps= load_video(f'{vidPath}/trimmed/{vid}')
+        metadata, singlevideo, dur, fps = load_video(f'{vidPath}/trimmed/{vid}')
         print(f'{vid} loaded')
 
-        img = singlevideo[0,:,:,:]
-        gcf = compute_global_contrast_factor(img)
-        print(f'gcf for first frame is {gcf}')
+        all_gcfs = np.zeros(singlevideo.shape[0])
+        for idx, frame in enumerate(singlevideo):
+            all_gcfs[idx] = compute_global_contrast_factor(frame)
+        
+        framewise_gcf[vid] = all_gcfs
+        mean_gcf[vid] = np.mean(all_gcfs)
 
         
     
