@@ -67,7 +67,7 @@ def get_gcf(vidPath):
     args:  
         vidPath: path to the original videos, as in crop_movies
     returns:
-        framewise_gcf: a pandas dataframe with cols=movie_titles and values=gcf for each frame
+        framewise_gcf: a pandas dataframe with indices=movie_titles and values=gcf for each frame
         mean_gcf: the mean gcf for each video
     """
     
