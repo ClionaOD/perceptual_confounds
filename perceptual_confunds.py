@@ -97,7 +97,7 @@ def get_gcf(vidPath):
 if __name__ == "__main__":
     
     vidPath = './test_stim'
-    movie_times = pd.read_csv('./test_movie.csv',sep=';', index_col='title')
+    movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
     crop_movies(vidPath, movie_times)
