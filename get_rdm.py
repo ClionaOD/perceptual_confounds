@@ -18,10 +18,10 @@ cluster_order = hierarchical_clustering(gcf_rdm.values, gcf_rdm.index)
 
 reord_df = gcf_rdm.reindex(index=cluster_order,columns=cluster_order)
 
-plt.close()
 fig,ax = plt.subplots(figsize=(11.69,8.27))
 sns.heatmap(reord_df, ax=ax)
 ax.tick_params(axis='both',labelsize=9)
 plt.tight_layout
 plt.savefig('mean global contrast RDM.pdf')
 plt.show()
+plt.close()
