@@ -103,7 +103,7 @@ if __name__ == "__main__":
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
-    #crop_movies(vidPath, movie_times)
+    crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_gcf(vidPath)
