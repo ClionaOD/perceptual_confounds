@@ -17,7 +17,6 @@ def load_video(infn, clipheight=None):
 
     # Load a video
     singlevideo=skvideo.io.vread(infn)
-    print(singlevideo.shape)
     singlevideo=singlevideo.astype(np.uint8)
 
     # Clip height?
@@ -132,7 +131,9 @@ if __name__ == "__main__":
     vidPath = '/home/clionaodoherty/foundcog_stimuli'
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
-    #crop all videos in vidPath according to start/end in movie_times
+    load_video('vidPath/trimmed/minions_supermarket.mp4')
+    load_video('vidPath/fps/minions_supermarket.mp4')
+    """#crop all videos in vidPath according to start/end in movie_times
     #crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
@@ -145,4 +146,4 @@ if __name__ == "__main__":
         if not os.path.isdir(f'{vidPath}/{vid}'):
             metadata, singlevideo, dur, fps = load_video(f'{vidPath}/trimmed/{vid}')
             df.loc[vid]=fps
-    df.to_csv('./fps_redo.csv')
+    df.to_csv('./fps_redo.csv')"""
