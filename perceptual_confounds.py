@@ -5,7 +5,7 @@ import numpy as np
 from skimage import color
 
 from gcf import compute_global_contrast_factor, compute_image_average_contrast
-from rms_dff import rmsdiff
+#from rms_dff import rmsdiff
 
 def load_video(infn, clipheight=None):
     # Load metadata
