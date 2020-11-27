@@ -91,9 +91,9 @@ def get_gcf(vid, vidname, frame_dict, mean_dict):
     for idx, frame in enumerate(vid):
         all_gcfs[idx] = compute_global_contrast_factor(frame)
         
-    frame_dict[vid] = all_gcfs
+    frame_dict[vidname] = all_gcfs
     mean = np.mean(all_gcfs)
-    mean_dict[vid] = [mean]
+    mean_dict[vidname] = [mean]
 
     print(f'{vid} mean gcf = {mean}')
 
