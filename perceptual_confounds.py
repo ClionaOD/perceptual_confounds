@@ -44,7 +44,7 @@ def crop(start,dur,inPath,outPath):
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
-def change_framerate(fps,inPath,outPath):
+def change_framerate(fps='25',inPath,outPath):
     """
     args:
         fps: desired framerate
@@ -75,9 +75,8 @@ def crop_movies(vid_path, movie_times):
             crop(start,dur,inPath,outPath)
             print(f'{vid} trimmed')
 
-            #set to mean frame rate
-            fps = pd.read_csv('./fps.csv')
-            change_framerate(str(np.mean(fps.values)), f'{vidPath}/trimmed/{vid}', f'{vidPath}/fps/{vid}')
+            #set to mean frame rate fps=25
+            change_framerate(inPath=f'{vidPath}/trimmed/{vid}', outPath=f'{vidPath}/fps/{vid}')
             print(f'{vid} frame rate standardised')
 
 def get_gcf(vid, frame_dict, mean_dict):
