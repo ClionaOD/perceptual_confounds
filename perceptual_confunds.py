@@ -3,7 +3,9 @@ import pandas as pd
 import skvideo.io
 import numpy as np
 from skimage import color
+
 from gcf import compute_global_contrast_factor, compute_image_average_contrast
+from rms_dff import rmsdiff
 
 def load_video(infn, clipheight=None):
     # Load metadata
@@ -62,6 +64,8 @@ def crop_movies(vid_path, movie_times):
             print(f'{vid} trimmed')
 
 def get_gcf(vidPath):
+    #TODO: make gcf a separate function
+    #TODO: make this a get_confounds function including rms
     """
     calculate gcf using code from Matkovic et al for each video
     args:  
@@ -100,12 +104,21 @@ def get_gcf(vidPath):
 if __name__ == "__main__":
     
     vidPath = '/home/clionaodoherty/foundcog_stimuli'
-    movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
+    """movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
+    #TODO:make movie crops same length (22.5 s)
+    #TODO:make movie crops same frame rate
     crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_gcf(vidPath)
     framewise_gcf.to_csv('./framewise_gcf.csv')
-    mean_gcf.to_csv('./mean_gcf.csv')
+    mean_gcf.to_csv('./mean_gcf.csv')"""
+
+    df = pd.DataFrame(index=os.listdir(vidPath),columns=['fps'])
+    for vid in os.listdir(vidPath):
+        if not os.path.isdir(f'{vidPath}/{vid}'):
+            metadata, singlevideo, dur, fps = load_video(f'{vidPath}/trimmed/{vid}')
+            df.loc[vid]=fps
+    df.to_csv('./fps.csv')
