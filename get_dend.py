@@ -8,7 +8,7 @@ def hierarchical_clustering(in_matrix, label_list, outpath=None):
     matrix = copy.copy(in_matrix)
     np.fill_diagonal(matrix, 0)
     fig,ax = plt.subplots(figsize=(15,10))
-    dend = sch.dendrogram(sch.linkage(matrix, method='euclidean'), 
+    dend = sch.dendrogram(sch.linkage(matrix, method='ward'), 
         ax=ax, 
         labels=label_list, 
         orientation='right'
