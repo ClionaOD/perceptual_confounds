@@ -79,7 +79,7 @@ def crop_movies(vid_path, movie_times):
             change_framerate(inPath=f'{vidPath}/trimmed/{vid}', outPath=f'{vidPath}/fps/{vid}')
             print(f'{vid} frame rate standardised')
 
-def get_gcf(vid, frame_dict, mean_dict):
+def get_gcf(vid, vidname, frame_dict, mean_dict):
     """
     args:
         vid: the video get contrast of
@@ -117,7 +117,7 @@ def get_confounds(vidPath):
         metadata, singlevideo, dur, fps = load_video(f'{vidPath}/{vid}')
         print(f'{vid} loaded')
         
-        get_gcf(singlevideo, framewise_gcf, mean_gcf)
+        get_gcf(singlevideo, vid, framewise_gcf, mean_gcf)
 
     framewise_gcf = pd.DataFrame.from_dict(framewise_gcf, orient='index')
     mean_gcf = pd.DataFrame.from_dict(mean_gcf, orient='index')
