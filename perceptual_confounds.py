@@ -44,7 +44,7 @@ def crop(start,dur,inPath,outPath):
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
-def change_framerate(fps='25',inPath,outPath):
+def change_framerate(inPath,outPath,fps='25'):
     """
     args:
         fps: desired framerate
