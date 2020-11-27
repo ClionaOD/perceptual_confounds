@@ -131,8 +131,8 @@ if __name__ == "__main__":
     vidPath = '/home/clionaodoherty/foundcog_stimuli'
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
-    load_video('vidPath/trimmed/minions_supermarket.mp4')
-    load_video('vidPath/fps/minions_supermarket.mp4')
+    load_video(f'{vidPath}/trimmed/minions_supermarket.mp4')
+    load_video(f'{vidPath}/fps/minions_supermarket.mp4')
     """#crop all videos in vidPath according to start/end in movie_times
     #crop_movies(vidPath, movie_times)
 
