@@ -117,7 +117,7 @@ def get_confounds(vidPath):
         metadata, singlevideo, dur, fps = load_video(f'{vidPath}/{vid}')
         print(f'{vid} loaded')
         
-        get_gcf(vid, framewise_gcf, mean_gcf)
+        get_gcf(singlevideo, framewise_gcf, mean_gcf)
 
     framewise_gcf = pd.DataFrame.from_dict(framewise_gcf, orient='index')
     mean_gcf = pd.DataFrame.from_dict(mean_gcf, orient='index')
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
-    crop_movies(vidPath, movie_times)
+    #crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/fps')
