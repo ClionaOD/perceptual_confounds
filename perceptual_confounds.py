@@ -77,7 +77,7 @@ def crop_movies(vid_path, movie_times):
 
             #set to mean frame rate
             fps = pd.read_csv('./fps.csv')
-            change_framerate(np.mean(fps.values), f'{vidPath}/trimmed/{vid}', f'{vidPath}/fps/{vid}')
+            change_framerate(str(np.mean(fps.values)), f'{vidPath}/trimmed/{vid}', f'{vidPath}/fps/{vid}')
             print(f'{vid} frame rate standardised')
 
 def get_gcf(vid, frame_dict, mean_dict):
