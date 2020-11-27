@@ -2,7 +2,7 @@ import os
 import math
 import numpy as np
 import pandas as pd
-from PIL import ImageChops
+from PIL import Image, ImageChops
 from perceptual_confounds import load_video
 
 def rmsdiff(im1, im2):
@@ -21,7 +21,13 @@ for vid in os.listdir(vidPath):
     
     all_rms = []
     for idx in range(singlevideo.shape[0] -1):
-        h, rms = rmsdiff(singlevideo[idx,:,:,:], singlevideo[idx+1,:,:,:])
+        im1 = singlevideo[idx,:,:,:]
+        im2 = singlevideo[idx+1,:,:,:]
+
+        im1 = Image.fromarray(np.uint8(im1)).convert('RGB')
+        im2 = Image.fromarray(np.uint8(im2)).convert('RGB')
+        
+        h, rms = rmsdiff(im1, im2)
         all_rms.append(rmsdiff)
     
     framewise_rms[vid] = all_rms
