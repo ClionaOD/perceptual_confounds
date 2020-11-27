@@ -28,7 +28,7 @@ for vid in os.listdir(vidPath):
         im2 = Image.fromarray(np.uint8(im2)).convert('RGB')
         
         h, rms = rmsdiff(im1, im2)
-        all_rms.append(rmsdiff)
+        all_rms.append(rms)
     
     framewise_rms[vid] = all_rms
 
