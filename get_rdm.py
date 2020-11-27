@@ -3,7 +3,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from get_dend import hierarchical_clustering
 
-gcf_df = pd.read_csv('./mean_std_gcf.csv', index_col=0)
+gcf_df = pd.read_csv('./mean_gcf.csv', index_col=0)
+gcf_df.columns=['mean','std']
 
 gcf_rdm = pd.DataFrame(index=gcf_df.index, columns=gcf_df.index, dtype=float)
 
