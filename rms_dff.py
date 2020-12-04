@@ -13,7 +13,7 @@ def rmsdiff(im1, im2):
     rms = math.sqrt(sum_of_squares/float(im1.size[0] * im1.size[1]))
     return h,rms
 
-vidPath = '/home/clionaodoherty/foundcog_stimuli/fps'
+vidPath = '/home/clionaodoherty/foundcog_stimuli/final'
 framewise_rms = {k:[] for k in os.listdir(vidPath)}
 for vid in os.listdir(vidPath):
     metadata, singlevideo, dur, fps = load_video(f'{vidPath}/{vid}')

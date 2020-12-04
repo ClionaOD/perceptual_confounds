@@ -46,17 +46,29 @@ def crop(start,dur,inPath,outPath):
 def change_framerate(inPath,outPath,fps='25'):
     """
     args:
-        fps: desired framerate
         inPath: path to video to change fps, include extension '*.mp4'
         outPath: path to save video, must be separate to inPath, include extension '*.mp4'
+        fps: desired framerate
     """
     ffmpegCommand = f"ffmpeg -i {inPath} -filter:v fps=fps={fps} {outPath}"
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
+def control_aspect(inPath, outPath, w=640, h=360):
+    """
+    args:
+        inPath: path to video to change aspect ratio, include extension '*.mp4'
+        outPath: path to save video, must be separate to inPath, include extension '*.mp4'
+        w: desired width
+        h: desired height
+    """
+    ffmpegCommand = f'ffmpeg -i {inPath} -vf scale={w}:{h} {outPath}'
+    print(ffmpegCommand)
+    runBash(ffmpegCommand)
+
 def crop_movies(vid_path, movie_times):
     """
-    crop all videos in vidPath according to start/end in movie_times
+    crop all videos in vidPath according to start in movie_times for set duration of 22.5 sec
     
     args: 
         vid_path: the path to find videos to trim
@@ -78,6 +90,10 @@ def crop_movies(vid_path, movie_times):
             change_framerate(inPath=f'{vidPath}/trimmed/{vid}', outPath=f'{vidPath}/fps/{vid}')
             print(f'{vid} frame rate standardised')
 
+            #set to same aspect ratio
+            control_aspect(inPath=f'{vidPath}/fps/{vid}', outPath=f'{vidPath}/final/{vid}')
+            print(f'{vid} aspect ratio standardised')
+
 def get_gcf(vid, vidname, frame_dict, mean_dict):
     """
     args:
@@ -98,7 +114,6 @@ def get_gcf(vid, vidname, frame_dict, mean_dict):
 
 
 def get_confounds(vidPath):
-    #TODO: include rms
     """
     calculate gcf using code from Matkovic et al for each video
     args:  
@@ -132,16 +147,9 @@ if __name__ == "__main__":
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
-    #crop_movies(vidPath, movie_times)
+    crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
-    framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/fps')
+    framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/final')
     framewise_gcf.to_csv('./framewise_gcf.csv')
     mean_gcf.to_csv('./mean_gcf.csv')
-
-    df = pd.DataFrame(index=os.listdir(vidPath),columns=['fps'])
-    for vid in os.listdir(vidPath):
-        if not os.path.isdir(f'{vidPath}/{vid}'):
-            metadata, singlevideo, dur, fps = load_video(f'{vidPath}/trimmed/{vid}')
-            df.loc[vid]=fps
-    df.to_csv('./fps_redo.csv')

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-vidPath = '/home/clionaodoherty/foundcog_stimuli/trimmed'
+vidPath = '/home/clionaodoherty/foundcog_stimuli/final'
 
 df = pd.DataFrame(index=os.listdir(vidPath), columns=['filesize'])
 
