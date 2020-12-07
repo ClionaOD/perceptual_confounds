@@ -94,7 +94,7 @@ def crop_movies(vid_path, movie_times):
             control_aspect(inPath=f'{vidPath}/fps/{vid}', outPath=f'{vidPath}/final/{vid}')
             print(f'{vid} aspect ratio standardised')
 
-def get_gcf(vid, vidname, frame_dict, mean_dict):
+def get_gcf(vid):
     """
     args:
         vid: the video get contrast of
@@ -105,12 +105,8 @@ def get_gcf(vid, vidname, frame_dict, mean_dict):
     all_gcfs = np.zeros(vid.shape[0])
     for idx, frame in enumerate(vid):
         all_gcfs[idx] = compute_global_contrast_factor(frame)
-        
-    frame_dict[vidname] = all_gcfs
-    mean = np.mean(all_gcfs)
-    mean_dict[vidname] = [mean]
-
-    print(f'{vid} mean gcf = {mean}')
+    
+    return all_gcfs
 
 
 def get_confounds(vidPath):
@@ -131,7 +127,12 @@ def get_confounds(vidPath):
         metadata, singlevideo, dur, fps = load_video(f'{vidPath}/{vid}')
         print(f'{vid} loaded')
         
-        get_gcf(singlevideo, vid, framewise_gcf, mean_gcf)
+        all_gcfs = get_gcf(singlevideo)
+        framewise_gcf[vid] = all_gcfs
+        mean = np.mean(all_gcfs)
+        mean_gcf[vid] = [mean]
+
+        print(f'{vid} mean gcf = {mean}')
 
     framewise_gcf = pd.DataFrame.from_dict(framewise_gcf, orient='index')
     mean_gcf = pd.DataFrame.from_dict(mean_gcf, orient='index')
