@@ -62,7 +62,7 @@ def control_aspect(inPath, outPath, w=640, h=360):
         w: desired width
         h: desired height
     """
-    ffmpegCommand = f'ffmpeg -i {inPath} -vf scale={w}:{h} {outPath}'
+    ffmpegCommand = f'ffmpeg -i {inPath} -vf scale={w}:{h},setsar=1:1,setdar=16:9 {outPath}'
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     movie_times = pd.read_csv('./movie_times.csv',sep=';', index_col='title')
     
     #crop all videos in vidPath according to start/end in movie_times
-    crop_movies(vidPath, movie_times)
+    #crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/final')
