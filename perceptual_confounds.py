@@ -135,9 +135,9 @@ def get_confounds(vidPath):
 
     framewise_gcf = pd.DataFrame.from_dict(framewise_gcf, orient='index')
     mean_gcf = pd.DataFrame.from_dict(mean_gcf, orient='index')
+    mean_gcf.columns = ['mean','std']
     for vid in mean_gcf.index:
         mean_gcf.loc[vid,'std'] = framewise_gcf.loc[vid].std()
-    mean_gcf.colums = ['mean','std']
 
     return framewise_gcf, mean_gcf
 
