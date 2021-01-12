@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import skvideo.io
 import numpy as np
+import json
 from skimage import color
 
 from gcf import compute_global_contrast_factor, compute_image_average_contrast
@@ -135,12 +136,15 @@ def get_confounds(vidPath):
         print(f'{vid} mean gcf = {mean}')
 
     framewise_gcf = pd.DataFrame.from_dict(framewise_gcf, orient='index')
+    
+    return framewise_gcf, mean_gcf
+    """
     mean_gcf = pd.DataFrame.from_dict(mean_gcf, orient='index')
     mean_gcf.columns = ['mean','std']
     for vid in mean_gcf.index:
         mean_gcf.loc[vid,'std'] = framewise_gcf.loc[vid].std()
 
-    return framewise_gcf, mean_gcf
+    return framewise_gcf, mean_gcf"""
 
 if __name__ == "__main__":
     
@@ -153,4 +157,6 @@ if __name__ == "__main__":
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/final')
     framewise_gcf.to_csv('./framewise_gcf.csv')
-    mean_gcf.to_csv('./mean_gcf.csv')
+    with open('./mean_gcf.json','w') as f:
+        json.dump(mean_gcf, f)
+    #mean_gcf.to_csv('./mean_gcf.csv')
