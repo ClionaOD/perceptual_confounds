@@ -37,9 +37,7 @@ def stack_events(events, mov_list, rest=0.00):
     
     return df
 
-with open('./events_per_movie.pickle','rb') as f:
-    all_events = pickle.load(f)
-
+"""
 # make design matrices on a per movie basis
 tr = 1.0
 n_scans = 22
@@ -50,29 +48,34 @@ for vid, events in all_events.items():
     X = make_first_level_design_matrix(frame_times, events, hrf_model='spm')
     indv_design_matrices[vid] = X
     
-    """
+    
     fig, ax = plt.subplots()
     plot_design_matrix(X, ax=ax)
     ax.set_title(f'{vid[:-4]} design matrix', fontsize=12)
     plt.show()
     plt.close()
-    """
+    
 
 #with open('./design_matrices_per_movie.pickle','wb') as f:
 #    pickle.dump(indv_design_matrices, f)
+"""
 
-#make design matrix for stacked events
-rest = 0.00
-tr = 1.0
-n_scans = (22 * len(all_events)) + (rest*len(all_events))
-frame_times = np.arange(n_scans) * tr
+def get_design_matrix(events, rest=0.00):
+    #make design matrix for stacked events
+    #param events: the dict of movie event files (keys mov_name, values dataframe)
+    tr = 1.0
+    n_scans = (22 * len(events)) + (rest*len(events))
+    frame_times = np.arange(n_scans) * tr
 
-mov_list = list(all_events.keys())
+    mov_list = list(events.keys())
 
-all_vid_events = stack_events(all_events, mov_list, rest=rest)
-X = make_first_level_design_matrix(frame_times, all_vid_events, hrf_model='spm')
+    #each time stack_events is called, the order of movies is randomised
+    stacked_events = stack_events(events, mov_list, rest=rest)
+    X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model='spm')
+    
+    return X
 
-#Efficiency
+#Efficiency - note this is not the correct function (contrasts are wrong). Just a place holder for now
 def efficiency(X):
     '''Calculate efficiency for a given design matrix (i.e a given video) '''       
     invXtX = np.linalg.inv(X.T.dot(X))
@@ -84,4 +87,20 @@ def efficiency(X):
     return efficiency
 
 
-    
+with open('./events_per_movie.pickle','rb') as f:
+    all_events = pickle.load(f)
+
+while len(all_events) > 8:
+    all_vids_desmat = get_design_matrix(all_events)
+    all_vids_efficiencies = efficiency(all_vids_desmat)
+
+    loa_efficiencies = {k:None for k in all_events.keys()}
+    for mov in all_events.keys():
+        leave_one_out_events = {k:v for k,v in all_events.items() if not k==mov}
+        loa_efficiencies[mov] = efficiency(get_design_matrix(leave_one_out_events))
+
+    efficiency_df = pd.DataFrame.from_dict({k:[v] for k,v in loa_efficiencies.items()})
+    efficiency_df.loc[1] = all_vids_efficiencies - efficiency_df.loc[0,:].values
+    drop_mov = efficiency_df.idxmax(axis=1).loc[1]
+
+    all_events.pop(drop_mov)
