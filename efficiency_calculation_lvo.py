@@ -4,13 +4,14 @@ Created on Thu Jan 14 14:01:06 2021
 
 @author: Trish MacKeogh
 """
+import seaborn as sn
 import pickle
 import pandas as pd
 import numpy as np
 import random
 from nilearn.glm.first_level import make_first_level_design_matrix
 #from nilearn.plotting import plot_design_matrix
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 pd.set_option('display.max_columns', None)
 
 #Data
@@ -26,6 +27,8 @@ def efficiency_calc(X, contrasts):
     '''Calculate efficiency for a given design matrix (i.e a given video) '''     
     
     #Singular matrix - no solution to inverse 
+    print(X.shape)
+    print(X.head(20))
     invXtX = np.linalg.inv(X.T.dot(X))
     efficiency = np.trace((1.0/ contrasts.T.dot(invXtX).dot(contrasts)))
     
@@ -126,9 +129,47 @@ required_video_num = 8
 list_contrast_catgs = ['animate', 'inanimate_small', 'inanimate_big']
 events_top_movies = get_efficiencies_LVO(all_events, required_video_num, list_contrast_catgs)
  
+#**********************************************************************************************
+#Correlation
 
-
-        
-        
+def get_df_all_videos(all_events):
+    '''Get concatenated events dataframe. A period of rest in between each video is included'''
+    
+    #List of videos + randomise
+    list_videos = list(all_events.keys())
+    random.shuffle(list_videos) #Randomise movie order
+    
+    #Params
+    movie_length = 22.524
+    delay = 0.001
+    df_all_videos = pd.DataFrame()
+    
+    for idx, vid in enumerate(list_videos):      
+        df_videoX = all_events[vid]
+        #Adjust onsets of event
+        df_videoX['onset'] = df_videoX['onset'] + idx*(movie_length + delay)
+     
+        #Concatenate
+        df_all_videos = pd.concat([df_all_videos,  df_videoX])
+    
+    return df_all_videos
+ 
+def get_correlation_matrix(df_all_videos):
+    
+    #Design matrix
+    X = make_first_level_design_matrix(frame_times, df_all_videos, hrf_model='glover') 
+    
+    #Correlation matrix
+    corrMatrix = X.corr()
+    sn.heatmap(corrMatrix, annot = True)
+    plt.show()
+    
+    return corrMatrix 
+    
+    
+#Get df all events
+df_all_videos = get_df_all_videos(all_events)      
+#Corr matrix
+corrMatrix =  get_correlation_matrix(df_all_videos) 
 
     
