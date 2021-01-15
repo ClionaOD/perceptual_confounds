@@ -9,13 +9,9 @@ from model_design_matrix import get_design_matrix
 from nilearn.plotting import plot_design_matrix
 import matplotlib.pyplot as plt
 
-# Note: for loop below causing strange error in design matrices.
-# For now, run the script through with repeats=1 and specify the run number. 
-run = 5
-
 events = pd.read_pickle('./events_per_movie.pickle')
 
-repeats = 1
+repeats = 5
 
 desmats_conv = {i:{'design_matrix':None, 'corr_matrix':None} for i in range(repeats)}
 desmats_nonconv = {i:{'design_matrix':None, 'corr_matrix':None} for i in range(repeats)}
@@ -39,34 +35,34 @@ for i in range(repeats):
     fig, ax = plt.subplots(figsize=(11.69,8.27))
     plot_design_matrix(X, ax=ax)
     ax.set_title(f'convolved design matrix', fontsize=12)
-    plt.savefig(f'./design_matrices/convolved_{run}.png')
+    plt.savefig(f'./design_matrices/convolved_run_{i+1}.png')
     plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
     sns.heatmap(hrf_corr_mat, ax=ax)
     ax.set_title(f'correlation matrix - convolved', fontsize=12)
-    plt.savefig(f'./design_matrices/correlation_matrices/convolved_{run}.png')
+    plt.savefig(f'./design_matrices/correlation_matrices/convolved_run_{i+1}.png')
     plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
     plot_design_matrix(X, ax=ax)
     ax.set_title(f'design matrix - no covolution', fontsize=12)
-    plt.savefig(f'./design_matrices/no_conv_{run}.png')
+    plt.savefig(f'./design_matrices/no_conv_run_{i+1}.png')
     plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
     sns.heatmap(hrf_corr_mat, ax=ax)
     ax.set_title(f'correlation matrix - no convolution', fontsize=12)
-    plt.savefig(f'./design_matrices/correlation_matrices/no_conv_{run}.png')
+    plt.savefig(f'./design_matrices/correlation_matrices/no_conv_run_{i+1}.png')
     plt.show()
     plt.close()
 
-with open(f'./design_matrices/conv_run_{run}.pickle','wb') as f:
+with open(f'./design_matrices/conv_{repeats}_runs.pickle','wb') as f:
     pickle.dump(desmats_conv, f)
-with open(f'./design_matrices/not_conv_run_{run}.pickle','wb') as f:
+with open(f'./design_matrices/not_conv_{repeats}_runs.pickle','wb') as f:
     pickle.dump(desmats_nonconv, f)
 
 
