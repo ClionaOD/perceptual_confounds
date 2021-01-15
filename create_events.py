@@ -48,7 +48,7 @@ for idx, vid in enumerate(gcf_df.index):
 
 #get events files in same structure for semantic tags
 
-def elan_events(path):
+def elan_events(path, n_raters=2):
     df_dict = {}
     for vid in os.listdir(path):
         elan_df = pd.read_csv(os.path.join(path,vid), sep='\t', header=None)
@@ -59,7 +59,7 @@ def elan_events(path):
         df['duration'] = elan_df.loc[:,'duration'].values
         df['trial_type'] = elan_df.loc[:,'tag'].values
         #set magnitude=1 if magnitude missing as per the behaviour of nilearn
-        df['magnitude'] = [1 for i in range(len(df))]
+        df['magnitude'] = [1/n_raters for i in range(len(df))]
 
         df_dict[vid.replace('.txt','.mp4')] = df
 
