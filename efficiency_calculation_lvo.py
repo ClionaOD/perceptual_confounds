@@ -14,6 +14,20 @@ from nilearn.glm.first_level import make_first_level_design_matrix
 import matplotlib.pyplot as plt
 pd.set_option('display.max_columns', None)
 
+#Plot properties
+%matplotlib qt
+
+SMALL_SIZE = 8
+MEDIUM_SIZE = 18
+BIGGER_SIZE = 20
+
+plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=MEDIUM_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=MEDIUM_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=MEDIUM_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+
 #Data
 with open('./events_per_movie.pickle','rb') as f:
     all_events = pickle.load(f)
@@ -157,19 +171,26 @@ def get_df_all_videos(all_events):
 def get_correlation_matrix(df_all_videos):
     
     #Design matrix
+    
     X = make_first_level_design_matrix(frame_times, df_all_videos, hrf_model='glover') 
     
     #Correlation matrix
     corrMatrix = X.corr()
-    sn.heatmap(corrMatrix, annot = True)
+    sns.heatmap(corrMatrix, annot = True)
     plt.show()
     
-    return corrMatrix 
+    return X 
     
-    
+def repeat_corr(n_repeats)
+
+    #Get df all events
+    df_all_videos = get_df_all_videos(all_events)      
+    #Corr matrix
+    corrMatrix =  get_correlation_matrix(df_all_videos) 
+
+
 #Get df all events
 df_all_videos = get_df_all_videos(all_events)      
 #Corr matrix
-corrMatrix =  get_correlation_matrix(df_all_videos) 
-
-    
+X = get_correlation_matrix(df_all_videos) 
+corrMatrix =  get_correlation_matrix(df_all_videos)    
