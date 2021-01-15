@@ -6,36 +6,42 @@ from nilearn.glm.first_level import make_first_level_design_matrix
 from nilearn.plotting import plot_design_matrix
 import matplotlib.pyplot as plt
 
-def stack_events(events, mov_list, rest=0.00):
-    """take movie events files and concatenate them in a random order, 
-        this simulates an experiments' event file for a given run.
-    params:
-        events = dict of events files, keys=movie_titles,values=dataframe
-        mov_list = list of movies to stack, each element should be a key in events
-        rest = size of the gap to include between displayed movies
-    """
-    #shuffle the order of the movies
-    random.shuffle(mov_list)
+# HC function
+def get_rest_df(rest_length):
     
-    df = pd.DataFrame(columns=events[mov_list[0]].columns)
+    df_rest = pd.DataFrame()
+    df_rest['onset'] = 22.525
+    df_rest['duration'] = rest_length
+    df_rest['trial_type'] = 'rest'
+    df_rest['magnitude'] = 1.0
     
-    for idx, mov in enumerate(mov_list):
-        mov_events = events[mov]
-        
-        offset = (22.524*idx) + (rest*idx)
-        mov_events['onset'] = mov_events['onset'].values + offset
-        df = pd.concat([df, mov_events])
-        
-        #get value in sec at which previous movie ended - all movs have longest duration=22.524
-        end_mov = 22.524 * (idx+1)
-        
-        #add rest
-        rest_ = {k:[] for k in mov_events.columns}
-        rest_['onset'] = [end_mov+0.001]; rest_['duration'] = [rest] ; rest_['trial_type'] = ['rest'] ; rest_['magnitude'] = [1]
-        rest_event = pd.DataFrame.from_dict(rest_)
-        df = pd.concat([df, rest_event])
+    return df_rest
+
+# HC function
+def get_df_events(all_events, rest_length = 2.0):
+    '''Get concatenated events dataframe. A period of rest in between each video is included'''
     
-    return df
+    #List of videos + randomise
+    list_videos = list(all_events.keys())
+    random.shuffle(list_videos) #Randomise movie order
+    
+    #Params
+    movie_length = 22.524
+    delay = 0.001
+    df_rest = get_rest_df(rest_length)
+    df_events_concat = pd.DataFrame()
+    
+    for idx, vid in enumerate(list_videos):      
+        df_eventX = all_events[vid]
+        df_temp = pd.concat([df_eventX, df_rest])
+        #Adjust onsets of event
+        df_temp['onset'] = df_temp['onset'] + idx*(movie_length + rest_length + delay)
+        
+        #Concatenate
+        df_events_concat = pd.concat([df_events_concat,  df_temp])
+    
+    return df_events_concat
+
 
 def get_design_matrix(events_dict, rest=0.00, hrf='spm'):
     #make design matrix for stacked events
@@ -44,10 +50,8 @@ def get_design_matrix(events_dict, rest=0.00, hrf='spm'):
     n_scans = (22 * len(events_dict)) + (rest*len(events_dict))
     frame_times = np.arange(n_scans) * tr
 
-    mov_list = list(events_dict.keys())
-
     #each time stack_events is called, the order of movies is randomised
-    stacked_events = stack_events(events_dict, mov_list, rest=rest)
+    stacked_events = get_df_events(events_dict, rest_length=rest)
     X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model=hrf)
     
     return X
