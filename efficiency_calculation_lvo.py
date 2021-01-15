@@ -73,7 +73,7 @@ def get_df_events(all_events, rest_length = 2.0):
     df_events_concat = pd.DataFrame()
     
     for idx, vid in enumerate(list_videos):      
-        df_eventX = all_events[vid]
+        df_eventX = all_events[vid].copy()
         df_temp = pd.concat([df_eventX, df_rest])
         #Adjust onsets of event
         df_temp['onset'] = df_temp['onset'] + idx*(movie_length + rest_length + delay)
