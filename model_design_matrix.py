@@ -1,3 +1,9 @@
+"""
+Created on Thu Jan 14 14:01:06 2021
+
+@author: Cliona O'Doherty, Hannah Craddock
+"""
+
 import pickle
 import pandas as pd
 import numpy as np
