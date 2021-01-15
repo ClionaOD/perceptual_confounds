@@ -37,70 +37,66 @@ def stack_events(events, mov_list, rest=0.00):
     
     return df
 
-"""
-# make design matrices on a per movie basis
-tr = 1.0
-n_scans = 22
-frame_times = np.arange(n_scans) * tr
-
-indv_design_matrices = {k:None for k in all_events.keys()}
-for vid, events in all_events.items():
-    X = make_first_level_design_matrix(frame_times, events, hrf_model='spm')
-    indv_design_matrices[vid] = X
-    
-    
-    fig, ax = plt.subplots()
-    plot_design_matrix(X, ax=ax)
-    ax.set_title(f'{vid[:-4]} design matrix', fontsize=12)
-    plt.show()
-    plt.close()
-    
-
-#with open('./design_matrices_per_movie.pickle','wb') as f:
-#    pickle.dump(indv_design_matrices, f)
-"""
-
-def get_design_matrix(events, rest=0.00):
+def get_design_matrix(events_dict, rest=0.00, hrf='spm'):
     #make design matrix for stacked events
-    #param events: the dict of movie event files (keys mov_name, values dataframe)
+    #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
     tr = 1.0
-    n_scans = (22 * len(events)) + (rest*len(events))
+    n_scans = (22 * len(events_dict)) + (rest*len(events_dict))
     frame_times = np.arange(n_scans) * tr
 
-    mov_list = list(events.keys())
+    mov_list = list(events_dict.keys())
 
     #each time stack_events is called, the order of movies is randomised
-    stacked_events = stack_events(events, mov_list, rest=rest)
-    X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model='spm')
+    stacked_events = stack_events(events_dict, mov_list, rest=rest)
+    X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model=hrf)
     
     return X
 
-#Efficiency - note this is not the correct function (contrasts are wrong). Just a place holder for now
-def efficiency(X):
+#Efficiency
+def efficiency_calc(X, contrast_vec):
     '''Calculate efficiency for a given design matrix (i.e a given video) '''       
     invXtX = np.linalg.inv(X.T.dot(X))
-    #Constrasts - need to verify
-    #Main(common) effect (1,1) vs differential effect (1, -1)
-    contrasts = np.ones((invXtX.shape[0], 1)) #Need to verify: np.ones((invXtX.shape))
-    efficiency = 1.0/(np.trace(contrasts.T.dot(invXtX).dot(contrasts)))
+    efficiency = np.trace((1.0/ contrast_vec.T.dot(invXtX).dot(contrast_vec)))
     
     return efficiency
 
+def get_contrasts(desmat):
+    conditions = desmat.columns.tolist()
+    
+    contrast_vec = np.zeros((len(conditions),1))
 
-with open('./events_per_movie.pickle','rb') as f:
-    all_events = pickle.load(f)
+    animate_idx = conditions.index('animate')
+    inanimate_big_idx = conditions.index('inanimate_big')
+    inanimate_small_idx = conditions.index('inanimate_small')
 
-while len(all_events) > 8:
-    all_vids_desmat = get_design_matrix(all_events)
-    all_vids_efficiencies = efficiency(all_vids_desmat)
+    contrast_vec[animate_idx] = 1
+    contrast_vec[inanimate_big_idx] = -1
+    contrast_vec[inanimate_small_idx] = -1
 
-    loa_efficiencies = {k:None for k in all_events.keys()}
-    for mov in all_events.keys():
-        leave_one_out_events = {k:v for k,v in all_events.items() if not k==mov}
-        loa_efficiencies[mov] = efficiency(get_design_matrix(leave_one_out_events))
+    return contrast_vec
 
-    efficiency_df = pd.DataFrame.from_dict({k:[v] for k,v in loa_efficiencies.items()})
-    efficiency_df.loc[1] = all_vids_efficiencies - efficiency_df.loc[0,:].values
-    drop_mov = efficiency_df.idxmax(axis=1).loc[1]
+if __name__ == "__main__":
 
-    all_events.pop(drop_mov)
+    with open('./events_per_movie.pickle','rb') as f:
+        all_events = pickle.load(f)
+
+    while len(all_events) > 8:
+        all_vids_desmat = get_design_matrix(all_events)
+        all_contrast = get_contrasts(all_vids_desmat)
+        all_vids_efficiencies = efficiency_calc(all_vids_desmat, all_contrast)
+        print(f'with {len(all_events)} videos, efficiency = {all_vids_efficiencies}')
+
+        loa_efficiencies = {k:None for k in all_events.keys()}
+        for mov in all_events.keys():
+            leave_one_out_events = {k:v for k,v in all_events.items() if not k==mov}
+            loa_desmat = get_design_matrix(leave_one_out_events)
+            loa_contrasts = get_contrasts(loa_desmat)
+            loa_efficiencies[mov] = efficiency_calc(loa_desmat,loa_contrasts)
+
+        efficiency_df = pd.DataFrame.from_dict({k:[v] for k,v in loa_efficiencies.items()})
+        #efficiency_df.loc[1] = all_vids_efficiencies - efficiency_df.loc[0,:].values
+        drop_mov = efficiency_df.idxmax(axis=1).loc[0]
+
+        print(f'removing {drop_mov} lowers efficiency by the least to {efficiency_df[drop_mov][0]}')
+
+        all_events.pop(drop_mov)
