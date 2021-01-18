@@ -29,35 +29,35 @@ for i in range(repeats):
     X_no_hrf = get_design_matrix(events, hrf=None)
     desmats_nonconv[i]['design_matrix'] = X_no_hrf
 
-    corr_mat = X_no_hrf.corr()
+    corr_mat = X_no_hrf.iloc[:,:-14].corr()
     desmats_nonconv[i]['corr_matrix'] = corr_mat
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
     plot_design_matrix(X, ax=ax)
     ax.set_title(f'convolved design matrix', fontsize=12)
     plt.savefig(f'./design_matrices/convolved_run_{i+1}.png')
-    plt.show()
+    #plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
     sns.heatmap(hrf_corr_mat, ax=ax)
     ax.set_title(f'correlation matrix - convolved', fontsize=12)
     plt.savefig(f'./design_matrices/correlation_matrices/convolved_run_{i+1}.png')
-    plt.show()
+    #plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
-    plot_design_matrix(X, ax=ax)
+    plot_design_matrix(X_no_hrf, ax=ax)
     ax.set_title(f'design matrix - no covolution', fontsize=12)
     plt.savefig(f'./design_matrices/no_conv_run_{i+1}.png')
-    plt.show()
+    #plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
-    sns.heatmap(hrf_corr_mat, ax=ax)
+    sns.heatmap(corr_mat, ax=ax)
     ax.set_title(f'correlation matrix - no convolution', fontsize=12)
     plt.savefig(f'./design_matrices/correlation_matrices/no_conv_run_{i+1}.png')
-    plt.show()
+    #plt.show()
     plt.close()
 
 with open(f'./design_matrices/conv_{repeats}_runs.pickle','wb') as f:
