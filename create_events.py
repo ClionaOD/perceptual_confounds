@@ -53,6 +53,7 @@ def elan_events(path, n_raters=2):
     for vid in os.listdir(path):
         elan_df = pd.read_csv(os.path.join(path,vid), sep='\t', header=None)
         elan_df.columns = ['tag',' ','start','stop','duration',' ']
+        elan_df['tag'] = [tag.lower() for tag in elan_df['tag'].to_list()]
 
         df = pd.DataFrame(columns=['onset','duration','trial_type','magnitude'])
         df['onset'] = elan_df.loc[:,'start'].values

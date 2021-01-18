@@ -3,6 +3,7 @@ import copy
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+
 import scipy.cluster.hierarchy as sch
 
 def hierarchical_clustering(in_matrix, label_list, outpath=None, ax=None):
