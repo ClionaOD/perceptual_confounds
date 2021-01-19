@@ -24,12 +24,20 @@ def get_rest_df(rest_length):
     return df_rest
 
 # HC function
-def get_df_events(all_events, rest_length = 2.0):
-    '''Get concatenated events dataframe. A period of rest in between each video is included'''
+def get_df_events(all_events, rest_length = 2.0, sample_with_replacement=False):
+    '''Get concatenated events dataframe. 
+    A period of rest in between each video is included: rest_length in seconds
+    
+    The function will randomly shuffle the order of movies each time unless sample_with_replacement
+        is set to True in which case movies will be randomly sampled with replacement (for bootstrapping).
+    '''
     
     #List of videos + randomise
     list_videos = list(all_events.keys())
-    random.shuffle(list_videos) #Randomise movie order
+    if sample_with_replacement:
+        list_videos = random.choices(list_videos,k=len(list_videos))
+    else:
+        random.shuffle(list_videos) #Randomise movie order
     
     #Params
     movie_length = 22.524
@@ -49,7 +57,7 @@ def get_df_events(all_events, rest_length = 2.0):
     return df_events_concat
 
 
-def get_design_matrix(events_dict, rest=0.00, hrf='spm'):
+def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement=False):
     #make design matrix for stacked events
     #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
     tr = 1.0
@@ -57,7 +65,10 @@ def get_design_matrix(events_dict, rest=0.00, hrf='spm'):
     frame_times = np.arange(n_scans) * tr
 
     #each time stack_events is called, the order of movies is randomised
-    stacked_events = get_df_events(events_dict, rest_length=rest)
+    if sample_with_replacement:
+        stacked_events = get_df_events(events_dict, rest_length=rest, sample_with_replacement=True)
+    else:
+        stacked_events = get_df_events(events_dict, rest_length=rest)
     X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model=hrf)
     
     return X
