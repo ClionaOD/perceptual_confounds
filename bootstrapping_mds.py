@@ -53,7 +53,7 @@ def confidence_ellipse(x, y, ax, n_std=2.0, facecolor='none', **kwargs):
     ell_radius_x = np.sqrt(1 + pearson)
     ell_radius_y = np.sqrt(1 - pearson)
     ellipse = Ellipse((0, 0), width=ell_radius_x * 2, height=ell_radius_y * 2,
-                      facecolor=facecolor, **kwargs)
+                      facecolor=facecolor, edgecolor='blue', **kwargs)
 
     # Calculating the stdandard deviation of x from
     # the squareroot of the variance and multiplying
@@ -137,7 +137,6 @@ def bootstrapped_mds(events, q=50):
             X.append(x_i)
         bootstrapped_coords[k] = np.array(X)
 
-
     return bootstrapped_coords
 
 if __name__ == "__main__":
@@ -147,8 +146,8 @@ if __name__ == "__main__":
 
     fig, ax = plt.subplots()
     for condition, coords_arr in bootstrap_coords.items():
-        x = coords_arr[:,0] ; y = coords_arr[:,1]
-        ax.scatter(x,y,s=0.5, vmin=-10, vmax=10)
-        confidence_ellipse(x, y, ax=ax)
+        x = coords_arr[:,0].T ; y = coords_arr[:,1].T
+        ax.scatter(x,y,s=0.5)
+        confidence_ellipse(x, y, ax=ax, facecolor='red')
     plt.show()
 
