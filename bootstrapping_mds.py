@@ -164,26 +164,30 @@ if __name__ == "__main__":
     with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
         pickle.dump(bootstrap_coords,f)
 
+    #with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
+    #    bootstrap_coords = pickle.load(f)
+        
     cmap = plt.get_cmap('hsv')
     colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
 
-    plt.close()
     fig, (ax1,ax2) = plt.subplots(ncols=2, figsize=(11.69,8.27))
 
     for idx, (condition, coords_arr) in enumerate(bootstrap_coords.items()):
         x = coords_arr[:,0] ; y = coords_arr[:,1]
-        ax1.scatter(x,y,s=0.5)
+        #ax1.scatter(x,y,s=0.01)
         confidence_ellipse(x, y, ax=ax1, n_std=n_std, edgecolor=colors[idx], label=condition)
 
         np.mean(coords_arr)
         
         ax1.text(np.mean(x), np.mean(y),condition, ha='center', va='center')
         
+    ax1.set_xlim((-0.35,0.35))
+    ax1.set_ylim((-0.35,0.35))
     ax1.set_aspect('equal')
 
     h,l = ax1.get_legend_handles_labels()
     ax2.axis('off')
     ax2.legend(h,l)
     plt.savefig(f'./bootstrap_results_q_{q}_std_{n_std}.pdf')
-    #plt.show()
+    plt.show()
 
