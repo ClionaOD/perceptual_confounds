@@ -7,6 +7,7 @@ Implementation of Bootstrapping MDS Solutions by Jacoby and Armstrong 2013
 import numpy as np
 import pandas as pd
 import pickle
+import warnings
 
 import scipy.spatial.distance as ssd
 from scipy.spatial import procrustes
@@ -17,6 +18,8 @@ from model_design_matrix import get_design_matrix
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
+
+warnings.filterwarnings("ignore")
 
 def confidence_ellipse(x, y, ax, n_std=2.0, facecolor='none', edgecolor='blue', label= '', **kwargs):
     """
@@ -93,8 +96,13 @@ def get_mds_embedding(rdm, ref=None):
     """
     mds = MDS(n_components=2, dissimilarity='precomputed')
     df_embedding = pd.DataFrame(mds.fit_transform(rdm.values), index=rdm.index)
-    
+
     if ref is not None:
+        # Some random combinations of movies may drop a condition (this is rare). 
+        # Check that both are the same shape, fill in NaN where not.
+        if not df_embedding.shape == ref.shape:
+            df_embedding = df_embedding.reindex(index=ref.index)
+            df_embedding = df_embedding.fillna(0)
         mtx1, mtx2, disparity = procrustes(ref, df_embedding.values)
         df_embedding = pd.DataFrame(mtx2, index=rdm.index)
     
