@@ -41,19 +41,24 @@ with open('./design_matrices/not_conv_5_runs.pickle',"rb") as f:
     not_conv = pickle.load(f)
 
 for run, results in conv.items():
-    fig, (ax1, ax2) = plt.subplots(figsize=(13,8.27), ncols=2)
+    fig, ((ax1, _), (ax2, ax3)) = plt.subplots(figsize=(9,15), ncols=2, nrows=2)
     
+    _.remove()
+
+    sns.heatmap(results['corr_matrix'], ax=ax1)
+    ax1.set_title('correlation matrix (alphabetical)')
+
     order = hierarchical_clustering(results['corr_matrix'].values,
         results['corr_matrix'].columns, 
-        ax=ax1
+        ax=ax2
         )
     
     order.reverse()
     new_corr_mat = results['corr_matrix'].reindex(index=order,columns=order)
 
     
-    sns.heatmap(new_corr_mat, ax=ax2)
-    ax2.set_title(f'clustered correlation matrix - convolved', fontsize=12)
+    sns.heatmap(new_corr_mat, ax=ax3)
+    ax3.set_title(f'clustered correlation matrix - convolved')
     
     plt.tight_layout()
     plt.savefig(f'./clustered_corr_matrices/convolved_run_{run+1}.pdf')
@@ -61,19 +66,24 @@ for run, results in conv.items():
     plt.close()
 
 for run, results in not_conv.items():
-    fig, (ax1, ax2) = plt.subplots(figsize=(13,8.27), ncols=2)
+    fig, ((ax1, _), (ax2, ax3)) = plt.subplots(figsize=(9,15), ncols=2, nrows=2)
+    
+    sns.heatmap(results['corr_matrix'], ax=ax1)
+    ax1.set_title('correlation matrix (alphabetical)')
+
+    _.remove()
     
     order = hierarchical_clustering(results['corr_matrix'].values,
         results['corr_matrix'].columns, 
-        ax=ax1
+        ax=ax2
         )
     
     order.reverse()
     new_corr_mat = results['corr_matrix'].reindex(index=order,columns=order)
 
     
-    sns.heatmap(new_corr_mat, ax=ax2)
-    ax2.set_title(f'clustered correlation matrix - not convolved', fontsize=12)
+    sns.heatmap(new_corr_mat, ax=ax3)
+    ax3.set_title(f'clustered correlation matrix - not convolved', fontsize=12)
     
     plt.tight_layout()
     plt.savefig(f'./clustered_corr_matrices/not_convolved_run_{run+1}.pdf')
