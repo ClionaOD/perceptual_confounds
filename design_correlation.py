@@ -17,23 +17,25 @@ desmats_conv = {i:{'design_matrix':None, 'corr_matrix':None} for i in range(repe
 desmats_nonconv = {i:{'design_matrix':None, 'corr_matrix':None} for i in range(repeats)}
 
 for i in range(repeats):
-    X = get_design_matrix(events)
-    desmats_conv[i]['design_matrix'] = X
+    # create design matrix, randomly order movies
+    hrf_desmat = get_design_matrix(events)
+    desmats_conv[i]['design_matrix'] = hrf_desmat
 
-    hrf_corr_mat = X.iloc[:,:-14].corr()
+    # get correlation matrix
+    hrf_corr_mat = hrf_desmat.iloc[:,:-14].corr()
     desmats_conv[i]['corr_matrix'] = hrf_corr_mat
 
-    #in get_design_matrix, nilearn make_first_level_design_matrix has
-    #  option to include hrf=None. Unsure if this is working correctly as results 
-    #  are highly similar.
-    X_no_hrf = get_design_matrix(events, hrf=None)
-    desmats_nonconv[i]['design_matrix'] = X_no_hrf
+    # repeat without hrf convolution
+    no_hrf_desmat = get_design_matrix(events, hrf=None)
+    desmats_nonconv[i]['design_matrix'] = no_hrf_desmat
 
-    corr_mat = X_no_hrf.iloc[:,:-14].corr()
-    desmats_nonconv[i]['corr_matrix'] = corr_mat
+    no_hrf_corr_mat = no_hrf_desmat.iloc[:,:-14].corr()
+    desmats_nonconv[i]['corr_matrix'] = no_hrf_corr_mat
+
+    #plotting
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
-    plot_design_matrix(X, ax=ax)
+    plot_design_matrix(hrf_desmat, ax=ax)
     ax.set_title(f'convolved design matrix', fontsize=12)
     plt.savefig(f'./design_matrices/convolved_run_{i+1}.png')
     #plt.show()
@@ -47,14 +49,14 @@ for i in range(repeats):
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
-    plot_design_matrix(X_no_hrf, ax=ax)
+    plot_design_matrix(no_hrf_desmat, ax=ax)
     ax.set_title(f'design matrix - no covolution', fontsize=12)
     plt.savefig(f'./design_matrices/no_conv_run_{i+1}.png')
     #plt.show()
     plt.close()
 
     fig, ax = plt.subplots(figsize=(11.69,8.27))
-    sns.heatmap(corr_mat, ax=ax)
+    sns.heatmap(no_hrf_corr_mat, ax=ax)
     ax.set_title(f'correlation matrix - no convolution', fontsize=12)
     plt.savefig(f'./design_matrices/correlation_matrices/no_conv_run_{i+1}.png')
     #plt.show()
