@@ -128,7 +128,7 @@ def repeat_corr(all_events, n_repeats, path_save):
         
 
 #Repeat correlation
-path_save = './correlation_matrices_hc/'
+path_save = './correlation_matrices_hc/'# '/conv_results_{}.pickle'
 n_repeats = 5
 repeat_corr(all_events, n_repeats, path_save)
 
