@@ -7,7 +7,6 @@ Implementation of Bootstrapping MDS Solutions by Jacoby and Armstrong 2013
 import numpy as np
 import pandas as pd
 import pickle
-import warnings
 
 import scipy.spatial.distance as ssd
 from scipy.spatial import procrustes
@@ -19,9 +18,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
 
-warnings.filterwarnings("ignore")
-
-def confidence_ellipse(x, y, ax, n_std=2.0, facecolor='none', edgecolor='blue', label= '', **kwargs):
+def confidence_ellipse(x, y, ax, n_std=2.0, facecolor='none', **kwargs):
     """
     Copied from https://matplotlib.org/devdocs/gallery/statistics/confidence_ellipse.html
     
@@ -56,7 +53,7 @@ def confidence_ellipse(x, y, ax, n_std=2.0, facecolor='none', edgecolor='blue', 
     ell_radius_x = np.sqrt(1 + pearson)
     ell_radius_y = np.sqrt(1 - pearson)
     ellipse = Ellipse((0, 0), width=ell_radius_x * 2, height=ell_radius_y * 2,
-                      facecolor=facecolor, edgecolor=edgecolor, label=label, **kwargs)
+                      facecolor=facecolor, edgecolor='blue', **kwargs)
 
     # Calculating the stdandard deviation of x from
     # the squareroot of the variance and multiplying
@@ -96,13 +93,7 @@ def get_mds_embedding(rdm, ref=None):
     """
     mds = MDS(n_components=2, dissimilarity='precomputed')
     df_embedding = pd.DataFrame(mds.fit_transform(rdm.values), index=rdm.index)
-
     if ref is not None:
-        # Some random combinations of movies may drop a condition (this is rare). 
-        # Check that both are the same shape, fill in NaN where not.
-        if not df_embedding.shape == ref.shape:
-            df_embedding = df_embedding.reindex(index=ref.index)
-            df_embedding = df_embedding.fillna(0)
         mtx1, mtx2, disparity = procrustes(ref, df_embedding.values)
         df_embedding = pd.DataFrame(mtx2, index=rdm.index)
     
@@ -120,10 +111,6 @@ def bootstrapped_mds(events, q=50):
     observations = []
     
     bootstrap_embeddings = []
-
-    #ref dataframe for Procrustes transform
-    reference = None
-    
     for i in range(q):
         # 1. sample n rows with replacement from V (observation matrix)
         bootstrap_replic_q = get_design_matrix(events, sample_with_replacement=True)
@@ -134,11 +121,9 @@ def bootstrapped_mds(events, q=50):
         # 3. perform MDS on the rdm for this iteration
         if i == 0:
             observations.extend(list(rdm_q.columns))
-            reference = get_mds_embedding(rdm_q)
-
-            mds_q = get_mds_embedding(rdm_q, ref=reference)
+            mds_q = get_mds_embedding(rdm_q)
         else:
-            mds_q = get_mds_embedding(rdm_q, ref=reference)
+            mds_q = get_mds_embedding(rdm_q, ref=bootstrap_embeddings[0])
         
         bootstrap_embeddings.append(mds_q)
 
@@ -156,38 +141,14 @@ def bootstrapped_mds(events, q=50):
 
 if __name__ == "__main__":
     events = pd.read_pickle('./events_per_movie.pickle')
-    
-    q = 1000
-    n_std = 2.0
-    
-    bootstrap_coords = bootstrapped_mds(events, q=q)
-    with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
-        pickle.dump(bootstrap_coords,f)
 
-    #with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
-    #    bootstrap_coords = pickle.load(f)
-        
-    cmap = plt.get_cmap('hsv')
-    colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
+    bootstrap_coords = bootstrapped_mds(events, q=50)
 
-    fig, (ax1,ax2) = plt.subplots(ncols=2, figsize=(11.69,8.27))
+    fig, ax = plt.subplots()
+    for condition, coords_arr in bootstrap_coords.items():
+        x = coords_arr[:,0].T ; y = coords_arr[:,1].T
+        ax.scatter(x,y,s=0.5)
+        confidence_ellipse(x, y, ax=ax, facecolor='red')
+    plt.savefig('bootstrap_mds.jpg')
 
-    for idx, (condition, coords_arr) in enumerate(bootstrap_coords.items()):
-        x = coords_arr[:,0] ; y = coords_arr[:,1]
-        #ax1.scatter(x,y,s=0.01)
-        confidence_ellipse(x, y, ax=ax1, n_std=n_std, edgecolor=colors[idx], label=condition)
-
-        np.mean(coords_arr)
-        
-        ax1.text(np.mean(x), np.mean(y),condition, ha='center', va='center')
-        
-    ax1.set_xlim((-0.35,0.35))
-    ax1.set_ylim((-0.35,0.35))
-    ax1.set_aspect('equal')
-
-    h,l = ax1.get_legend_handles_labels()
-    ax2.axis('off')
-    ax2.legend(h,l)
-    plt.savefig(f'./bootstrap_results_q_{q}_std_{n_std}.pdf')
-    plt.show()
 
