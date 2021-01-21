@@ -5,6 +5,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from nilearn.plotting import plot_design_matrix
 
+
 def efficiency_calc(X, contrasts):
     '''Calculate efficiency for a given design matrix (i.e a given video) '''     
     #Singular matrix - no solution to inverse 
@@ -79,3 +80,4 @@ plt.bar(range(len(eff_bespoke)), list(eff_bespoke.values()), align='center')
 plt.xticks(range(len(eff_bespoke)), list(eff_bespoke.keys()), rotation=90)
 plt.tight_layout()
 plt.savefig('bespoke_efficiency.jpg')
+
