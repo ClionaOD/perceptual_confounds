@@ -77,12 +77,12 @@ def confidence_ellipse(x, y, ax, n_std=2.0, facecolor='none', edgecolor='blue', 
     
     return ax.add_patch(ellipse)
 
-def construct_rdm(observation_df):
+def construct_rdm(observation_df, metric='correlation'):
     """
     Takes a n*k df with n observations and k conditions,
     returns the data as an n*n rdm dataframe
     """
-    rdm = ssd.pdist(observation_df.values.T)
+    rdm = ssd.pdist(observation_df.values.T, metric=metric)
     rdm = ssd.squareform(rdm)
     rdm = pd.DataFrame(rdm, columns=observation_df.columns, index=observation_df.columns)
     
@@ -108,12 +108,13 @@ def get_mds_embedding(rdm, ref=None):
     
     return df_embedding
 
-def bootstrapped_mds(events, q=50):
+def bootstrapped_mds(events, q=50, con_list=None):
     """
     takes events, constructs resampled design matrix, performs bootstrapped mds
     
     events: dict with keys=movie_names and values=events_files
     q: number of iterations for bootstrapping
+    con_list: optional list of contrasts, in form of list of dict/str like this [{'animate':1, 'inanimate':-1}, {'open':1, 'outside':1}, 'social'} where 'social' is equvialent to {'social':1}....]
     """
     
     # get list of m observations on first iteration of bootstrapping
@@ -121,15 +122,53 @@ def bootstrapped_mds(events, q=50):
     
     bootstrap_embeddings = []
 
+    # All trial types in model, alphabetically
+    all_trial_type=list(set().union(*[set(events[x].trial_type) for x in events]))
+    all_trial_type.sort()
+
+    # Find out how many columns of interest in model
+    coi = len(all_trial_type)
+
+    # Make contrast matrix and labels for later
+    if not con_list:
+        # Default contrasts
+        con=np.eye(coi)
+        con_names=all_trial_type
+    else:
+        # Contrasts from list of dict/string (see function description)
+        con = np.zeros((coi, len(con_list)))
+        con_names = ['']*len(con_list)
+        
+        for con_ind, con_list_entry in enumerate(con_list):
+            if isinstance(con_list_entry, dict):
+                for key, val in con_list_entry.items():
+                    con[all_trial_type.index(key), con_ind] = val 
+                    if val==-1:
+                        con_names[con_ind] += '-' + key
+                    elif val==1:
+                        con_names[con_ind] += '+' + key
+                    else:
+                        con_names[con_ind] += f'{val}*{key}'
+            elif isinstance(con_list_entry, str):
+                con[all_trial_type.index(con_list_entry), con_ind] = 1 
+                con_names[con_ind] = con_list_entry                
+
+
+           
     #ref dataframe for Procrustes transform
     reference = None
     
     for i in range(q):
         # 1. sample n rows with replacement from V (observation matrix)
-        bootstrap_replic_q = get_design_matrix(events, sample_with_replacement=True)
-
+        while 1:
+            # Repeat if any columns completely missing from design matrix
+            bootstrap_replic_q = get_design_matrix(events, sample_with_replacement=True)
+            if all([x in bootstrap_replic_q for x in all_trial_type]):
+                break
+        desmat_contrasted = pd.DataFrame( np.array(bootstrap_replic_q[all_trial_type]) @ con, columns= con_names)
+        
         # 2. use replication of V to get rdm
-        rdm_q = construct_rdm(bootstrap_replic_q.iloc[:,:-14]) #exclude drift and constant columns
+        rdm_q = construct_rdm(desmat_contrasted) #exclude drift and constant columns
 
         # 3. perform MDS on the rdm for this iteration
         if i == 0:
@@ -144,7 +183,7 @@ def bootstrapped_mds(events, q=50):
 
     # 4. restructure the data
     bootstrapped_coords = {}
-    for k in observations:
+    for k in con_names:
         # create X, a q*m matrix of bootstrapped coordinates for the condition/object
         X = []
         for mds_q in bootstrap_embeddings:
@@ -152,20 +191,26 @@ def bootstrapped_mds(events, q=50):
             X.append(x_i)
         bootstrapped_coords[k] = np.array(X)
 
-    return bootstrapped_coords
+    return bootstrapped_coords, con_names
 
 if __name__ == "__main__":
     events = pd.read_pickle('./events_per_movie.pickle')
     
     q = 1000
-    n_std = 2.0
-    
-    bootstrap_coords = bootstrapped_mds(events, q=q)
+    n_std = 1.0
+    con_list=['animate', 'biological', 'biological_motion', 'body_parts',
+       'camera_cut', 'civilisation', 'closed', 'contrast_sensitivity_function',
+       'faces', 'far', 'global_contrast_factor', 'inanimate_big',
+       'inanimate_small', 'inside', 'nature', 'near', 'non_biological',
+       'non_social', {'open': 1, 'outside': 1}, 'rms_difference', 'salient_near_away',
+       'salient_near_towards', 'scene', 'scene_change', 'social', 'tools']
+
+    bootstrap_coords, con_names = bootstrapped_mds(events, q=q, con_list = con_list)
     with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
         pickle.dump(bootstrap_coords,f)
 
-    #with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
-    #    bootstrap_coords = pickle.load(f)
+    with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
+        bootstrap_coords = pickle.load(f)
         
     cmap = plt.get_cmap('hsv')
     colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
@@ -179,15 +224,18 @@ if __name__ == "__main__":
 
         np.mean(coords_arr)
         
-        ax1.text(np.mean(x), np.mean(y),condition, ha='center', va='center')
+        ax1.text(np.mean(x), np.mean(y), condition, ha='center', va='center')
         
     ax1.set_xlim((-0.35,0.35))
     ax1.set_ylim((-0.35,0.35))
     ax1.set_aspect('equal')
+    ax1.axis('off')
 
     h,l = ax1.get_legend_handles_labels()
     ax2.axis('off')
     ax2.legend(h,l)
+    plt.tight_layout()
+
     plt.savefig(f'./bootstrap_results_q_{q}_std_{n_std}.pdf')
     plt.show()
 

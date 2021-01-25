@@ -15,9 +15,9 @@ from nilearn.plotting import plot_design_matrix
 # Make event prob dist
 ntp=64
 des=[]
-des.append((np.arange(ntp)==16).astype(np.float)) # wimpy column!
-des.append((np.arange(ntp)==16).astype(np.float)) # wimpy column!
-#des.append((np.arange(ntp)<32).astype(np.float)) # really powerful column!
+#des.append((np.arange(ntp)==16).astype(np.float)) # wimpy column!
+des.append(0.9*(np.arange(ntp)<32).astype(np.float)) # really powerful column!
+des.append(0.9*(np.arange(ntp)<32).astype(np.float)) # really powerful column but similar!
 ndes = len(des)
 
 # Make events
@@ -32,7 +32,8 @@ for axind in range(ndes):
     r=np.random.uniform(size=(ntp,1))
     for t in range(ntp):
         if r[t]<des[axind][t]:
-            ev={'onset':t + axind*0.0001,'duration':1,'trial_type':f'cond{axind}'} # jittering onsets with axind * 0.0001 due to behaviour of make_first_level_design_matrix raised in this issue https://github.com/nilearn/nilearn/issues/2668#issuecomment-766424736
+#            ev={'onset':t + axind*0.0001,'duration':1,'trial_type':f'cond{axind}'} # jittering onsets with axind * 0.0001 due to behaviour of make_first_level_design_matrix raised in this issue https://github.com/nilearn/nilearn/issues/2668#issuecomment-766424736
+            ev={'onset':t + np.random.uniform(0.5),'duration':1,'trial_type':f'cond{axind}'} # adding some random jitter to the columns
             events = events.append(ev, ignore_index=True)
 all_trial_type=['cond0','cond1']
 
