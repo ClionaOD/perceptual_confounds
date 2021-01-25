@@ -198,16 +198,19 @@ if __name__ == "__main__":
     
     q = 1000
     n_std = 1.0
-    con_list=['animate', 'biological', 'biological_motion', 'body_parts',
-       'camera_cut', 'civilisation', 'closed', 'contrast_sensitivity_function',
-       'faces', 'far', 'global_contrast_factor', 'inanimate_big',
-       'inanimate_small', 'inside', 'nature', 'near', 'non_biological',
-       'non_social', {'open': 1, 'outside': 1}, 'rms_difference', 'salient_near_away',
-       'salient_near_towards', 'scene', 'scene_change', 'social', 'tools']
+    con_list=['animate',  
+        {'biological_motion':1 , 'body_parts': 1},
+        'camera_cut', 'civilisation', 
+        {'closed':1, 'inside':1}, 
+        {'contrast_sensitivity_function':1, 'global_contrast_factor':1, 'rms_difference':1}, 
+        'faces', 'far',  'inanimate_big',
+        'inanimate_small', 'nature', 'near', 'non_biological',
+        'non_social', {'open': 1, 'outside': 1}, 'salient_near_away',
+        'salient_near_towards', 'scene', 'scene_change', {'biological':1, 'social':1} , 'tools']
 
-    bootstrap_coords, con_names = bootstrapped_mds(events, q=q, con_list = con_list)
-    with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
-        pickle.dump(bootstrap_coords,f)
+    # bootstrap_coords, con_names = bootstrapped_mds(events, q=q, con_list = con_list)
+    # with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
+    #     pickle.dump(bootstrap_coords,f)
 
     with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
         bootstrap_coords = pickle.load(f)
@@ -215,7 +218,7 @@ if __name__ == "__main__":
     cmap = plt.get_cmap('hsv')
     colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
 
-    fig, (ax1,ax2) = plt.subplots(ncols=2, figsize=(11.69,8.27))
+    fig, ax1 = plt.subplots(ncols=1, figsize=(11.69,8.27))
 
     for idx, (condition, coords_arr) in enumerate(bootstrap_coords.items()):
         x = coords_arr[:,0] ; y = coords_arr[:,1]
@@ -232,8 +235,8 @@ if __name__ == "__main__":
     ax1.axis('off')
 
     h,l = ax1.get_legend_handles_labels()
-    ax2.axis('off')
-    ax2.legend(h,l)
+    ax1.axis('off')
+    legend = ax1.legend(h,l,  prop={'size': 5 }, loc='upper right')
     plt.tight_layout()
 
     plt.savefig(f'./bootstrap_results_q_{q}_std_{n_std}.pdf')
