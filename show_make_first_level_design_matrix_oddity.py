@@ -1,3 +1,8 @@
+'''
+Test code to investigate odd behaviour of make_first_level_design_matrix in which duplicates of events are ignored
+Raised as issue  https://github.com/nilearn/nilearn/issues/2668#issuecomment-766424736
+@author: Rhodri Cusack cusackrh@tcd.ie
+'''
 
 from nilearn.glm.first_level import make_first_level_design_matrix
 import pandas as pd
