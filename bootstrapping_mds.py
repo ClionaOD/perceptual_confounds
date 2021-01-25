@@ -108,13 +108,15 @@ def get_mds_embedding(rdm, ref=None):
     
     return df_embedding
 
-def bootstrapped_mds(events, q=50, con_list=None):
+def bootstrapped_mds(events, q=50, con_list=None, reference=None):
     """
     takes events, constructs resampled design matrix, performs bootstrapped mds
     
     events: dict with keys=movie_names and values=events_files
     q: number of iterations for bootstrapping
     con_list: optional list of contrasts, in form of list of dict/str like this [{'animate':1, 'inanimate':-1}, {'open':1, 'outside':1}, 'social'} where 'social' is equvialent to {'social':1}....]
+    reference:    dataframe for Procrustes transform
+
     """
     
     # get list of m observations on first iteration of bootstrapping
@@ -155,8 +157,6 @@ def bootstrapped_mds(events, q=50, con_list=None):
 
 
            
-    #ref dataframe for Procrustes transform
-    reference = None
     
     for i in range(q):
         # 1. sample n rows with replacement from V (observation matrix)
@@ -173,7 +173,8 @@ def bootstrapped_mds(events, q=50, con_list=None):
         # 3. perform MDS on the rdm for this iteration
         if i == 0:
             observations.extend(list(rdm_q.columns))
-            reference = get_mds_embedding(rdm_q)
+            if reference is None:
+                reference = get_mds_embedding(rdm_q)
 
             mds_q = get_mds_embedding(rdm_q, ref=reference)
         else:
@@ -191,7 +192,7 @@ def bootstrapped_mds(events, q=50, con_list=None):
             X.append(x_i)
         bootstrapped_coords[k] = np.array(X)
 
-    return bootstrapped_coords, con_names
+    return bootstrapped_coords, con_names, reference
 
 if __name__ == "__main__":
     events = pd.read_pickle('./events_per_movie.pickle')
@@ -200,17 +201,46 @@ if __name__ == "__main__":
     n_std = 1.0
     con_list=['animate',  
         {'biological_motion':1 , 'body_parts': 1},
-        'camera_cut', 'civilisation', 
+        {'biological':1, 'social':1},
+        'faces', 'nature',
+        {'inanimate_small':1, 'tools':1},
+        'inanimate_big',
+        'non_social',  {'salient_near_away':1, 'far':1},
+        'salient_near_towards', 
+        'near',  
         {'closed':1, 'inside':1}, 
-        {'contrast_sensitivity_function':1, 'global_contrast_factor':1, 'rms_difference':1}, 
-        'faces', 'far',  'inanimate_big',
-        'inanimate_small', 'nature', 'near', 'non_biological',
-        'non_social', {'open': 1, 'outside': 1}, 'salient_near_away',
-        'salient_near_towards', 'scene', 'scene_change', {'biological':1, 'social':1} , 'tools']
+        {'open': 1, 'outside': 1},
+        'scene', 
+        {'non_biological':1, 'civilisation':1},
+        'camera_cut',
+        {'contrast_sensitivity_function':1, 'global_contrast_factor':1, 'rms_difference':1},
+        'scene_change',
+ 
+]
 
-    # bootstrap_coords, con_names = bootstrapped_mds(events, q=q, con_list = con_list)
-    # with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
-    #     pickle.dump(bootstrap_coords,f)
+
+   
+
+    # Do a set of iterations and find one with lowest variance (so a good reference) 
+    ninitial = 10
+    reference_min = None
+    bootstrap_var_min = np.inf
+
+    for perm in range(50):
+        bootstrap_coords, con_names, reference = bootstrapped_mds(events, q=50, con_list = con_list)
+        bootstrap_var=0
+        for condition, coords_arr in bootstrap_coords.items():
+            bootstrap_var += coords_arr.var(axis=0).sum()
+        if bootstrap_var < bootstrap_var_min:
+            reference_min = reference
+            bootstrap_var_min = bootstrap_var
+
+    print('Found MDS reference')
+
+    # Use this reference for the main bootstrap
+    bootstrap_coords, con_names, reference = bootstrapped_mds(events, q=q, con_list = con_list, reference= reference)
+    with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
+        pickle.dump(bootstrap_coords,f)
 
     with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
         bootstrap_coords = pickle.load(f)
