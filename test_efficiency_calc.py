@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Testing efficiency by recreating figure http://imaging.mrc-cbu.cam.ac.uk/images/eff_friston.gif on this page https://imaging.mrc-cbu.cam.ac.uk/imaging/DesignEfficiency
+
+@author: Rhodri Cusack
+"""
+
 import numpy as np
 from single_column_efficiency import efficiency_calc
 from matplotlib import pyplot as plt
@@ -5,7 +12,6 @@ import pandas as pd
 from nilearn.glm.first_level import make_first_level_design_matrix
 from nilearn.plotting import plot_design_matrix
 
-# Comparing to figure http://imaging.mrc-cbu.cam.ac.uk/images/eff_friston.gif on this page https://imaging.mrc-cbu.cam.ac.uk/imaging/DesignEfficiency
 
 # Make event prob dist
 ntp=64

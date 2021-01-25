@@ -7,7 +7,7 @@ from nilearn.plotting import plot_design_matrix
 
 
 def efficiency_calc(X, contrasts):
-    '''Calculate efficiency for a given design matrix (i.e a given video) '''     
+    '''Calculate efficiency for a given design matrix '''     
     #Singular matrix - no solution to inverse 
     invXtX = np.linalg.pinv(X.T@X)
     efficiency = 1.0 / np.trace(( contrasts.T@invXtX@contrasts))
