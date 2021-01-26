@@ -26,7 +26,7 @@ def hierarchical_clustering(in_matrix, label_list, method_clustering, outpath=No
         )
     else:   
         fig,ax = plt.subplots(figsize=(15,10))
-        dend = sch.dendrogram(sch.linkage(matrix, method= methodX), 
+        dend = sch.dendrogram(sch.linkage(matrix, method= method_clustering), 
             ax=ax, 
             labels=label_list, 
             orientation='right'
@@ -105,7 +105,7 @@ dir_save = './clustered_corr_matrices/'
 dir_save = './clustered_corr_matrices/correlation_hc/'
 
 root_path = './correlation_matrices_hc/'
-methods = ['complete']  #['single', 'complete', 'average', 'weighted', 'centroid', 'median', 'ward']
+methods = ['complete', 'single', 'complete', 'average', 'weighted', 'centroid', 'median', 'ward']
 
 for method_clustering in methods:
     print(method_clustering)
