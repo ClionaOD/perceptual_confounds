@@ -197,8 +197,7 @@ def bootstrapped_mds(events, q=50, con_list=None, reference=None):
 if __name__ == "__main__":
     events = pd.read_pickle('./events_per_movie.pickle')
     
-    q = 1000
-    n_std = 1.0
+    
     con_list=['animate',  
         {'biological_motion':1 , 'body_parts': 1},
         {'biological':1, 'social':1},
@@ -219,56 +218,92 @@ if __name__ == "__main__":
 ]
 
 
-   
+    use_precomputed_bootstrap=False
+    use_precomputed_reference=False
+    nreferences=10
+    nbootstraps_per_reference=2
+    ninitial = 1
+    initial_q = 1
+    q = 1000
+    n_std = 1.0
 
-    # Do a set of iterations and find one with lowest variance (so a good reference) 
-    ninitial = 10
-    reference_min = None
-    bootstrap_var_min = np.inf
+    results=[]
+    
+    for reference_ind in range(nreferences):
+        if use_precomputed_reference:
+            with open(f'./bootstrap_mds_reference_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
+                reference = pickle.load(f)
+        else:
+            # Do a set of iterations and find one with lowest variance (so a good reference) 
+           
+            reference_min = None
+            bootstrap_var_min = np.inf
+            for perm in range(ninitial):
+                bootstrap_coords, con_names, reference = bootstrapped_mds(events, q=initial_q, con_list = con_list)
+                bootstrap_var=0
+                for condition, coords_arr in bootstrap_coords.items():
+                    bootstrap_var += coords_arr.var(axis=0).sum()
+                if bootstrap_var < bootstrap_var_min:
+                    reference_min = reference
+                    bootstrap_var_min = bootstrap_var
 
-    for perm in range(50):
-        bootstrap_coords, con_names, reference = bootstrapped_mds(events, q=50, con_list = con_list)
-        bootstrap_var=0
-        for condition, coords_arr in bootstrap_coords.items():
-            bootstrap_var += coords_arr.var(axis=0).sum()
-        if bootstrap_var < bootstrap_var_min:
-            reference_min = reference
-            bootstrap_var_min = bootstrap_var
+            reference=reference_min
+            print('Found MDS reference')
+            with open(f'./bootstrap_mds_reference_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
+                pickle.dump(reference,f)
 
-    print('Found MDS reference')
+        for bootstrap_ind in range(nbootstraps_per_reference):
+            if use_precomputed_bootstrap:
+                with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
+                    bootstrap_coords = pickle.load(f)
+            else:
+                # Use this reference for the main bootstrap
+                bootstrap_coords, con_names, reference = bootstrapped_mds(events, q=q, con_list = con_list, reference= reference)
+                with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
+                    pickle.dump(bootstrap_coords,f)
+                
+            cmap = plt.get_cmap('hsv')
+            colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
 
-    # Use this reference for the main bootstrap
-    bootstrap_coords, con_names, reference = bootstrapped_mds(events, q=q, con_list = con_list, reference= reference)
-    with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','wb') as f:
-        pickle.dump(bootstrap_coords,f)
+            fig, ax1 = plt.subplots(ncols=1, figsize=(11.69,8.27))
 
-    with open(f'./bootstrap_mds_coords_q_{q}_nstd_{n_std}.pickle','rb') as f:
-        bootstrap_coords = pickle.load(f)
-        
-    cmap = plt.get_cmap('hsv')
-    colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
+            bootstrap_var = 0
+            for idx, (condition, coords_arr) in enumerate(bootstrap_coords.items()):
+                x = coords_arr[:,0] ; y = coords_arr[:,1]
+                #ax1.scatter(x,y,s=0.01)
+                confidence_ellipse(x, y, ax=ax1, n_std=n_std, edgecolor=colors[idx], label=condition)
 
-    fig, ax1 = plt.subplots(ncols=1, figsize=(11.69,8.27))
+                np.mean(coords_arr)
+                
+                ax1.text(np.mean(x), np.mean(y), condition, ha='center', va='center')
+                bootstrap_var += coords_arr.var(axis=0).sum()
+            
+            results.append({'reference_ind': reference_ind,
+                            'bootstrap_ind': bootstrap_ind,
+                            'ninitial' :ninitial,
+                            'initial_q': initial_q,
+                            'q': q,
+                            'con_list': con_list,
+                            'bootstrap_var': bootstrap_var })
+            print(f'Reference {reference_ind} iteration {bootstrap_ind} final bootstrap variance {bootstrap_var}')
+            
+            ax1.set_xlim((-0.35,0.35))
+            ax1.set_ylim((-0.35,0.35))
+            ax1.set_aspect('equal')
+            ax1.axis('off')
 
-    for idx, (condition, coords_arr) in enumerate(bootstrap_coords.items()):
-        x = coords_arr[:,0] ; y = coords_arr[:,1]
-        #ax1.scatter(x,y,s=0.01)
-        confidence_ellipse(x, y, ax=ax1, n_std=n_std, edgecolor=colors[idx], label=condition)
+            h,l = ax1.get_legend_handles_labels()
+            ax1.axis('off')
+            legend = ax1.legend(h,l,  prop={'size': 5 }, loc='upper right')
+            plt.tight_layout()
 
-        np.mean(coords_arr)
-        
-        ax1.text(np.mean(x), np.mean(y), condition, ha='center', va='center')
-        
-    ax1.set_xlim((-0.35,0.35))
-    ax1.set_ylim((-0.35,0.35))
-    ax1.set_aspect('equal')
-    ax1.axis('off')
+            plt.savefig(f'bootstrap/bootstrap_results_q_{q}_std_{n_std}_ninitial_{ninitial}_initialq_{initial_q}_ref_{reference_ind}_iteration_{bootstrap_ind}.pdf')
 
-    h,l = ax1.get_legend_handles_labels()
-    ax1.axis('off')
-    legend = ax1.legend(h,l,  prop={'size': 5 }, loc='upper right')
-    plt.tight_layout()
+    with open(f'bootstrap/bootstrap_results_q{q}_std_{n_std}_ninitial_{ninitial}_initialq_{initial_q}.pickle','wb') as f:
+        pickle.dump(results,f)
 
-    plt.savefig(f'./bootstrap_results_q_{q}_std_{n_std}.pdf')
+    print(results)
+
+
     plt.show()
 
