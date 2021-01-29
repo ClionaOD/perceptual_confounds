@@ -66,7 +66,7 @@ def get_design_matrix(all_events, hrf='spm'):
     
     #Get 
     tr = 1.0
-    n_scans = tr*23.0*len(all_events)
+    n_scans = 23.0*len(all_events)/tr
     frame_times = np.arange(n_scans) * tr
 
     X = make_first_level_design_matrix(frame_times, df_all_videos, hrf_model=hrf)
