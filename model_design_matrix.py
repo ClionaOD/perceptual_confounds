@@ -57,10 +57,11 @@ def get_df_events(all_events, rest_length = 2.0, sample_with_replacement=False):
     return df_events_concat
 
 
-def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement=False, tr=1.0):
+def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement=False, tr=1.0, n_scans=None):
     #make design matrix for stacked events
     #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
-    n_scans = (22 * len(events_dict)) + (rest*len(events_dict))
+    if not n_scans:
+        n_scans = (22 * len(events_dict)) + (rest*len(events_dict))
     frame_times = np.arange(n_scans) * tr
 
     #each time stack_events is called, the order of movies is randomised

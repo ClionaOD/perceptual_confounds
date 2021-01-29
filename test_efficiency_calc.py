@@ -17,9 +17,9 @@ def get_henson_events(ntp=64):
     des=[]
     des.append((np.arange(ntp)%8==0).astype(np.float))
     des.append(np.ones(ntp)*0.5)
-    des.append(np.abs(np.cos(2*np.pi*np.arange(ntp)/16)))
-    des.append(np.abs(np.cos(2*np.pi*np.arange(ntp)/32)))
-    des.append(np.abs(np.cos(2*np.pi*np.arange(ntp)/64)))
+    des.append((1+np.cos(2*np.pi*np.arange(ntp)/8))/2)
+    des.append((1+np.cos(2*np.pi*np.arange(ntp)/16))/2)
+    des.append((1+np.cos(2*np.pi*np.arange(ntp)/64))/2)
     des.append((np.arange(ntp)<32).astype(np.float))
     ndes = len(des)
 
@@ -31,13 +31,14 @@ def get_henson_events(ntp=64):
         events[axind]=pd.DataFrame()
         for t in range(ntp):
             if r[t]<des[axind][t]:
-                ev={'onset':t,'duration':1,'trial_type':f'vanilla{axind}'}
+                ev={'onset':t,'duration':1,'trial_type':f'model{axind}'}
                 events[axind] = events[axind].append(ev, ignore_index=True)
     return events, des
 
 
 if __name__=='__main__':
     ntp=64
+    tr=1.0
     events, des= get_henson_events(ntp=ntp)
     ndes=len(events)
 
@@ -50,7 +51,7 @@ if __name__=='__main__':
     gs = fig.add_gridspec(ndes, 2)
     for axind in range(ndes):
         ax=fig.add_subplot(gs[axind,0])            
-        X=make_first_level_design_matrix(np.arange(ntp), events=events[axind], hrf_model='spm', drift_model=None)
+        X=make_first_level_design_matrix(np.arange(ntp) * tr, events=events[axind], hrf_model='spm', drift_model=None)
         ax.bar(range(ntp),des[axind])
         eff.append(efficiency_calc(X,con))
         
