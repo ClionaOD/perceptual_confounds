@@ -35,43 +35,130 @@ def get_df_events(all_events, rest_length = 2.0, sample_with_replacement=False):
     #List of videos + randomise
     list_videos = list(all_events.keys())
     if sample_with_replacement:
+        print('With replacement')
         list_videos = random.choices(list_videos,k=len(list_videos))
     else:
+        print('Not Shuffle')
         random.shuffle(list_videos) #Randomise movie order
-    
+
+    print(list_videos)
+
     #Params
     movie_length = 22.524
-    delay = 0.001
-    df_rest = get_rest_df(rest_length)
-    df_events_concat = pd.DataFrame()
+    delay = 23.0 - movie_length
+    df_all_videos = pd.DataFrame()
     
     for idx, vid in enumerate(list_videos):      
-        df_eventX = all_events[vid].copy()
-        df_temp = pd.concat([df_eventX, df_rest])
-        #Adjust onsets of event
-        df_temp['onset'] = df_temp['onset'] + idx*(movie_length + rest_length + delay)
+        df_videoX = all_events[vid].copy()
         
+        df_videoX['movie_source']=vid # it is important to remember where you came from
+        
+        # Find videos where the tags overrun
+        overrun=(df_videoX['onset']+df_videoX['duration'])>22.9 # enforce 100 ms gap
+        if overrun.any()>0:
+            print(f'Video {idx} overruns {overrun.sum()}')
+            df_videoX['duration'][overrun]=22.9-df_videoX['onset'][overrun]
+
+        #Adjust onsets of event
+        df_videoX['onset'] = 0.01 + (df_videoX['onset']*51.0).round()/51.0 + idx*(movie_length + delay)
+#        df_videoX['onset'] = df_videoX['onset'] + idx*(movie_length + delay)
+
+        df_videoX['duration'] = (df_videoX['duration']*51.0).round()/51.0 
         #Concatenate
-        df_events_concat = pd.concat([df_events_concat,  df_temp])
+        df_all_videos = df_all_videos.append(df_videoX, ignore_index = True)
     
-    return df_events_concat
+    return df_all_videos, list_videos
 
 
 def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement=False, tr=1.0, n_scans=None):
     #make design matrix for stacked events
     #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
     if not n_scans:
-        n_scans = (22 * len(events_dict)) + (rest*len(events_dict))
+        n_scans = (23.0 * len(events_dict)) + (rest*len(events_dict))+10
     frame_times = np.arange(n_scans) * tr
 
     #each time stack_events is called, the order of movies is randomised
     if sample_with_replacement:
-        stacked_events = get_df_events(events_dict, rest_length=rest, sample_with_replacement=True)
+        stacked_events, list_videos = get_df_events(events_dict, rest_length=rest, sample_with_replacement=True)
     else:
-        stacked_events = get_df_events(events_dict, rest_length=rest)
+        stacked_events, list_videos = get_df_events(events_dict, rest_length=rest)
+
+    stacked_events = stacked_events.sort_values('onset', ignore_index= True)
     X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model=hrf)
     
+    # for idx, vid in enumerate(list_videos):
+    #     earliest=stacked_events[stacked_events['movie_source'] == vid]['onset'].min()
+    #     latest=(stacked_events[stacked_events['movie_source'] == vid]['onset'] + stacked_events[stacked_events['movie_source'] == vid]['duration']).max()
+    #     print(f'video {idx} earliest {earliest} latest {latest}')
+    
+    print(stacked_events)
     return X
+# walle
+# 660.0    2.000000e+00
+# 661.0    2.000000e+00
+# 662.0    2.000000e+00
+# 663.0    2.000000e+00
+# 664.0    2.000000e+00
+# 665.0    2.000000e+00
+# 666.0    2.000000e+00
+# 667.0    1.000000e+00
+# 668.0   -7.305460e-15
+# 669.0   -1.197587e-14
+# 670.0    1.000000e+00
+# 671.0    2.000000e+00
+# 672.0    2.000000e+00
+# 673.0    2.000000e+00
+# 674.0    2.000000e+00
+# 675.0    2.000000e+00
+# 676.0    2.000000e+00
+# 677.0    2.000000e+00
+# 678.0    2.000000e+00
+# 679.0   -1.094097e-14
+# 680.0    1.000000e+00
+# 681.0    2.000000e+00
+# 682.0    2.000000e+00
+# 683.0    2.000000e+00
+# 684.0    2.000000e+00
+# 685.0    2.000000e+00
+# 686.0   -1.189133e-14
+# 687.0   -1.201991e-14
+# 688.0   -7.827517e-15
+# 689.0    2.000000e+00
+# 690.0   -1.216164e-15
+
+#          onset  duration trial_type  magnitude movie_source
+# 16885  299.160     0.620    animate        0.5    walle.mp4
+# 16886  302.880     7.899    animate        0.5    walle.mp4
+# 16887  311.072     6.688    animate        0.5    walle.mp4
+# 16888  320.580     0.748    animate        0.5    walle.mp4
+# 16930  299.000     0.606    animate        0.5    walle.mp4
+# 16931  301.513     9.097    animate        0.5    walle.mp4
+# 16932  312.940     4.625    animate        0.5    walle.mp4
+# 16933  320.430     1.094    animate        0.5    walle.mp4
+# 299.0    1.000000e+00
+# 300.0   -4.632657e-15
+# 301.0   -1.009989e-14
+# 302.0    1.000000e+00
+# 303.0    2.000000e+00
+# 304.0    2.000000e+00
+# 305.0    2.000000e+00
+# 306.0    2.000000e+00
+# 307.0    2.000000e+00
+# 308.0    2.000000e+00
+# 309.0    2.000000e+00
+# 310.0    2.000000e+00
+# 311.0   -8.647809e-15
+# 312.0    1.000000e+00
+# 313.0    2.000000e+00
+# 314.0    2.000000e+00
+# 315.0    2.000000e+00
+# 316.0    2.000000e+00
+# 317.0    2.000000e+00
+# 318.0   -1.038616e-14
+# 319.0   -1.031756e-14
+# 320.0   -5.027524e-15
+# 321.0    2.000000e+00
+# 322.0    1.000000e+00
 
 #Efficiency
 def efficiency_calc(X, contrast_vec):

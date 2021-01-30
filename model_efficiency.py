@@ -9,26 +9,12 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 
 from test_efficiency_calc import get_henson_events
+import scipy.cluster.hierarchy as sch
 
 
-def fit_model(events, signal_con, test_con, scale_type='peak2peak', tr=1.0, sample_with_replacement=True):
-
+def fit_model(X, events, signal_con, test_con, tr=1.0, sample_with_replacement=True):
+    # How many noise samples?
     nsamples = 1000
-
-    if len(events) == 1:
-        nscans = 64
-    else:
-        nscans = None
-
-    # Get design matrix
-    X = get_design_matrix(
-        events, sample_with_replacement=sample_with_replacement, tr=tr, n_scans=nscans)
-    
-    
-    if scale_type == 'peak2peak':
-        # Scale each column to have range from 0 to 1
-        all_trial_type = list(set().union(*[set(events[x].trial_type) for x in events]))         # List of all trial_type values
-        X[all_trial_type]= (X[all_trial_type] - X[all_trial_type].min()) / (X[all_trial_type].max() - X[all_trial_type].min()) 
 
     nscans = len(X)
     print(f'nscans {nscans}')
@@ -94,13 +80,18 @@ if __name__ == '__main__':
     event_type = 'movies'               # event list types
                                         #   henson: use testing set of events from CBU web page (see test_efficiency_calc.py)
                                         #   movies: use all movies
-    con_list_type = 'boiled_down_3'    # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3] 
+    con_list_type = ['all_trial_type','boiled_down_1','boiled_down_2','boiled_down_3'][0] 
+                                        # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3] 
+    
+    scale_type = 'peak2peak' # each column in design matrix
 
     # Get event model.
     if event_type == 'henson':
         events, des = get_henson_events()
+        nscans = 64
     elif event_type == 'movies':
         events = pd.read_pickle('./events_per_movie.pickle')
+        nscans = None # calculated from events
 
     # List of all trial_type values
     all_trial_type = list(set().union(
@@ -176,6 +167,44 @@ if __name__ == '__main__':
     #all_trial_type = ['open', 'outside', 'nature', ['open','outside','nature']]
     df = pd.DataFrame()
 
+    # Get design matrix
+
+    Xreps=10
+    for xind in range(Xreps):
+        X = get_design_matrix(
+            events, sample_with_replacement=False, tr=tr, n_scans=nscans, hrf='fir')
+
+        if scale_type == 'peak2peak':
+            # Scale each column in X to have range from 0 to 1
+            all_trial_type = list(set().union(*[set(events[x].trial_type + '_delay_0') for x in events]))         # List of all trial_type values
+            X[all_trial_type]= (X[all_trial_type] - X[all_trial_type].min()) / (X[all_trial_type].max() - X[all_trial_type].min()) 
+
+        corrX = X.corr()
+        if xind==0:
+            allcorrX=np.zeros((corrX.shape[0], X.shape[1], Xreps))
+        allcorrX[:,:,xind]=corrX
+
+
+    fig, ax = plt.subplots(figsize=(11.5, 9))
+    plt.rcParams.update({'font.size': 8})
+    sns.heatmap(allcorrX.std(axis=2), ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
+    plt.tight_layout()
+
+    plt.savefig(f'model_efficiency_events_Xcorr_std.jpg')
+
+    # if scale_type == 'peak2peak':
+    #     # Scale each column in X to have range from 0 to 1
+    #     all_trial_type = list(set().union(*[set(events[x].trial_type + '_delay_0') for x in events]))         # List of all trial_type values
+    #     X[all_trial_type]= (X[all_trial_type] - X[all_trial_type].min()) / (X[all_trial_type].max() - X[all_trial_type].min()) 
+
+    corrX = X.corr()
+    fig, ax = plt.subplots(figsize=(11.5, 9))
+    plt.rcParams.update({'font.size': 8})
+    sns.heatmap(corrX, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
+    plt.tight_layout()
+
+    plt.savefig(f'model_efficiency_events_Xcorr.jpg')
+
     # contrasted design matrix columns
     Xcon=pd.DataFrame()
 
@@ -205,7 +234,7 @@ if __name__ == '__main__':
 
         # Fit GLM
         #  sample_with_replacement determines whether to do bootstrapping across movies
-        zstats, concol = fit_model(ev, sig_con, test_con, tr=tr, sample_with_replacement=False)
+        zstats, concol = fit_model(X, ev, sig_con, test_con, tr=tr, sample_with_replacement=False)
 
         vals = zstats.get_fdata()
 
@@ -226,10 +255,24 @@ if __name__ == '__main__':
   
     plt.savefig(f'model_efficiency_events_{event_type}_con_{con_list_type}_violin.jpg')
 
+    fig, ax = plt.subplots(nrows = 1, figsize=(11.5, 9))
     #Correlation matrix
     corrMatrix = Xcon.corr()
+    dend = sch.dendrogram(sch.linkage(corrMatrix,  method= 'complete'), 
+            ax=ax,  
+            labels=corrMatrix.columns,
+            orientation='right'
+        )
+
+    order=dend['ivl']
+    print(order)
+    plt.savefig(f'model_efficiency_events_{event_type}_con_{con_list_type}_clusters.jpg')
+
     fig, ax = plt.subplots(figsize=(11.5, 9))
     plt.rcParams.update({'font.size': 12})
+
+    corrMatrixReordered = corrMatrix.reindex(index=order,columns=order)
+
     sns.heatmap(corrMatrix, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
     plt.tight_layout()
 
