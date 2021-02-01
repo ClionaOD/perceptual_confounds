@@ -168,35 +168,15 @@ if __name__ == '__main__':
     df = pd.DataFrame()
 
     # Get design matrix
+    X = get_design_matrix(
+        events, sample_with_replacement=False, tr=tr, n_scans=nscans, hrf='spm')
 
-    Xreps=10
-    for xind in range(Xreps):
-        X = get_design_matrix(
-            events, sample_with_replacement=False, tr=tr, n_scans=nscans, hrf='fir')
+    if scale_type == 'peak2peak':
+        # Scale each column in X to have range from 0 to 1
+        all_trial_type = list(set().union(*[set(events[x].trial_type) for x in events]))         # List of all trial_type values
+        X[all_trial_type]= (X[all_trial_type] - X[all_trial_type].min()) / (X[all_trial_type].max() - X[all_trial_type].min()) 
 
-        if scale_type == 'peak2peak':
-            # Scale each column in X to have range from 0 to 1
-            all_trial_type = list(set().union(*[set(events[x].trial_type + '_delay_0') for x in events]))         # List of all trial_type values
-            X[all_trial_type]= (X[all_trial_type] - X[all_trial_type].min()) / (X[all_trial_type].max() - X[all_trial_type].min()) 
-
-        corrX = X.corr()
-        if xind==0:
-            allcorrX=np.zeros((corrX.shape[0], X.shape[1], Xreps))
-        allcorrX[:,:,xind]=corrX
-
-
-    fig, ax = plt.subplots(figsize=(11.5, 9))
-    plt.rcParams.update({'font.size': 8})
-    sns.heatmap(allcorrX.std(axis=2), ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
-    plt.tight_layout()
-
-    plt.savefig(f'model_efficiency_events_Xcorr_std.jpg')
-
-    # if scale_type == 'peak2peak':
-    #     # Scale each column in X to have range from 0 to 1
-    #     all_trial_type = list(set().union(*[set(events[x].trial_type + '_delay_0') for x in events]))         # List of all trial_type values
-    #     X[all_trial_type]= (X[all_trial_type] - X[all_trial_type].min()) / (X[all_trial_type].max() - X[all_trial_type].min()) 
-
+    # Dump correlation
     corrX = X.corr()
     fig, ax = plt.subplots(figsize=(11.5, 9))
     plt.rcParams.update({'font.size': 8})

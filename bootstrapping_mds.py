@@ -213,7 +213,7 @@ def bootstrap_mds_across_movies(con_list=None,
                   q=1000,
                   n_std=1.0, 
                   save_results=False,
-                  save_figures=False):
+                  save_figures=False ):
 
     results = []
 
@@ -324,4 +324,4 @@ if __name__ == "__main__":
                  'global_contrast_factor': 1, 'rms_difference': 1},
                 'scene_change',
                 ]
-    results = bootstrap_mds_across_movies(con_list=con_list, events = events, save_results=True, save_figures=True)
+    results = bootstrap_mds_across_movies(con_list=con_list, events = events, save_results=True, save_figures=True, nreferences=10, nbootstraps_per_reference=2)
