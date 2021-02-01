@@ -11,6 +11,7 @@ import seaborn as sns
 from test_efficiency_calc import get_henson_events
 import scipy.cluster.hierarchy as sch
 
+from contrast_list import get_con_list
 
 def fit_model(X, events, signal_con, test_con, tr=1.0, sample_with_replacement=True):
     # How many noise samples?
@@ -81,7 +82,7 @@ if __name__ == '__main__':
                                         #   henson: use testing set of events from CBU web page (see test_efficiency_calc.py)
                                         #   movies: use all movies
     con_list_type = ['all_trial_type','boiled_down_1','boiled_down_2','boiled_down_3'][0] 
-                                        # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3] 
+                                        
     
     scale_type = 'peak2peak' # each column in design matrix
 
@@ -93,76 +94,7 @@ if __name__ == '__main__':
         events = pd.read_pickle('./events_per_movie.pickle')
         nscans = None # calculated from events
 
-    # List of all trial_type values
-    all_trial_type = list(set().union(
-        *[set(events[x].trial_type) for x in events]))
-    all_trial_type.sort()
-
-    # Create list of columns to be used in design matrix
-    if con_list_type == 'all_trial_type':
-        con_list = {x: 1 for x in all_trial_type}
-        nuisance_con = {}
-
-    elif con_list_type == 'boiled_down_1':
-        con_list = ['animate',
-                    {'biological_motion': 1, 'body_parts': 1},
-                    {'biological': 1, 'social': 1},
-                    'faces',
-                    {'inanimate_small': 1, 'tools': 1},
-                    'inanimate_big',
-                    'non_social',  {'salient_near_away': 1, 'far': 1},
-                    'salient_near_towards',
-                    'near',
-                    { 'closed': 1, 'inside': 1},
-                    {'open': 1, 'outside': 1, 'nature': 1},
-                    'scene',
-                    {'non_biological': 1, 'civilisation': 1},
-                    'camera_cut',
-                    'scene_change',
-                    ]
-
-    elif con_list_type == 'boiled_down_2':
-        con_list = ['animate',
-                    {'biological_motion': 1, 'body_parts': 1},
-                    {'biological': 1, 'social': 1, 'non_social':-1},
-                    'faces',
-                    {'inanimate_small': 1, 'tools': 1},
-                    'inanimate_big',
-                    {'salient_near_away': 1, 'far': 1},
-                    'salient_near_towards',
-                    'near',
-                    {'open': 1, 'outside': 1, 'nature': 1, 'closed': -1, 'inside': -1},
-                    'scene',
-                    {'non_biological': 1, 'civilisation': 1},
-                    'camera_cut',
-                    'scene_change',
-                    ]
-
-    elif con_list_type == 'boiled_down_3':
-        con_list = [{'body_parts': 1, 'biological': 1, 'faces':1, 'animate':1, 'biological_motion': 1},
-                    {'social': 1},
-                    {'inanimate_small': 1, 'closed': 1, 'inside': 1 },
-                    {'near':1, 'tools': 1, 'civilisation':1, 'non_biological': 1},
-                    {'open': 1, 'outside': 1, 'nature': 1, },
-                    {'inanimate_big':1, 'far': 1,  'scene':1, 'non_social':1}
-        ]
-    if con_list_type.startswith('boiled_down'):
-        # These are nuisance columns that will be put into the design matrix, and the simulated
-        #  brain signal with random amplitude and into model but aren't of interest
-        nuisance_con = {'contrast_sensitivity_function': 1,
-                        'global_contrast_factor': 1, 'rms_difference': 1}
-
-    if create_duplicate_faces:
-        # Create nuisance column nearly duplicate to faces
-        for k, v in events.items():
-            isface = v[v["trial_type"] == 'faces']
-            isface['trial_type'] = 'faces2'
-            isface['onset'] = isface['onset'] + \
-                np.random.normal(scale=0.2, size=(len(isface)))
-            events[k] = v.append(isface, ignore_index=True)
-        # Add this contrast to the nuisance variables
-        # if amplitude zero, this column will be only present it design matrix not signal
-        nuisance_con['faces2'] = 0
+    con_list, nuisance_con, all_trial_type = get_con_list(events, con_list_type, create_duplicate_faces=False)
 
     #all_trial_type = ['open', 'outside', 'nature', ['open','outside','nature']]
     df = pd.DataFrame()
@@ -238,22 +170,28 @@ if __name__ == '__main__':
     fig, ax = plt.subplots(nrows = 1, figsize=(11.5, 9))
     #Correlation matrix
     corrMatrix = Xcon.corr()
+
+    # Clustering figure
     dend = sch.dendrogram(sch.linkage(corrMatrix,  method= 'complete'), 
             ax=ax,  
             labels=corrMatrix.columns,
             orientation='right'
         )
-
     order=dend['ivl']
     print(order)
     plt.savefig(f'model_efficiency_events_{event_type}_con_{con_list_type}_clusters.jpg')
 
+    # Correlation matrix figure
     fig, ax = plt.subplots(figsize=(11.5, 9))
     plt.rcParams.update({'font.size': 12})
-
-    corrMatrixReordered = corrMatrix.reindex(index=order,columns=order)
-
     sns.heatmap(corrMatrix, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
     plt.tight_layout()
-
     plt.savefig(f'model_efficiency_events_{event_type}_con_{con_list_type}_corr.jpg')
+
+    # Correlation matrix, reordered by clustering, figure
+    corrMatrixReordered = corrMatrix.reindex(index=order,columns=order)
+    fig, ax = plt.subplots(figsize=(11.5, 9))
+    plt.rcParams.update({'font.size': 12})
+    sns.heatmap(corrMatrixReordered, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
+    plt.tight_layout()
+    plt.savefig(f'model_efficiency_events_{event_type}_con_{con_list_type}_corr_reordered.jpg')

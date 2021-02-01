@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
 
+from contrast_list import get_con_list
+
 warnings.filterwarnings("ignore")
 
 
@@ -255,8 +257,7 @@ def bootstrap_mds_across_movies(con_list=None,
             cmap = plt.get_cmap('hsv')
             colors = cmap(np.linspace(0, 1.0, len(bootstrap_coords)+1))
 
-            if ax is None:
-                _, ax = plt.subplots(ncols=1, figsize=(11.69, 8.27))
+            _, ax = plt.subplots(ncols=1, figsize=(11.69, 8.27))
 
             bootstrap_var = 0
             for idx, (condition, coords_arr) in enumerate(bootstrap_coords.items()):
@@ -305,23 +306,13 @@ def bootstrap_mds_across_movies(con_list=None,
 
 if __name__ == "__main__":
     events = pd.read_pickle('./events_per_movie.pickle')
+    # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3]
+    con_list_type = ['all_trial_type','boiled_down_1','boiled_down_2','boiled_down_3'][0] 
 
-    con_list = ['animate',
-                {'biological_motion': 1, 'body_parts': 1},
-                {'biological': 1, 'social': 1},
-                'faces', 'nature',
-                {'inanimate_small': 1, 'tools': 1},
-                'inanimate_big',
-                'non_social',  {'salient_near_away': 1, 'far': 1},
-                'salient_near_towards',
-                'near',
-                {'closed': 1, 'inside': 1},
-                {'open': 1, 'outside': 1},
-                'scene',
-                {'non_biological': 1, 'civilisation': 1},
-                'camera_cut',
-                {'contrast_sensitivity_function': 1,
-                 'global_contrast_factor': 1, 'rms_difference': 1},
-                'scene_change',
-                ]
+    # Get contrasts
+    con_list, nuisance_con, all_trial_type = get_con_list(events, con_list_type, create_duplicate_faces=False)
+    
+    # No distinction between nuisance and not
+    con_list = {**con_list, **nuisance_con}
+
     results = bootstrap_mds_across_movies(con_list=con_list, events = events, save_results=True, save_figures=True, nreferences=10, nbootstraps_per_reference=2)
