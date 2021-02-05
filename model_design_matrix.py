@@ -70,7 +70,7 @@ def get_df_events(all_events, rest_length = 2.0, sample_with_replacement=False):
     return df_all_videos, list_videos
 
 
-def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement=False, tr=1.0, n_scans=None):
+def get_design_matrix(events_dict=None, rest=0.00, hrf='spm', stacked_events = None, sample_with_replacement=False, tr=1.0, n_scans=None):
     #make design matrix for stacked events
     #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
     if not n_scans:
@@ -82,12 +82,13 @@ def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement
     frame_times = np.arange(n_scans) * tr
 
     #each time stack_events is called, the order of movies is randomised
-    if sample_with_replacement:
-        stacked_events, list_videos = get_df_events(events_dict, rest_length=rest, sample_with_replacement=True)
-    else:
-        stacked_events, list_videos = get_df_events(events_dict, rest_length=rest)
+    if stacked_events is None:
+        if sample_with_replacement:
+            stacked_events, list_videos = get_df_events(events_dict, rest_length=rest, sample_with_replacement=True)
+        else:
+            stacked_events, list_videos = get_df_events(events_dict, rest_length=rest)
 
-    stacked_events = stacked_events.sort_values('onset', ignore_index= True)
+        stacked_events = stacked_events.sort_values('onset', ignore_index= True)
     
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=UserWarning)
@@ -99,7 +100,7 @@ def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement
     #     print(f'video {idx} earliest {earliest} latest {latest}')
     
  #   print(stacked_events)
-    return X
+    return X, stacked_events, n_scans
 
 #Efficiency
 def efficiency_calc(X, contrast_vec):

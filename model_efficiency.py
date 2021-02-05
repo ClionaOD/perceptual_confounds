@@ -15,7 +15,11 @@ from contrast_list import get_con_list
 
 from  joblib import Parallel, delayed
 
-def fit_model(X, events, signal_con, test_con, tr=1.0, sample_with_replacement=True):
+def fit_model(X, signal_con, test_con, tr=1.0, Xtest = None):
+    
+    if Xtest is None:
+        Xtest = X
+
     # How many noise samples?
     nsamples = 1000
 
@@ -44,7 +48,7 @@ def fit_model(X, events, signal_con, test_con, tr=1.0, sample_with_replacement=T
 
     # Fit GLM
     fmri_glm = FirstLevelModel(t_r=tr, hrf_model='spm', mask_img=False)
-    fmri_glm = fmri_glm.fit(img, design_matrices=[X])
+    fmri_glm = fmri_glm.fit(img, design_matrices=[Xtest])
 
     z_map = fmri_glm.compute_contrast(test_con, output_type='z_score')
     return z_map, Y
@@ -57,7 +61,7 @@ def get_multiplier(val):
     elif val == -1:
         return '-'
     else:
-        return f'{val}*'
+        return '%.2f*'%val
 
 
 def get_abbrev(val):
@@ -76,9 +80,29 @@ def get_abbrev(val):
         val = val.replace(k,v)
     return val
 
-def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', nscans=None, tr=1, save_figures=False, all_trial_type=None):
-    
-    # Drop anything from events
+def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', nscans=None, tr=1, save_figures=False, all_trial_type=None, design_matrix_type = 'all' ):
+    '''
+    Parameters
+        events_in: dict, with keys of movie name, and values a pandas dataframe describing the design
+        todrop: string, a movie to be dropped from events_in (used to make leave-on-out more convenient to parallelise)
+        con_list_type: string, see possible values in contrast_list.py
+        nscans: number of scans in design matrix, or None if calculate from events
+        tr: repetition time
+        save_figures: save outputs
+        event_type: 'movies', just used to label output files
+        design_matrix_type: ['all' | 'single'] 
+            'all' means put all columns into model no matter what contrast signal is
+            'percontrast' means only put contrast signal
+    Returns
+        zstat: estimated z statistic
+    '''
+
+    event_type='movies'
+
+    if not design_matrix_type == 'all':
+        event_type = event_type + '_desmat_percontrast'
+
+    # Drop anything requested from events 
     if todrop:
         events= events_in.copy()
         del(events[todrop])
@@ -87,21 +111,22 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
 
     scale_type = 'peak2peak' # each column in design matrix
 
+    # List of all events
     if all_trial_type is None:
         all_trial_type = list(set().union(*[set(events[x].trial_type) for x in events]))         # List of all trial_type values
 
+    # Signal and nuisance contrasts
     con_list, nuisance_con, _ = get_con_list(events, con_list_type, all_trial_type)
 
     df = pd.DataFrame()
 
     # Get design matrix
-    X = get_design_matrix(
-            events, sample_with_replacement=False, tr=tr, n_scans=nscans, hrf='spm')
+    #  Used to generate signal, and if design_matrix_type = 'all', for test as well
+    X, stacked_events, n_scans = get_design_matrix(events, sample_with_replacement=False, tr=tr, hrf='spm')
 
     if len(set(all_trial_type) - set(X.columns))>0:
         print('Failing as not all columns in model!')
         return -np.inf
-
 
     if scale_type == 'peak2peak':
         # Scale each column in X to have range from 0 to 1
@@ -116,14 +141,15 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
         plt.tight_layout()
         plt.savefig(f'model_efficiency_events_Xcorr.jpg')
 
-    # contrasted design matrix columns
+    # Contrasted design matrix columns
     Xcon=pd.DataFrame()
 
     for ind, trial_type in enumerate(con_list):
         if isinstance(trial_type, str):
             trial_type = {trial_type: 1}
 
-        # These columns are used to make the simulated brain signal. Includes nuisance_con, with random weighting.
+        # These columns are used to make the specificaiton for the simulated brain signal, in sig_con.
+        #   Includes nuisance_con, with random weighting from 0 to the contrast value
         sig_con = '+'.join([get_multiplier(val) + 'X.' +
                             key for key, val in trial_type.items()])
         if nuisance_con:
@@ -131,21 +157,38 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
                 high=float(val))) + 'X.' + key for key, val in nuisance_con.items()])
 
         # Contrast for which result should be returned
+        #  This is the thing we measure
         test_con = '+'.join([get_multiplier(val) +
                              key for key, val in {**trial_type}.items()])
 
         # Used as labels in figures
+        #  A short form for this contrast, to use in figures
         con_label = '+'.join([get_multiplier(val) + get_abbrev(key)
                               for key, val in trial_type.items()])
 
-        if event_type == 'henson':
-            ev = {'oneev': events[ind]}
+
+
+        if design_matrix_type == 'percontrast':
+            # Select only events of trial_type in test_con
+            test_stacked_events = pd.DataFrame()
+            for tt in trial_type:
+                test_stacked_events = test_stacked_events.append(stacked_events[stacked_events.trial_type == tt])
+
+            # Make limited design matrix using these. Use same order for events
+            Xtest, _, _ = get_design_matrix(stacked_events = test_stacked_events, sample_with_replacement=False, tr=tr, n_scans=n_scans, hrf='spm')
+            if scale_type == 'peak2peak':
+                # Scale each non-nuisance column in Xtest to have range from 0 to 1
+                ttk=list(trial_type.keys())
+                Xtest[ttk]= (Xtest[ttk] - Xtest[ttk].min()) / (Xtest[ttk].max() - Xtest[ttk].min()) 
+
+        elif design_matrix_type == 'all':
+            Xtest = X
         else:
-            ev = events
+            raise(f'Unknown design_matrix_type {design_matrix_type}')
 
         # Fit GLM
         #  sample_with_replacement determines whether to do bootstrapping across movies
-        zstats, concol = fit_model(X, ev, sig_con, test_con, tr=tr, sample_with_replacement=False)
+        zstats, concol = fit_model(X, sig_con, test_con, Xtest = Xtest, tr=tr)
 
         vals = zstats.get_fdata()
 
@@ -164,6 +207,7 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
         fig, ax = plt.subplots(nrows = 1, figsize=(11.5, 9))
         plt.grid(axis='x')
         sns.violinplot(data=df, x='con_label', y='values', ax=ax)
+        plt.plot([-0.5,len(con_list)], [0,0], 'r:')
         plt.xticks(rotation=90)
         plt.ylabel('z stat')
         plt.rcParams.update({'font.size': 12})
@@ -182,7 +226,7 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
                 orientation='right'
             )
         order=dend['ivl']
-#        print(order)
+
         plt.savefig(f'model_efficiency_events_{event_type}_con_{con_list_type}_clusters.jpg')
 
         # Correlation matrix figure
@@ -202,23 +246,14 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
 
     return zstat_mean
 
-if __name__ == '__main__':
-    event_type = 'movies'               # event list types
-                                        #   henson: use testing set of events from CBU web page (see test_efficiency_calc.py)
-                                        #   movies: use all movies
+def find_optimal_movies(nits=1, target_movies=8):
     con_list_type = ['all_trial_type','boiled_down_1','boiled_down_2','boiled_down_3', 'boiled_down_4', 'boiled_down_5'][5] 
-    # Get event model.
-    if event_type == 'henson':
-        original_events, des = get_henson_events()
-        nscans = 64
-    elif event_type == 'movies':
-        original_events = pd.read_pickle('./events_per_movie.pickle')
-        nscans = None # calculated from events
+    original_events = pd.read_pickle('./events_per_movie.pickle')
+    nscans = None # calculated from events
 
     res = pd.DataFrame()
 
     all_trial_type = list(set().union(*[set(original_events[x].trial_type) for x in original_events]))         # List of all trial_type values
-
     
     num_movies=len(original_events)
     zstat = optimise_efficiency(original_events)
@@ -226,10 +261,6 @@ if __name__ == '__main__':
 
     finals=[]
 
-    nits=100
-
-    target_movies = 8
-    
     # for testing, original_events = {k: original_events[k] for k in ['walle.mp4', 'cars.mp4', 'up_russell.mp4', 'real_cars.mp4', 'breakfast_smoothie.mp4', 'new_orleans.mp4', 'funny_tools.mp4', 'despicable_me.mp4', 'steamed_buns.mp4']}
 
     # Iteratively drop movies that give the lowest average z stat
@@ -249,5 +280,24 @@ if __name__ == '__main__':
     with open('model_effiency_select_movies.csv','w') as f:
         res.to_csv(f)
 
-    # ['rio_jungle_jig.mp4', 'bedtime.mp4', 'up_russell.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'supermarket.mp4', 'funny_tools.mp4', 'dalmations.mp4', 'beachsong.mp4']
- #  ['walle.mp4', 'rio_jungle_jig.mp4', 'forest.mp4', 'cars.mp4', 'ratatouille.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'supermarket.mp4', 'funny_tools.mp4']
+
+def all_movie_analysis(con_list_type= 'boiled_down_5', event_type = 'movies', design_matrix_type='all'):
+    # Get event model.
+    if event_type == 'henson':
+        events, des = get_henson_events()
+        nscans = 64
+    elif event_type == 'movies':
+        events = pd.read_pickle('./events_per_movie.pickle')
+        nscans = None # calculated from events
+
+
+    zstat = optimise_efficiency(events, save_figures=True, con_list_type = con_list_type, design_matrix_type=design_matrix_type)
+    print(f'All movies {zstat}')
+
+if __name__=='__main__':
+    # Find best subset of 8 movies, given contrasts 
+    # find_optimal_movies()
+
+    # Run once with figures
+    all_movie_analysis(con_list_type = 'all_trial_type', design_matrix_type = 'percontrast')
+    # all_movie_analysis(con_list_type = 'boiled_down_5', design_matrix_type = 'all')
