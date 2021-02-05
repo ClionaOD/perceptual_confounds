@@ -58,32 +58,35 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
         ]
         
     elif con_list_type == 'boiled_down_4':
-        # Made 
+        # cluster with cutoff of 1.45
+        # from this https://github.com/ClionaOD/perceptual_confounds/blob/7be5ea1aa765c5b93103b3f6992db96f6b20f772/model_efficiency_events_movies_con_all_trial_type_clusters.jpg
+
         con_list = [{'non_social':1},
                     {'inanimate_big':1, 'far':1},
                     {'scene':1, 'near':1},
-                    {'out':1, 'open':1},
+                    {'outside':1, 'open':1},
                     {'nature':1},
                     {'tools':1, 'inanimate_small':1},
                     {'non_biological':1, 'civilisation':1},
-                    {'in':1, 'closed':1},
+                    {'inside':1, 'closed':1},
                     {'faces':1, 'animate':1, 'social': 1},
-                    {'body_parts':1, 'bio_motion': 1, 'biological':1},
+                    {'body_parts':1, 'biological_motion': 1, 'biological':1},
         ]
-            
-            
-            'bio', 'bio_motion', 'body_parts', 'social', 'anim', 'faces', 'closed', 'in', 
-        'civilisation', 'non_bio', 'inanim_small', 'tools', 'nature', 
-        'open', 'out', 'near', 'scene', 'csf', 'gcf', 'rms', 'far', 'inanim_big', 'sal_tow', 'sal_away', 'scene_change', 'camera_cut', 'non_social']
-        
-        
-        [{'body_parts': 1, 'biological': 1, 'faces':1, 'animate':1, 'biological_motion': 1},
-                    {'social': 1},
-                    {'inanimate_small': 1, 'closed': 1, 'inside': 1 },
-                    {'near':1, 'tools': 1, 'civilisation':1, 'non_biological': 1},
-                    {'open': 1, 'outside': 1, 'nature': 1, },
-                    {'inanimate_big':1, 'far': 1,  'scene':1, 'non_social':1}
-        ]
+    elif con_list_type == 'boiled_down_5':
+        # (1) problem with boiled down 4 is that power is poor for some, as they are anti-correlated
+        # so fix this up
+        # (2) also balance contrast weighting better so columns with more regressors summed are not automatically bigger
+        # make sum of positive=1 and sum of negative = -1
+        # (3) still some negative strong negative correlations, so also made nature vs. non-bio/civ 
+        # (4) changed weighting of non_social as getting far too much influence on bio stuff
+        con_list = [
+                    {'inanimate_big':0.5, 'far':0.5},
+                    {'scene':0.5, 'near':0.5},
+                    {'outside':0.5, 'open':0.5, 'inside':-0.5, 'closed':-0.5},
+                    {'nature':1,  'non_biological':-0.25, 'civilisation':-0.25, 'tools':-0.25, 'inanimate_small':-0.25},
+                    {'faces':1/6, 'animate':1/6, 'social': 1/6, 'non_social':-1/6},
+                    {'body_parts':1/6, 'biological_motion': 1/6, 'biological':1/6},
+        ]            
         
     if con_list_type.startswith('boiled_down'):
         # These are nuisance columns that will be put into the design matrix, and the simulated

@@ -1,7 +1,7 @@
 """
 Created on Thu Jan 14 14:01:06 2021
 
-@author: Cliona O'Doherty, Hannah Craddock
+@author: Cliona O'Doherty, Hannah Craddock, Rhodri Cusack
 """
 
 import pickle
@@ -11,6 +11,7 @@ import random
 from nilearn.glm.first_level import make_first_level_design_matrix
 from nilearn.plotting import plot_design_matrix
 import matplotlib.pyplot as plt
+import warnings
 
 # HC function
 def get_rest_df(rest_length):
@@ -50,20 +51,19 @@ def get_df_events(all_events, rest_length = 2.0, sample_with_replacement=False):
     
     for idx, vid in enumerate(list_videos):      
         df_videoX = all_events[vid].copy()
-        
+        df_videoX.is_copy = None # get rid of setting with copy warning
+
         df_videoX['movie_source']=vid # it is important to remember where you came from
         
         # Find videos where the tags overrun
         overrun=(df_videoX['onset']+df_videoX['duration'])>22.9 # enforce 100 ms gap
         if overrun.any()>0:
-#            print(f'Video {idx} overruns {overrun.sum()}')
             df_videoX['duration'][overrun]=22.9-df_videoX['onset'][overrun]
 
-        #Adjust onsets of event
+        # Round off onset and duration
         df_videoX['onset'] = 0.01 + (df_videoX['onset']*51.0).round()/51.0 + idx*(movie_length + delay)
-#        df_videoX['onset'] = df_videoX['onset'] + idx*(movie_length + delay)
-
         df_videoX['duration'] = (df_videoX['duration']*51.0).round()/51.0 
+
         #Concatenate
         df_all_videos = df_all_videos.append(df_videoX, ignore_index = True)
     
@@ -75,6 +75,10 @@ def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement
     #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
     if not n_scans:
         n_scans = (23.0 * len(events_dict)) + (rest*len(events_dict))+10
+        # Number of scans can't be odd
+        if n_scans%2==1:
+            n_scans+=1
+
     frame_times = np.arange(n_scans) * tr
 
     #each time stack_events is called, the order of movies is randomised
@@ -84,7 +88,10 @@ def get_design_matrix(events_dict, rest=0.00, hrf='spm', sample_with_replacement
         stacked_events, list_videos = get_df_events(events_dict, rest_length=rest)
 
     stacked_events = stacked_events.sort_values('onset', ignore_index= True)
-    X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model=hrf)
+    
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category=UserWarning)
+        X = make_first_level_design_matrix(frame_times, stacked_events, hrf_model=hrf)
     
     # for idx, vid in enumerate(list_videos):
     #     earliest=stacked_events[stacked_events['movie_source'] == vid]['onset'].min()
