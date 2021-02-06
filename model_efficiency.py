@@ -1,6 +1,6 @@
 
 from nilearn.glm.first_level import FirstLevelModel
-from model_design_matrix import get_design_matrix
+from model_design_matrix import get_design_matrix, get_df_events
 from bold_noise import bold_noise
 import pandas as pd
 import nibabel as nib
@@ -98,6 +98,8 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
     '''
 
     event_type='movies'
+    movie_length = 22.524
+    delay = 23.0 - movie_length
 
     if not design_matrix_type == 'all':
         event_type = event_type + '_desmat_percontrast'
@@ -122,8 +124,8 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
 
     # Get design matrix
     #  Used to generate signal, and if design_matrix_type = 'all', for test as well
-    stacked_events, n_scans, list_videos = get_df_events(events_dict, rest_length=0.0, sample_with_replacement=False, n_scans=None)
-    X = get_design_matrix(events, sample_with_replacement=False, tr=tr, hrf='spm')
+    stacked_events, n_scans, list_videos = get_df_events(events, rest_length=0.0, sample_with_replacement=False, n_scans=None, movie_length=movie_length, delay=delay)
+    X = get_design_matrix(events, sample_with_replacement=False, tr=tr, hrf='spm', stacked_events = stacked_events, n_scans = n_scans)
 
     if len(set(all_trial_type) - set(X.columns))>0:
         print('Failing as not all columns in model!')

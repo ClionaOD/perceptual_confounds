@@ -25,7 +25,7 @@ def get_rest_df(rest_length):
     return df_rest
 
 # HC function
-def get_df_events(all_events, rest_length = 0.0, sample_with_replacement=False):
+def get_df_events(all_events, rest_length = 0.0, sample_with_replacement=False, movie_length = None, delay = None, n_scans=None):
     '''Get concatenated events dataframe. 
     A period of rest in between each video is included: rest_length in seconds
     
@@ -33,12 +33,8 @@ def get_df_events(all_events, rest_length = 0.0, sample_with_replacement=False):
         is set to True in which case movies will be randomly sampled with replacement (for bootstrapping).
     '''
 
-    #Params
-    movie_length = 22.524
-    delay = 23.0 - movie_length
-
     if not n_scans:
-        n_scans = (23.0 * len(all_events)) + (rest_length*len(all_events))+10
+        n_scans = (movie_length * len(all_events)) + ((delay + rest_length)*len(all_events))+10
         # Number of scans can't be odd
         if n_scans%2==1:
             n_scans+=1
@@ -76,14 +72,14 @@ def get_df_events(all_events, rest_length = 0.0, sample_with_replacement=False):
     return df_all_videos, n_scans, list_videos
 
 
-def get_design_matrix(events_dict=None, rest=0.00, hrf='spm', stacked_events = None, sample_with_replacement=False, tr=1.0, n_scans=None):
+def get_design_matrix(events_dict=None, rest=0.00, hrf='spm', stacked_events = None, sample_with_replacement=False, tr=1.0, n_scans=None, movie_length = 22.524, delay = 23.0 - 22.524):
     #make design matrix for stacked events
     #param events_dict: the dict of movie event files (keys mov_name, values dataframe)
 
 
     #each time stack_events is called, the order of movies is randomised
     if stacked_events is None:
-        stacked_events, n_scans, list_videos = get_df_events(events_dict, rest_length=rest, sample_with_replacement=sample_with_replacement, n_scans=n_scans)
+        stacked_events, n_scans, list_videos = get_df_events(events_dict, rest_length=rest, sample_with_replacement=sample_with_replacement, n_scans=n_scans, movie_length=movie_length, delay=delay)
 
     stacked_events = stacked_events.sort_values('onset', ignore_index= True)
 
