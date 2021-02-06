@@ -122,7 +122,8 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
 
     # Get design matrix
     #  Used to generate signal, and if design_matrix_type = 'all', for test as well
-    X, stacked_events, n_scans = get_design_matrix(events, sample_with_replacement=False, tr=tr, hrf='spm')
+    stacked_events, n_scans, list_videos = get_df_events(events_dict, rest_length=0.0, sample_with_replacement=False, n_scans=None)
+    X = get_design_matrix(events, sample_with_replacement=False, tr=tr, hrf='spm')
 
     if len(set(all_trial_type) - set(X.columns))>0:
         print('Failing as not all columns in model!')
@@ -175,7 +176,7 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
                 test_stacked_events = test_stacked_events.append(stacked_events[stacked_events.trial_type == tt])
 
             # Make limited design matrix using these. Use same order for events
-            Xtest, _, _ = get_design_matrix(stacked_events = test_stacked_events, sample_with_replacement=False, tr=tr, n_scans=n_scans, hrf='spm')
+            Xtest = get_design_matrix(stacked_events = test_stacked_events, sample_with_replacement=False, tr=tr, n_scans=n_scans, hrf='spm')
             if scale_type == 'peak2peak':
                 # Scale each non-nuisance column in Xtest to have range from 0 to 1
                 ttk=list(trial_type.keys())
