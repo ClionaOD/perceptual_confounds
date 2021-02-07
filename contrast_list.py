@@ -1,4 +1,4 @@
-def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_faces=False):
+def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_faces=False, noise_weight = 1):
 
     if not all_trial_type:
         # List of all trial_type values
@@ -12,6 +12,11 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
     if con_list_type == 'all_trial_type':
         con_list = {x: 1 for x in all_trial_type}
         nuisance_con = {}
+
+    elif con_list_type == 'all_trial_type_random_weight':
+        # this is used to set up random weights across movies
+        con_list = { None }
+        nuisance_con = {x: noise_weight for x in all_trial_type}
 
     elif con_list_type == 'boiled_down_1':
         con_list = ['animate',
@@ -91,8 +96,8 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
     if con_list_type.startswith('boiled_down'):
         # These are nuisance columns that will be put into the design matrix, and the simulated
         #  brain signal with random amplitude and into model but aren't of interest
-        nuisance_con = {'contrast_sensitivity_function': 1,
-                        'global_contrast_factor': 1, 'rms_difference': 1}
+        nuisance_con = {'contrast_sensitivity_function': noise_weight ,
+                        'global_contrast_factor': noise_weight , 'rms_difference': noise_weight }
 
    
     if create_duplicate_faces:
