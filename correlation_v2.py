@@ -45,7 +45,7 @@ def get_df_all_videos(all_events):
     
     #Params
     movie_length = 22.524
-    delay = 0.001
+    delay = 23.0 - movie_length
     df_all_videos = pd.DataFrame()
     
     for idx, vid in enumerate(list_videos):      
@@ -58,7 +58,7 @@ def get_df_all_videos(all_events):
     
     return df_all_videos
 
-def get_design_matrix(all_events, rest=0.00, hrf='spm'):
+def get_design_matrix(all_events, hrf='spm'):
     '''Make design matrix of concatenated videos'''
     
     #Concatenated videos - randomised order each time
@@ -66,7 +66,7 @@ def get_design_matrix(all_events, rest=0.00, hrf='spm'):
     
     #Get 
     tr = 1.0
-    n_scans = (22 * len(all_events)) + (rest*len(all_events))
+    n_scans = 23.0*len(all_events)/tr
     frame_times = np.arange(n_scans) * tr
 
     X = make_first_level_design_matrix(frame_times, df_all_videos, hrf_model=hrf)
@@ -86,7 +86,7 @@ def correlation_matrix(X, convolved, n, path_save):
     fig, ax = plt.subplots(figsize=(11.5, 9))
     sns.heatmap(corrMatrix, ax=ax)
     ax.set_title('correlation matrix - {}'.format(convolved), fontsize=12)
-    plt.savefig(path_save + '\{}_{}.png'.format(convolved, n+1), dpi=300, bbox_inches = "tight")
+    plt.savefig(path_save + '{}_{}.png'.format(convolved, n+1), dpi=300, bbox_inches = "tight")
     #plt.savefig('.\design_matrices\correlation_matrices_hc\{}_{}.png'.format(convolved, n+1))
     plt.show()
     
@@ -114,7 +114,7 @@ def repeat_corr(all_events, n_repeats, path_save):
         #2. Not covovled with hrf
         convolved = 'not_convolved'
         hrf = None
-        X = get_design_matrix(all_events, 0, hrf)
+        X = get_design_matrix(all_events, hrf)
         corr = correlation_matrix(X, convolved, n, path_save) 
         #Save results
         results_nonconv[n]['design_matrix'] = X
@@ -128,13 +128,12 @@ def repeat_corr(all_events, n_repeats, path_save):
         
 
 #Repeat correlation
-path_save = './correlation_matrices_hc/'
+path_save = './correlation_matrices_hc/' 
 n_repeats = 5
 repeat_corr(all_events, n_repeats, path_save)
-
 
 #Get df all events
 df_all_videos = get_df_all_videos(all_events)      
 #Corr matrix
 X = get_correlation_matrix(df_all_videos) 
-corrMatrix =  get_correlation_matrix(df_all_videos)   
+corrMatrix =  correlation_matrix(df_all_videos)   
