@@ -123,11 +123,11 @@ def get_confounds(vidPath):
         mean_gcf: the mean gcf for each video
     """
 
-    framewise_gcf = {k:[] for k in os.listdir(f'{vidPath}')}
-    mean_gcf = {k:[] for k in os.listdir(f'{vidPath}')}
+    framewise_gcf = {k:[] for k in os.listdir(f'{vidPath}') if '.mp4' in k}
+    mean_gcf = {k:[] for k in os.listdir(f'{vidPath}') if '.mp4' in k}
     
     #load the cropped video
-    for vid in os.listdir(f'{vidPath}'):
+    for vid in framewise_gcf.keys():
         metadata, singlevideo, dur, fps = load_video(f'{vidPath}/{vid}')
         print(f'{vid} loaded')
         
@@ -158,8 +158,8 @@ if __name__ == "__main__":
     #crop_movies(vidPath, movie_times)
 
     #calculate global contrast function and save the dataframes
-    framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/final')
-    framewise_gcf.to_csv('./framewise_gcf.csv')
-    with open('./mean_gcf.json','w') as f:
+    framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/longlist')
+    framewise_gcf.to_csv('./framewise_gcf_longlist.csv')
+    with open('./mean_gcf_longlist.json','w') as f:
         json.dump(mean_gcf, f)
     #mean_gcf.to_csv('./mean_gcf.csv')

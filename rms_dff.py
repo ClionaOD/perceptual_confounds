@@ -13,9 +13,9 @@ def rmsdiff(im1, im2):
     rms = math.sqrt(sum_of_squares/float(im1.size[0] * im1.size[1]))
     return h,rms
 
-vidPath = '/home/clionaodoherty/foundcog_stimuli/final'
-framewise_rms = {k:[] for k in os.listdir(vidPath)}
-for vid in os.listdir(vidPath):
+vidPath = '/home/clionaodoherty/foundcog_stimuli/longlist'
+framewise_rms = {k:[] for k in os.listdir(vidPath) if '.mp4' in k}
+for vid in framewise_rms.keys():
     metadata, singlevideo, dur, fps = load_video(f'{vidPath}/{vid}')
     print(f'{vid} loaded')
     
@@ -33,4 +33,4 @@ for vid in os.listdir(vidPath):
     framewise_rms[vid] = all_rms
 
 rms_df = pd.DataFrame.from_dict(framewise_rms, orient='index')
-rms_df.to_csv('./framewise_rms.csv')
+rms_df.to_csv('./framewise_rms_longlist.csv')
