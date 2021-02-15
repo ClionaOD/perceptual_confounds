@@ -92,7 +92,21 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
                     {'faces':1/6, 'animate':1/6, 'social': 1/6, 'non_social':-1/6},
                     {'body_parts':1/6, 'biological_motion': 1/6, 'biological':1/6},
         ]            
+    elif con_list_type == 'neuro_based':
+        # Contrasts explicitly based on the semantic dimensions of
+        # Kanwisher/Epstein/Culham/Downing , Konkle , Huth , 
+        # Kravitz for PPA being spaces (near/far etc.) rather than semantic factors
+        #'outside',  'inside' 
         
+        con_list = ['faces', 'body_parts', 'scene', 'tools',
+                    {'animate':1 , 'inanimate_small':-0.5, 'inanimate_big':-0.5},
+                    'biological_motion',
+                    {'nature':1, 'civilisation':-1},
+                    {'social':1 , 'non_social':-1},
+                    {'biological':1 , 'non_biological':-1},
+                    {'far':1/3, 'open':1/3, 'near':-1/3, 'closed':-1/3 }
+        ]
+
     if con_list_type.startswith('boiled_down'):
         # These are nuisance columns that will be put into the design matrix, and the simulated
         #  brain signal with random amplitude and into model but aren't of interest
