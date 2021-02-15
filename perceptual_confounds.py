@@ -63,7 +63,7 @@ def control_aspect(inPath, outPath, w=640, h=360):
         w: desired width
         h: desired height
     """
-    ffmpegCommand = f'ffmpeg -i {inPath} -vf scale={w}:{h},setsar=1:1,setdar=16:9 {outPath}'
+    ffmpegCommand = f'ffmpeg -i {inPath} -vf scale={w}:{h} {outPath}'
     print(ffmpegCommand)
     runBash(ffmpegCommand)
 
@@ -77,23 +77,26 @@ def crop_movies(vid_path, movie_times):
     """
     dur = '00:00:22.500'
     for vid in os.listdir(vidPath):
-        if not os.path.isdir(f'{vidPath}/{vid}'):
+        if 'mp4' in f'{vidPath}/{vid}':
             
-            #crop the video using ffmpeg command line
-            start = movie_times.loc[vid,'start']
-            inPath = f'{vidPath}/{vid}'
-            outPath = f'{vidPath}/trimmed/{vid}'
+            if not vid in os.listdir(f'{vidPath}/trimmed'):
+                #crop the video using ffmpeg command line
+                start = movie_times.loc[vid,'start']
+                inPath = f'{vidPath}/{vid}'
+                outPath = f'{vidPath}/trimmed/{vid}'
 
-            crop(start,dur,inPath,outPath)
-            print(f'{vid} trimmed')
+                crop(start,dur,inPath,outPath)
+                print(f'{vid} trimmed')
 
-            #set to mean frame rate fps=25
-            change_framerate(inPath=f'{vidPath}/trimmed/{vid}', outPath=f'{vidPath}/fps/{vid}')
-            print(f'{vid} frame rate standardised')
+            if not vid in os.listdir(f'{vidPath}/fps'):
+                #set to mean frame rate fps=25
+                change_framerate(inPath=f'{vidPath}/trimmed/{vid}', outPath=f'{vidPath}/fps/{vid}')
+                print(f'{vid} frame rate standardised')
 
-            #set to same aspect ratio
-            control_aspect(inPath=f'{vidPath}/fps/{vid}', outPath=f'{vidPath}/final/{vid}')
-            print(f'{vid} aspect ratio standardised')
+            if not vid in os.listdir(f'{vidPath}/aspect'):
+                #set to same aspect ratio
+                control_aspect(inPath=f'{vidPath}/fps/{vid}', outPath=f'{vidPath}/aspect/{vid}')
+                print(f'{vid} aspect ratio standardised')
 
 def get_gcf(vid):
     """
