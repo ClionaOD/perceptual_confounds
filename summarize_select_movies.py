@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 movies = []
 movies8 = []
 #with open('model_efficiency_select_movies_set2.csv','r') as f:
-with open('model_effiency_select_movies_desmat_blockpermovie_con_all_trial_type_random_weight.csv','r') as f:
+with open('model_effiency_select_movies_desmat_blockpermovie_con_all_trial_type_random_weight_set2.csv','r') as f:
 
     df = pd.read_csv(f)
     
@@ -25,7 +25,7 @@ with open('model_effiency_select_movies_desmat_blockpermovie_con_all_trial_type_
     plt.bar(dist_order, [dist[x] for x in dist_order])
     plt.xticks(rotation=90)
     plt.tight_layout()
-    plt.savefig('movie_efficiency_select_movies_bar.jpg')
+    plt.savefig('movie_efficiency_select_movies_bar_set2.jpg')
 
 
     # What is the most common combination of eight movies?

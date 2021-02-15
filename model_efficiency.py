@@ -81,7 +81,7 @@ def get_abbrev(val):
         val = val.replace(k,v)
     return val
 
-def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', nscans=None, tr=1, save_figures=False, all_trial_type=None, design_matrix_type = 'all' ):
+def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', nscans=None, tr=1, save_figures=False, all_trial_type=None, design_matrix_type = 'all', target_movies=8 ):
     '''
     Parameters
         events_in: dict, with keys of movie name, and values a pandas dataframe describing the design
@@ -305,11 +305,11 @@ def find_optimal_movies(nits=1, target_movies=8, design_matrix_type='all', con_l
         res = res.append({'iteration':it, 'movies':keys, 'zstat':zstat}, ignore_index=True)
         print(f'Iteration {it} final set is {keys}' )
 
-    with open(f'model_effiency_select_movies_desmat_{design_matrix_type}_con_{con_list_type}.csv','w') as f:
+    with open(f'model_effiency_select_movies_desmat_{design_matrix_type}_con_{con_list_type}_target_movies_{target_movies}.csv','w') as f:
         res.to_csv(f)
 
 
-def all_movie_analysis(con_list_type= 'boiled_down_5', event_type = 'movies', design_matrix_type='all'):
+def all_movie_analysis(con_list_type= 'boiled_down_5', event_type = 'movies', design_matrix_type='all', target_movies=8):
     # Get event model.
     if event_type == 'henson':
         events, des = get_henson_events()
@@ -319,7 +319,7 @@ def all_movie_analysis(con_list_type= 'boiled_down_5', event_type = 'movies', de
         nscans = None # calculated from events
 
 
-    zstat = optimise_efficiency(events, save_figures=True, con_list_type = con_list_type, design_matrix_type=design_matrix_type)
+    zstat = optimise_efficiency(events, save_figures=True, con_list_type = con_list_type, design_matrix_type=design_matrix_type, target_movies=8)
     print(f'All movies {zstat}')
 
 if __name__=='__main__':
@@ -329,9 +329,9 @@ if __name__=='__main__':
     # Run once with figures
     # all_movie_analysis(con_list_type = 'all_trial_type', design_matrix_type = 'percontrast')
     # all_movie_analysis(con_list_type = 'boiled_down_5', design_matrix_type = 'all')
-#    all_movie_analysis(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie')
+    all_movie_analysis(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', target_movies=14)
     
     # Assume each voxel of simulated brain activating with random weights on each tagged column, but that we're analysing for differences across movies
     #  We do an F-test for the effect of movie
     #  Then optimise subset of movies to maxmise this
-    find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100)
+    find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100, target_movies=14)
