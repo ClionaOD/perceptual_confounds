@@ -329,7 +329,7 @@ if __name__=='__main__':
     # Run once with figures
     # all_movie_analysis(con_list_type = 'all_trial_type', design_matrix_type = 'percontrast')
     # all_movie_analysis(con_list_type = 'boiled_down_5', design_matrix_type = 'all')
-    all_movie_analysis(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', target_movies=14)
+    find_optimal_movies(con_list_type = 'boiled_down_5', design_matrix_type = 'all', target_movies=14)
     
     # Assume each voxel of simulated brain activating with random weights on each tagged column, but that we're analysing for differences across movies
     #  We do an F-test for the effect of movie
