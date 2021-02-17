@@ -335,3 +335,6 @@ if __name__=='__main__':
     #  We do an F-test for the effect of movie
     #  Then optimise subset of movies to maxmise this
     find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100, target_movies=14)
+
+    # *** NEXT STAGE ***    
+    # Can use script summariz_select_movies.py to summarize results - change this to pick up correct .csv output files
