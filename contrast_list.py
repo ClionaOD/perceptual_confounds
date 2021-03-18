@@ -7,7 +7,7 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
         all_trial_type.sort()
 
 
-    # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3] 
+    # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3 | boiled_down_4 | boiled_down_5 | neuro_based ] 
      # Create list of columns to be used in design matrix
     if con_list_type == 'all_trial_type':
         con_list = {x: 1 for x in all_trial_type}
@@ -107,7 +107,7 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
                     {'far':1/3, 'open':1/3, 'near':-1/3, 'closed':-1/3 }
         ]
 
-    if con_list_type.startswith('boiled_down'):
+    if con_list_type.startswith('boiled_down') or con_list_type.startswith('neuro'):
         # These are nuisance columns that will be put into the design matrix, and the simulated
         #  brain signal with random amplitude and into model but aren't of interest
         nuisance_con = {'contrast_sensitivity_function': noise_weight ,
