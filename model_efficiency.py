@@ -330,20 +330,18 @@ if __name__=='__main__':
 
     # Run once with figures
     #all_movie_analysis(con_list_type = 'all_trial_type', design_matrix_type = 'percontrast')
-    #all_movie_analysis(con_list_type = 'boiled_down_5', design_matrix_type = 'all')
+    all_movie_analysis(con_list_type = 'boiled_down_new', design_matrix_type = 'all')
     #all_movie_analysis(con_list_type = 'neuro_based', design_matrix_type = 'all')
     
     # Get t stat distributions for all movies in both cluster-based contrast and neuro-based
-    #find_optimal_movies(con_list_type = 'boiled_down_5', design_matrix_type = 'all', nits=100, target_movies=15)
-    #find_optimal_movies(con_list_type = 'neuro_based', design_matrix_type = 'all', nits=100, target_movies=15)
     
-    find_optimal_movies(con_list_type = 'boiled_down_5', design_matrix_type = 'all', nits=100, target_movies=8)
-    find_optimal_movies(con_list_type = 'neuro_based', design_matrix_type = 'all', nits=100, target_movies=8)
+    find_optimal_movies(con_list_type = 'boiled_down_new', design_matrix_type = 'all', nits=100, target_movies=8)
+    #find_optimal_movies(con_list_type = 'neuro_based', design_matrix_type = 'all', nits=100, target_movies=8)
     
     # Assume each voxel of simulated brain activating with random weights on each tagged column, but that we're analysing for differences across movies
     #  We do an F-test for the effect of movie
     #  Then optimise subset of movies to maxmise this
-    find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100, target_movies=8)
+    #find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100, target_movies=8)
 
     # *** NEXT STAGE ***    
     # Can use script summarize_select_movies.py to summarize results - change this to pick up correct .csv output files
