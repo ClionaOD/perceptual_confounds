@@ -6,12 +6,13 @@ Created on Thu Jan 14 14:01:06 2021
 
 import pickle
 import pandas as pd
+from pandas.core.common import SettingWithCopyWarning
 import numpy as np
 import random
 from nilearn.glm.first_level import make_first_level_design_matrix
 from nilearn.plotting import plot_design_matrix
 import matplotlib.pyplot as plt
-import warnings
+import warnings 
 
 # HC function
 def get_rest_df(rest_length):
@@ -59,7 +60,9 @@ def get_df_events(all_events, rest_length = 0.0, sample_with_replacement=False, 
         # Find videos where the tags overrun
         overrun=(df_videoX['onset']+df_videoX['duration'])>22.9 # enforce 100 ms gap
         if overrun.any()>0:
-            df_videoX['duration'][overrun]=22.9-df_videoX['onset'][overrun]
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
+                df_videoX['duration'][overrun]=22.9-df_videoX['onset'][overrun]
 
         # Round off onset and duration
         df_videoX['onset'] = 0.01 + (df_videoX['onset']*51.0).round()/51.0 + idx*(movie_length + delay)
