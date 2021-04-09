@@ -7,7 +7,7 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
         all_trial_type.sort()
 
 
-    # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3] 
+    # contrast types [all_trial_type | boiled_down_1| boiled_down_2 | boiled_down_3 | boiled_down_4 | boiled_down_5 | neuro_based ] 
      # Create list of columns to be used in design matrix
     if con_list_type == 'all_trial_type':
         con_list = {x: 1 for x in all_trial_type}
@@ -25,7 +25,8 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
                     'faces',
                     {'inanimate_small': 1, 'tools': 1},
                     'inanimate_big',
-                    'non_social',  {'salient_near_away': 1, 'far': 1},
+                    'non_social',  
+                    {'salient_near_away': 1, 'far': 1},
                     'salient_near_towards',
                     'near',
                     { 'closed': 1, 'inside': 1},
@@ -97,7 +98,6 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
         # Kanwisher/Epstein/Culham/Downing , Konkle , Huth , 
         # Kravitz for PPA being spaces (near/far etc.) rather than semantic factors
         #'outside',  'inside' 
-        
         con_list = ['faces', 'body_parts', 'scene', 'tools',
                     {'animate':1 , 'inanimate_small':-0.5, 'inanimate_big':-0.5},
                     'biological_motion',
@@ -106,8 +106,24 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
                     {'biological':1 , 'non_biological':-1},
                     {'far':1/3, 'open':1/3, 'near':-1/3, 'closed':-1/3 }
         ]
+    
+    elif con_list_type == 'boiled_down_new':
+        # Defined manually from results of clustering on longlist only
+        # non-bio/civilisation and tools clusters are anticorrelated to nature/outsisde so they have been grouped
+        
+        con_list = [
+                    {'tools':1/6,'tool_use':1/6,'inanimate_small':1/6,'inside':1/6, 'non_biological':1/6, 'civilisation':1/6, 'nature':-1/2,'outside':-1/2},
+                    {'body_parts':1/4, 'biological_motion': 1/4, 'animate':1/4, 'faces':1/4},
+                    'social',
+                    {'near':0.5,'camera_cut':0.5},
+                    {'biological':0.5,'closed':0.5},
+                    'scene',
+                    {'salient_near_away':1/3, 'open':1/3, 'salient_near_towards':1/3},
+                    {'far':1/2,'inanimate_big':1/2},
+                    {'non_social':1/2,'scene_change':1/2}
+        ]
 
-    if con_list_type.startswith('boiled_down'):
+    if con_list_type.startswith('boiled_down') or con_list_type.startswith('neuro'):
         # These are nuisance columns that will be put into the design matrix, and the simulated
         #  brain signal with random amplitude and into model but aren't of interest
         nuisance_con = {'contrast_sensitivity_function': noise_weight ,
@@ -115,6 +131,7 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
 
    
     if create_duplicate_faces:
+            import numpy as np
             # Create nuisance column nearly duplicate to faces
             for k, v in events.items():
                 isface = v[v["trial_type"] == 'faces']
