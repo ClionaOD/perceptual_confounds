@@ -3,7 +3,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Data - get movies 
-dirData = dir('movies');      %# Get the data for the current directory
+output_file = 'total_energy_videos_w_new_movies.csv';
+dirData = dir('../movies_cropped');      %# Get the data for the current directory
 dirIndex = [dirData.isdir];  %# Find the index for directories
 video_names = {dirData(~dirIndex).name}';  %'# Get a list of the files
 
@@ -35,4 +36,4 @@ table_energy_output = array2table(tot_energy_output)
 table_energy_output.Properties.VariableNames = video_names 
 
 %Save as csv
-writetable(table_energy_output, 'total_energy.csv') 
+writetable(table_energy_output, output_file) 

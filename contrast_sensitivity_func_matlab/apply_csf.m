@@ -44,7 +44,7 @@ width_degrees=90;
 width_pixels=1929; % if projector has this many pixels across and video is video width (i.e., 640) pixels across
 fsx = width_pixels/width_degrees;  % pixels/degree; video width in pix/ 90 degrees of visual angle
 fsy = fsx; % Assume square pixels
-fst = v.FrameRate %Frames/sec 
+fst = v.FrameRate; %Frames/sec 
 
 % Nx = 640 %Number of columns in each frame
 % Ny = 360 %Number of rows in each frame
@@ -82,7 +82,7 @@ while frame_end < Nt
     %Params
     frame_start = frame_start+ chunk_shift_nframes; %
     count = count + 1;
-    frame_end = frame_end + chunk_shift_nframes %Update count end  
+    frame_end = frame_end + chunk_shift_nframes; %Update count end  
     
 end
 
