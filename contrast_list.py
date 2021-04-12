@@ -123,6 +123,20 @@ def get_con_list(events, con_list_type, all_trial_type=None, create_duplicate_fa
                     {'non_social':1/2,'scene_change':1/2}
         ]
 
+    elif con_list_type == 'boiled_down_new_2':
+        # Defined manually from results of clustering on longlist only
+        # non-bio/civilisation and tools clusters are anticorrelated to nature/outsisde so they have been grouped
+        
+        con_list = [
+                    {'tools':1/5,'tool_use':1/5,'inanimate_small':1/5,'non_biological':1/5, 'civilisation':1/5, 'nature':-1/5},
+                    {'inside':1, 'outside':-1},
+                    {'body_parts':1/5, 'biological':1/5,'biological_motion': 1/5, 'animate':1/5, 'faces':1/5},
+                    {'social':1, 'non_social':-1},
+                    {'closed':1, 'open':-1},
+                    'scene',
+                    {'far':1/2,'inanimate_big':1/2, 'near':-1/2}
+        ]
+
     if con_list_type.startswith('boiled_down') or con_list_type.startswith('neuro'):
         # These are nuisance columns that will be put into the design matrix, and the simulated
         #  brain signal with random amplitude and into model but aren't of interest
