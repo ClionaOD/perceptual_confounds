@@ -159,7 +159,7 @@ if __name__ == "__main__":
 
     #calculate global contrast function and save the dataframes
     framewise_gcf, mean_gcf = get_confounds(f'{vidPath}/longlist')
-    framewise_gcf.to_csv('./framewise_gcf_longlist.csv')
-    with open('./mean_gcf_longlist.json','w') as f:
-        json.dump(mean_gcf, f)
-    #mean_gcf.to_csv('./mean_gcf.csv')
+    framewise_gcf.to_csv('./framewise_gcf_longlist_new.csv')
+    #with open('./mean_gcf_longlist_new.json','w') as f:
+    #    json.dump(mean_gcf, f)
+    mean_gcf.to_csv('./mean_gcf_new.csv')
