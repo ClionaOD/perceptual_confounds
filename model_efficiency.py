@@ -137,7 +137,7 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
         if save_figures:
             plt.figure()
             plot_design_matrix(Xmovies)
-            plt.savefig('./cod_results/model_efficiency_events_blockpermovie_designmatrix.jpg')
+            plt.savefig('./cod_results/new_longlist/model_efficiency_events_blockpermovie_designmatrix.jpg')
 
     if len(set(all_trial_type) - set(X.columns))>0:
         print('Failing as not all columns in model!')
@@ -154,7 +154,7 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
         plt.rcParams.update({'font.size': 8})
         sns.heatmap(corrX, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
         plt.tight_layout()
-        plt.savefig(f'./cod_results/model_efficiency_events_Xcorr.jpg')
+        plt.savefig(f'./cod_results/new_longlist/model_efficiency_events_Xcorr.jpg')
 
     # Contrasted design matrix columns
     Xcon=pd.DataFrame()
@@ -238,7 +238,7 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
         plt.rcParams.update({'font.size': 12})
         plt.tight_layout()
     
-        plt.savefig(f'./cod_results/model_efficiency_events_{event_type}_con_{con_list_type}_violin.jpg')
+        plt.savefig(f'./cod_results/new_longlist/model_efficiency_events_{event_type}_con_{con_list_type}_violin.jpg')
 
         fig, ax = plt.subplots(nrows = 1, figsize=(11.5, 9))
         
@@ -255,14 +255,14 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
                 )
             order=dend['ivl']
 
-            plt.savefig(f'./cod_results/model_efficiency_events_{event_type}_con_{con_list_type}_clusters.jpg')
+            plt.savefig(f'./cod_results/new_longlist/model_efficiency_events_{event_type}_con_{con_list_type}_clusters.jpg')
 
             # Correlation matrix figure
             fig, ax = plt.subplots(figsize=(11.5, 9))
             plt.rcParams.update({'font.size': 12})
             sns.heatmap(corrMatrix, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
             plt.tight_layout()
-            plt.savefig(f'./cod_results/model_efficiency_events_{event_type}_con_{con_list_type}_corr.jpg')
+            plt.savefig(f'./cod_results/new_longlist/model_efficiency_events_{event_type}_con_{con_list_type}_corr.jpg')
 
             # Correlation matrix, reordered by clustering, figure
             corrMatrixReordered = corrMatrix.reindex(index=order,columns=order)
@@ -270,12 +270,12 @@ def optimise_efficiency(events_in, todrop= None, con_list_type='boiled_down_5', 
             plt.rcParams.update({'font.size': 12})
             sns.heatmap(corrMatrixReordered, ax=ax, cmap='PiYG', vmin=-0.5, vmax=0.5)
             plt.tight_layout()
-            plt.savefig(f'./cod_results/model_efficiency_events_{event_type}_con_{con_list_type}_corr_reordered.jpg')
+            plt.savefig(f'./cod_results/new_longlist/model_efficiency_events_{event_type}_con_{con_list_type}_corr_reordered.jpg')
 
     return zstat_mean
 
 def find_optimal_movies(nits=1, target_movies=8, design_matrix_type='all', con_list_type='boiled_down_5'):
-    original_events = pd.read_pickle('./events_per_movie_longlist.pickle')
+    original_events = pd.read_pickle('./events_per_movie_longlist_new.pickle') #TODO: make this a variable
     nscans = None # calculated from events
 
     res = pd.DataFrame()
@@ -307,7 +307,7 @@ def find_optimal_movies(nits=1, target_movies=8, design_matrix_type='all', con_l
         res = res.append({'iteration':it, 'movies':keys, 'zstat':zstat}, ignore_index=True)
         print(f'Iteration {it} final set is {keys}' )
 
-    with open(f'./cod_results/t_stats/model_effiency_select_movies_desmat_{design_matrix_type}_con_{con_list_type}_target_movies_{target_movies}.csv','w') as f:
+    with open(f'./cod_results/new_longlist/t_stats/model_effiency_select_movies_desmat_{design_matrix_type}_con_{con_list_type}_target_movies_{target_movies}.csv','w') as f:
         res.to_csv(f)
 
 
@@ -317,7 +317,7 @@ def all_movie_analysis(con_list_type= 'boiled_down_5', event_type = 'movies', de
         events, des = get_henson_events()
         nscans = 64
     elif event_type == 'movies':
-        events = pd.read_pickle('./events_per_movie_longlist.pickle')
+        events = pd.read_pickle('./events_per_movie_longlist_new.pickle') #TODO: make this a variable
         nscans = None # calculated from events
 
 
@@ -330,18 +330,18 @@ if __name__=='__main__':
 
     # Run once with figures
     #all_movie_analysis(con_list_type = 'all_trial_type', design_matrix_type = 'percontrast')
-    all_movie_analysis(con_list_type = 'boiled_down_new', design_matrix_type = 'all')
+    #all_movie_analysis(con_list_type = 'boiled_down_new_2', design_matrix_type = 'all')
     #all_movie_analysis(con_list_type = 'neuro_based', design_matrix_type = 'all')
     
     # Get t stat distributions for all movies in both cluster-based contrast and neuro-based
     
-    find_optimal_movies(con_list_type = 'boiled_down_new', design_matrix_type = 'all', nits=100, target_movies=8)
-    #find_optimal_movies(con_list_type = 'neuro_based', design_matrix_type = 'all', nits=100, target_movies=8)
+    find_optimal_movies(con_list_type = 'boiled_down_new_2', design_matrix_type = 'all', nits=100, target_movies=8)
+    find_optimal_movies(con_list_type = 'neuro_based', design_matrix_type = 'all', nits=100, target_movies=8)
     
     # Assume each voxel of simulated brain activating with random weights on each tagged column, but that we're analysing for differences across movies
     #  We do an F-test for the effect of movie
     #  Then optimise subset of movies to maxmise this
-    #find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100, target_movies=8)
+    find_optimal_movies(con_list_type = 'all_trial_type_random_weight', design_matrix_type = 'blockpermovie', nits=100, target_movies=8)
 
     # *** NEXT STAGE ***    
     # Can use script summarize_select_movies.py to summarize results - change this to pick up correct .csv output files
