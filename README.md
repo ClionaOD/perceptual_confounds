@@ -25,10 +25,15 @@ Figures in this repo are confusing and uncertain, see https://docs.google.com/pr
     model_design_matrix.py
         * has functions for generating a simulated design matrix based on the perceptual measures from the videos, and the elan tags (i.e. from events files output by create_events.py)
         * some functions here for efficiency as well, but not sure if they are used/relevant
+    
+    break_make_first_level_design_matrix.py
+        * RC used this as illustration for big bug he found in nilearn function if two events of the same trial type overlap, and end exactly simultaneously, the modelling only registers the end of one, and ramps the rest of the time. 
+        * solved this big issue by installing latest version of nilearn from github source.
 
 4. design_corr_and_cluster
     various scripts
-        * messy folder with a few different scripts doing the same thing. HC and COD seemed to do clustering themselves each. Lots of plots saved, not sure if any are hugely relevant or informative.
+        * messy folder with a few different scripts doing the same thing. HC and COD seemed to do clustering themselves each. COD began the proccess, and issues appeared with differences between the convolved and noncovolved design matrices, HC took over from COD and COD worked on MDS instead. Lots of plots saved, not sure if any are hugely relevant or informative.
+        * what's important from this step is that we clustered the design matrix correlation matrices, and used the resultant dendrograms to form contrasts of interest on which to optimise our semantic spread.
 
 5. bootstrap
     bootstrapping_mds.py
@@ -44,3 +49,8 @@ Figures in this repo are confusing and uncertain, see https://docs.google.com/pr
     B. summarize_select_movies.py
         * should pick up on the output of model_efficiency.py (in line 310)
         * then generates a report on what the most common combination of 8 movies are - i.e. which ones should we decide upon
+
+    single_column_efficiency.py
+        * RC worked on this script to help solve things limiting efficiency: columns where an event rarely appears, appears all the time, or appears/disappears at a temporal frequency that we have no sensitivity to (e.g., very fast or > 1.5 minutes) and also colinear columns
+        * single_efficiency.jpg shows (blue bars) single regressor plus confound columns contrasts [1,0,...,0] and orange bars for a contrast with all regressors included (to see how good a column is with friends included). Orange bars being smaller than blue is good.
+        * then tried to improve power/efficiency by collapsing across columns, shown in bespoke_efficiency.jpg. and bespoke_timecourse.jpg. RC used his own efficiency function and produced test_efficiency.py to see if it was doing the right thing (it is)
