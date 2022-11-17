@@ -1,0 +1,1002 @@
+All movies 0.04148943535146968
+All movies 0.012469926265046817
+<frozen importlib._bootstrap>:219: RuntimeWarning: numpy.ufunc size changed, may indicate binary incompatibility. Expected 192 from C header, got 216 from PyObject
+./model_efficiency.py:264: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all axes decorations. 
+  plt.tight_layout()
+./model_efficiency.py:272: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all axes decorations. 
+  plt.tight_layout()
+Dropping bedtime.mp4 as still gave z-stat of 0.08026191516413013
+Dropping our_planet.mp4 as still gave z-stat of 0.07419391985747913
+Dropping real_cars.mp4 as still gave z-stat of 0.06607059519835842
+Dropping bathsong.mp4 as still gave z-stat of 0.06494907770824275
+Dropping beachsong.mp4 as still gave z-stat of 0.06932479092047787
+Dropping moana.mp4 as still gave z-stat of 0.06417822898120362
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.053330757133766
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05064309424715434
+Iteration 0 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.07347025512752883
+Dropping forest.mp4 as still gave z-stat of 0.04235593687915712
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.056990537329458676
+Dropping bathsong.mp4 as still gave z-stat of 0.054322420166071354
+Dropping beachsong.mp4 as still gave z-stat of 0.055472323249274216
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0473488094879658
+Dropping ratatouille.mp4 as still gave z-stat of 0.04201262562035808
+Dropping our_planet.mp4 as still gave z-stat of 0.05853891742588006
+Iteration 1 final set is ['bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06456946448696296
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06379175005161096
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06089246665451891
+Dropping ratatouille.mp4 as still gave z-stat of 0.05898562760108588
+Dropping forest.mp4 as still gave z-stat of 0.06310706531402988
+Dropping bedtime.mp4 as still gave z-stat of 0.07203960770847757
+Dropping beachsong.mp4 as still gave z-stat of 0.04642116304371066
+Dropping pingu.mp4 as still gave z-stat of 0.038742147200118884
+Iteration 2 final set is ['pingu.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.08329276965014734
+Dropping moana.mp4 as still gave z-stat of 0.07303291995207982
+Dropping pingu.mp4 as still gave z-stat of 0.06367543005992148
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.09595742700259163
+Dropping bedtime.mp4 as still gave z-stat of 0.06057404971547466
+Dropping real_cars.mp4 as still gave z-stat of 0.07498439029842732
+Dropping forest.mp4 as still gave z-stat of 0.05065289089391616
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04568138480695599
+Iteration 3 final set is ['kids_kitchen.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07308845635425723
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06591723074426821
+Dropping bedtime.mp4 as still gave z-stat of 0.06254609699419604
+Dropping bathsong.mp4 as still gave z-stat of 0.0679078883216899
+Dropping pingu.mp4 as still gave z-stat of 0.0875547800838451
+Dropping our_planet.mp4 as still gave z-stat of 0.06298974403646139
+Dropping beachsong.mp4 as still gave z-stat of 0.07591746850221019
+Dropping real_cars.mp4 as still gave z-stat of 0.03563906159083833
+Iteration 4 final set is ['forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.05013166091788904
+Dropping bedtime.mp4 as still gave z-stat of 0.07862195192407337
+Dropping real_cars.mp4 as still gave z-stat of 0.06883619199618993
+Dropping our_planet.mp4 as still gave z-stat of 0.06459137768394298
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05746989449229575
+Dropping beachsong.mp4 as still gave z-stat of 0.06624279241144625
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06890793479650505
+Dropping forest.mp4 as still gave z-stat of 0.03740871828706798
+Iteration 5 final set is ['forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.06978768712791747
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.07373731937143502
+Dropping bathsong.mp4 as still gave z-stat of 0.06294048221266176
+Dropping pingu.mp4 as still gave z-stat of 0.057633923710577066
+Dropping real_cars.mp4 as still gave z-stat of 0.04728185356388479
+Dropping bedtime.mp4 as still gave z-stat of 0.05751694073650751
+Dropping our_planet.mp4 as still gave z-stat of 0.05272598708473487
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.047198226953843486
+Iteration 6 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'beachsong.mp4']
+Dropping our_planet.mp4 as still gave z-stat of 0.08642482044108749
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06177617820667284
+Dropping pingu.mp4 as still gave z-stat of 0.06403296343196575
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06217523042373037
+Dropping forest.mp4 as still gave z-stat of 0.03881606838276272
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.045864625854725886
+Dropping moana.mp4 as still gave z-stat of 0.043629339044863075
+Dropping bedtime.mp4 as still gave z-stat of 0.03894984580316232
+Iteration 7 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'beachsong.mp4']
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.059757426636398596
+Dropping bedtime.mp4 as still gave z-stat of 0.041563546170832924
+Dropping new_orleans.mp4 as still gave z-stat of 0.04905488183158606
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.060768662113425916
+Dropping real_cars.mp4 as still gave z-stat of 0.040422758054575854
+Dropping forest.mp4 as still gave z-stat of 0.07599671432006654
+Dropping pingu.mp4 as still gave z-stat of 0.03159532246401981
+Dropping our_planet.mp4 as still gave z-stat of 0.07436335580445118
+Iteration 8 final set is ['moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping pingu.mp4 as still gave z-stat of 0.09742625438912475
+Dropping real_cars.mp4 as still gave z-stat of 0.04310803277579074
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05757355520464574
+Dropping bathsong.mp4 as still gave z-stat of 0.08525414138411022
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.08035073049795097
+Dropping bedtime.mp4 as still gave z-stat of 0.06169237039866064
+Dropping our_planet.mp4 as still gave z-stat of 0.019439279755661933
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.019303390008856926
+Iteration 9 final set is ['forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping bedtime.mp4 as still gave z-stat of 0.07786932118030791
+Dropping our_planet.mp4 as still gave z-stat of 0.06837364972701422
+Dropping ratatouille.mp4 as still gave z-stat of 0.08069170582089927
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05913575051505254
+Dropping moana.mp4 as still gave z-stat of 0.026019796504072646
+Dropping new_orleans.mp4 as still gave z-stat of 0.042753138829438785
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04498853064612674
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.04204024318585085
+Iteration 10 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'real_cars.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.07126220586915888
+Dropping bathsong.mp4 as still gave z-stat of 0.06372485712213934
+Dropping pingu.mp4 as still gave z-stat of 0.0713345601672248
+Dropping forest.mp4 as still gave z-stat of 0.05925008343265783
+Dropping ratatouille.mp4 as still gave z-stat of 0.05755597466096739
+Dropping our_planet.mp4 as still gave z-stat of 0.04743439474441412
+Dropping new_orleans.mp4 as still gave z-stat of 0.021675606944410352
+Dropping moana.mp4 as still gave z-stat of 0.04387714063500649
+Iteration 11 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.0828584805774019
+Dropping real_cars.mp4 as still gave z-stat of 0.08085449040705421
+Dropping moana.mp4 as still gave z-stat of 0.057721297998046796
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06930123967961456
+Dropping new_orleans.mp4 as still gave z-stat of 0.05786566516395383
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05926450604191253
+Dropping bathsong.mp4 as still gave z-stat of 0.05839396806976964
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.03817379536641006
+Iteration 12 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.06601240935192564
+Dropping forest.mp4 as still gave z-stat of 0.04093186718323521
+Dropping moana.mp4 as still gave z-stat of 0.08173051791947873
+Dropping bathsong.mp4 as still gave z-stat of 0.04354019307362283
+Dropping beachsong.mp4 as still gave z-stat of 0.05114609433177758
+Dropping our_planet.mp4 as still gave z-stat of 0.056581604766845914
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05166178645195876
+Dropping pingu.mp4 as still gave z-stat of 0.047565327051689775
+Iteration 13 final set is ['bedtime.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.07195857261386437
+Dropping new_orleans.mp4 as still gave z-stat of 0.06327844816841154
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0552170955384605
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.053241335096269445
+Dropping real_cars.mp4 as still gave z-stat of 0.05390327127166279
+Dropping bathsong.mp4 as still gave z-stat of 0.05047767349841459
+Dropping pingu.mp4 as still gave z-stat of 0.06460016396934884
+Dropping ratatouille.mp4 as still gave z-stat of 0.04523881621169688
+Iteration 14 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping forest.mp4 as still gave z-stat of 0.04975486550120886
+Dropping beachsong.mp4 as still gave z-stat of 0.05979476085559513
+Dropping moana.mp4 as still gave z-stat of 0.06290575530357388
+Dropping real_cars.mp4 as still gave z-stat of 0.054054049143582014
+Dropping bedtime.mp4 as still gave z-stat of 0.05501460616960043
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06465110271817895
+Dropping bathsong.mp4 as still gave z-stat of 0.08232901882061879
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06139927937284626
+Iteration 15 final set is ['pingu.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.06456482107195145
+Dropping beachsong.mp4 as still gave z-stat of 0.06896563188837662
+Dropping pingu.mp4 as still gave z-stat of 0.048959591919636156
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05638624987444776
+Dropping bedtime.mp4 as still gave z-stat of 0.04431688749697792
+Dropping moana.mp4 as still gave z-stat of 0.04834770332665067
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.025426138578735446
+Dropping real_cars.mp4 as still gave z-stat of 0.0679471471740346
+Iteration 16 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.07101651691581756
+Dropping moana.mp4 as still gave z-stat of 0.047692771203038345
+Dropping pingu.mp4 as still gave z-stat of 0.07428008777809626
+Dropping our_planet.mp4 as still gave z-stat of 0.054470890665702695
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05595457234910784
+Dropping ratatouille.mp4 as still gave z-stat of 0.06742237391384305
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.059682897617049535
+Dropping bathsong.mp4 as still gave z-stat of 0.06129445472351806
+Iteration 17 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'beachsong.mp4']
+Dropping bedtime.mp4 as still gave z-stat of 0.051098074803708274
+Dropping bathsong.mp4 as still gave z-stat of 0.04912068665117801
+Dropping ratatouille.mp4 as still gave z-stat of 0.07918822014186933
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.05595893393715424
+Dropping pingu.mp4 as still gave z-stat of 0.05751805298552751
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04341904587655786
+Dropping real_cars.mp4 as still gave z-stat of 0.05176119225851429
+Dropping beachsong.mp4 as still gave z-stat of 0.06033712880526691
+Iteration 18 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05754716626859839
+Dropping our_planet.mp4 as still gave z-stat of 0.06100226022896017
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.059041203050890334
+Dropping beachsong.mp4 as still gave z-stat of 0.08029154068810934
+Dropping new_orleans.mp4 as still gave z-stat of 0.0671727421638048
+Dropping bathsong.mp4 as still gave z-stat of 0.05252964336187159
+Dropping real_cars.mp4 as still gave z-stat of 0.04530262419442194
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07237433266582617
+Iteration 19 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4']
+Dropping our_planet.mp4 as still gave z-stat of 0.05191208411193208
+Dropping pingu.mp4 as still gave z-stat of 0.0638897612698409
+Dropping bedtime.mp4 as still gave z-stat of 0.06652123800109098
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.04958891638832214
+Dropping ratatouille.mp4 as still gave z-stat of 0.037317663276448386
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.044790136054952
+Dropping real_cars.mp4 as still gave z-stat of 0.05058338961870189
+Dropping new_orleans.mp4 as still gave z-stat of 0.0679191918779883
+Iteration 20 final set is ['forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'beachsong.mp4']
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06774650385734696
+Dropping bathsong.mp4 as still gave z-stat of 0.06689569442872784
+Dropping bedtime.mp4 as still gave z-stat of 0.06430147569002213
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06742255029481395
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.056272813295027646
+Dropping our_planet.mp4 as still gave z-stat of 0.057343945355489895
+Dropping beachsong.mp4 as still gave z-stat of 0.050747545478071275
+Dropping moana.mp4 as still gave z-stat of 0.06277034439917
+Iteration 21 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.07735823094588516
+Dropping bedtime.mp4 as still gave z-stat of 0.06653657280680471
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05846519714633355
+Dropping new_orleans.mp4 as still gave z-stat of 0.07338880652639525
+Dropping ratatouille.mp4 as still gave z-stat of 0.07101201035495965
+Dropping our_planet.mp4 as still gave z-stat of 0.06674840027970082
+Dropping pingu.mp4 as still gave z-stat of 0.07044592926712837
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.052259959745112355
+Iteration 22 final set is ['forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping beachsong.mp4 as still gave z-stat of 0.07060109298119005
+Dropping real_cars.mp4 as still gave z-stat of 0.05664361367882449
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07381389543041644
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05548528769806592
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.05873640168861615
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05248440927010878
+Dropping ratatouille.mp4 as still gave z-stat of 0.07474263127285324
+Dropping bathsong.mp4 as still gave z-stat of 0.019129027703980526
+Iteration 23 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05834485733086352
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.060862847737710404
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06707104988276973
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.049821047352117266
+Dropping new_orleans.mp4 as still gave z-stat of 0.055124439135497465
+Dropping real_cars.mp4 as still gave z-stat of 0.034370433144762375
+Dropping bathsong.mp4 as still gave z-stat of 0.049634570759063204
+Dropping beachsong.mp4 as still gave z-stat of 0.0486705784186104
+Iteration 24 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping beachsong.mp4 as still gave z-stat of 0.08185875728562252
+Dropping bathsong.mp4 as still gave z-stat of 0.058390272135301416
+Dropping ratatouille.mp4 as still gave z-stat of 0.055221270636491904
+Dropping real_cars.mp4 as still gave z-stat of 0.05635971943816642
+Dropping moana.mp4 as still gave z-stat of 0.07196479888826385
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04124678553500715
+Dropping our_planet.mp4 as still gave z-stat of 0.04967565026239566
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05070048312601663
+Iteration 25 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06918942346823947
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06103376428259035
+Dropping forest.mp4 as still gave z-stat of 0.06271690249694019
+Dropping bathsong.mp4 as still gave z-stat of 0.05342487456813161
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.0788570376523534
+Dropping new_orleans.mp4 as still gave z-stat of 0.046625268179358845
+Dropping real_cars.mp4 as still gave z-stat of 0.05533507482812607
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06851927979607447
+Iteration 26 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.09929958967384973
+Dropping bathsong.mp4 as still gave z-stat of 0.07204847278909073
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04306152237634704
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05577209033741923
+Dropping moana.mp4 as still gave z-stat of 0.04654722874398434
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05552240601774234
+Dropping real_cars.mp4 as still gave z-stat of 0.05482937908989669
+Dropping bedtime.mp4 as still gave z-stat of 0.026426018508240796
+Iteration 27 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.06643199557306452
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.08026272736422117
+Dropping real_cars.mp4 as still gave z-stat of 0.0557382430244339
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0648274967530443
+Dropping forest.mp4 as still gave z-stat of 0.058484929641980606
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07384755759712774
+Dropping beachsong.mp4 as still gave z-stat of 0.04293483083027081
+Dropping moana.mp4 as still gave z-stat of 0.05554990939113067
+Iteration 28 final set is ['bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4']
+Dropping bedtime.mp4 as still gave z-stat of 0.06650262962683777
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05445570996967325
+Dropping real_cars.mp4 as still gave z-stat of 0.089314096236939
+Dropping beachsong.mp4 as still gave z-stat of 0.06391649208940602
+Dropping our_planet.mp4 as still gave z-stat of 0.04947105340728484
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04105687230886789
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0602769615636228
+Dropping new_orleans.mp4 as still gave z-stat of 0.01761757383637835
+Iteration 29 final set is ['forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.06722880645307046
+Dropping beachsong.mp4 as still gave z-stat of 0.07420067616708562
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06606775631805298
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05148682980200453
+Dropping moana.mp4 as still gave z-stat of 0.05127926424164218
+Dropping bedtime.mp4 as still gave z-stat of 0.05191048866356631
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.03973792809561761
+Dropping our_planet.mp4 as still gave z-stat of 0.03734210234685109
+Iteration 30 final set is ['forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'real_cars.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.056087496254579615
+Dropping our_planet.mp4 as still gave z-stat of 0.09132500194194512
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05580200182731439
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.08288581070599517
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06030139231043814
+Dropping new_orleans.mp4 as still gave z-stat of 0.03986787133966334
+Dropping bathsong.mp4 as still gave z-stat of 0.08434606905541724
+Dropping moana.mp4 as still gave z-stat of 0.06372840274188225
+Iteration 31 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'beachsong.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.08800440688448108
+Dropping pingu.mp4 as still gave z-stat of 0.060512678807215864
+Dropping beachsong.mp4 as still gave z-stat of 0.05006664345524141
+Dropping bedtime.mp4 as still gave z-stat of 0.056698648556700516
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0655259105578462
+Dropping bathsong.mp4 as still gave z-stat of 0.04981820148627428
+Dropping ratatouille.mp4 as still gave z-stat of 0.05495499721723713
+Dropping moana.mp4 as still gave z-stat of 0.049650374434576844
+Iteration 32 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping bathsong.mp4 as still gave z-stat of 0.07875540791427005
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.04884877686786884
+Dropping moana.mp4 as still gave z-stat of 0.08632076329113707
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06857448888770903
+Dropping our_planet.mp4 as still gave z-stat of 0.06564840221766921
+Dropping bedtime.mp4 as still gave z-stat of 0.04656125318642941
+Dropping ratatouille.mp4 as still gave z-stat of 0.03678072530305948
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0455368531239337
+Iteration 33 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.07456665993551599
+Dropping pingu.mp4 as still gave z-stat of 0.06569340774469366
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06180623606184399
+Dropping ratatouille.mp4 as still gave z-stat of 0.06750756845289166
+Dropping our_planet.mp4 as still gave z-stat of 0.06663112380268447
+Dropping bathsong.mp4 as still gave z-stat of 0.07724506557395161
+Dropping new_orleans.mp4 as still gave z-stat of 0.05858684103656881
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.026356301518971684
+Iteration 34 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'beachsong.mp4']
+Dropping forest.mp4 as still gave z-stat of 0.08468208154598232
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06820183309033005
+Dropping moana.mp4 as still gave z-stat of 0.051142955620136064
+Dropping beachsong.mp4 as still gave z-stat of 0.08515528340052217
+Dropping new_orleans.mp4 as still gave z-stat of 0.06602464661136628
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.08643550855972222
+Dropping bathsong.mp4 as still gave z-stat of 0.06545709070360838
+Dropping bedtime.mp4 as still gave z-stat of 0.04074698790482314
+Iteration 35 final set is ['bedtime.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06849338524631096
+Dropping our_planet.mp4 as still gave z-stat of 0.0712953285055053
+Dropping ratatouille.mp4 as still gave z-stat of 0.053538775930047244
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.060839359978284914
+Dropping real_cars.mp4 as still gave z-stat of 0.05714550135033119
+Dropping pingu.mp4 as still gave z-stat of 0.06482618753589486
+Dropping bedtime.mp4 as still gave z-stat of 0.06338640119535359
+Dropping moana.mp4 as still gave z-stat of 0.04833797210680428
+Iteration 36 final set is ['forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping beachsong.mp4 as still gave z-stat of 0.07372354415715968
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.043896785983283365
+Dropping pingu.mp4 as still gave z-stat of 0.06881559031486853
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0642310141308211
+Dropping real_cars.mp4 as still gave z-stat of 0.05072707147518321
+Dropping bedtime.mp4 as still gave z-stat of 0.0726122846343391
+Dropping new_orleans.mp4 as still gave z-stat of 0.051804756082201434
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.05834042067868077
+Iteration 37 final set is ['forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.06970872732493619
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05845374904083294
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05844574556678953
+Dropping bathsong.mp4 as still gave z-stat of 0.041290493456035395
+Dropping bedtime.mp4 as still gave z-stat of 0.056482089999377365
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.04001842048762373
+Dropping ratatouille.mp4 as still gave z-stat of 0.03389340048126698
+Dropping our_planet.mp4 as still gave z-stat of 0.05347493204372932
+Iteration 38 final set is ['forest.mp4', 'pingu.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05164238670062289
+Dropping moana.mp4 as still gave z-stat of 0.08031360151905892
+Dropping bedtime.mp4 as still gave z-stat of 0.0585239773562861
+Dropping new_orleans.mp4 as still gave z-stat of 0.062338677532583604
+Dropping real_cars.mp4 as still gave z-stat of 0.06173658714551665
+Dropping ratatouille.mp4 as still gave z-stat of 0.06428563266569201
+Dropping beachsong.mp4 as still gave z-stat of 0.05987038859667628
+Dropping forest.mp4 as still gave z-stat of 0.06457212814759586
+Iteration 39 final set is ['forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.06153279875799856
+Dropping new_orleans.mp4 as still gave z-stat of 0.05067760369064585
+Dropping forest.mp4 as still gave z-stat of 0.07564662367323766
+Dropping pingu.mp4 as still gave z-stat of 0.06695332918005174
+Dropping beachsong.mp4 as still gave z-stat of 0.07456208505434227
+Dropping bedtime.mp4 as still gave z-stat of 0.05423164043008021
+Dropping bathsong.mp4 as still gave z-stat of 0.04960858727798472
+Dropping ratatouille.mp4 as still gave z-stat of 0.045559660199448716
+Iteration 40 final set is ['rio_jungle_jig.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping pingu.mp4 as still gave z-stat of 0.07090754893411529
+Dropping forest.mp4 as still gave z-stat of 0.06728151797833772
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.060063919452634215
+Dropping bathsong.mp4 as still gave z-stat of 0.08497216526994014
+Dropping real_cars.mp4 as still gave z-stat of 0.04927447093100574
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.04935007774305022
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.052095459147900654
+Dropping ratatouille.mp4 as still gave z-stat of 0.07506120595576189
+Iteration 41 final set is ['bedtime.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.051418263839674114
+Dropping beachsong.mp4 as still gave z-stat of 0.04387676788378992
+Dropping bathsong.mp4 as still gave z-stat of 0.051430517559274344
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07655605479911898
+Dropping our_planet.mp4 as still gave z-stat of 0.08109236764447186
+Dropping forest.mp4 as still gave z-stat of 0.06119636570549227
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.051712429008075586
+Dropping bedtime.mp4 as still gave z-stat of 0.02334378662424385
+Iteration 42 final set is ['bedtime.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.08200385614418951
+Dropping ratatouille.mp4 as still gave z-stat of 0.04833755170897711
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.05173648123882455
+Dropping beachsong.mp4 as still gave z-stat of 0.04013001001475534
+Dropping bedtime.mp4 as still gave z-stat of 0.05620658546549446
+Dropping new_orleans.mp4 as still gave z-stat of 0.04937810674729528
+Dropping moana.mp4 as still gave z-stat of 0.04400021973751306
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.039169904412864075
+Iteration 43 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06474863841988653
+Dropping ratatouille.mp4 as still gave z-stat of 0.06765128455456483
+Dropping beachsong.mp4 as still gave z-stat of 0.048651687038341634
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.0435825440799144
+Dropping bedtime.mp4 as still gave z-stat of 0.04534213518080394
+Dropping real_cars.mp4 as still gave z-stat of 0.05511307255371598
+Dropping forest.mp4 as still gave z-stat of 0.04362227139491458
+Dropping moana.mp4 as still gave z-stat of 0.05350403829223718
+Iteration 44 final set is ['rio_jungle_jig.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0863288278218546
+Dropping real_cars.mp4 as still gave z-stat of 0.07345108288232334
+Dropping ratatouille.mp4 as still gave z-stat of 0.08746602333687924
+Dropping bedtime.mp4 as still gave z-stat of 0.07547472461078104
+Dropping our_planet.mp4 as still gave z-stat of 0.04802974517235931
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07906472370856629
+Dropping new_orleans.mp4 as still gave z-stat of 0.0350786108702412
+Dropping moana.mp4 as still gave z-stat of 0.026753441955245778
+Iteration 45 final set is ['forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping bedtime.mp4 as still gave z-stat of 0.05393653564608959
+Dropping real_cars.mp4 as still gave z-stat of 0.05880244514116238
+Dropping bathsong.mp4 as still gave z-stat of 0.05901183630104853
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06404073721640183
+Dropping new_orleans.mp4 as still gave z-stat of 0.05046037961955977
+Dropping ratatouille.mp4 as still gave z-stat of 0.06719217842258951
+Dropping moana.mp4 as still gave z-stat of 0.046970693037361344
+Dropping pingu.mp4 as still gave z-stat of 0.063069318066704
+Iteration 46 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'minions_supermarket.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.05420828816648236
+Dropping bedtime.mp4 as still gave z-stat of 0.0568142142449871
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0675673942064322
+Dropping new_orleans.mp4 as still gave z-stat of 0.05865146466099087
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0509421468122421
+Dropping our_planet.mp4 as still gave z-stat of 0.03691678269342539
+Dropping pingu.mp4 as still gave z-stat of 0.046172397315198295
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.048249006525375004
+Iteration 47 final set is ['forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.058508433025131666
+Dropping bathsong.mp4 as still gave z-stat of 0.07402704528479473
+Dropping moana.mp4 as still gave z-stat of 0.05852545135341939
+Dropping bedtime.mp4 as still gave z-stat of 0.0765594805312869
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05624962085631909
+Dropping our_planet.mp4 as still gave z-stat of 0.04911076428449129
+Dropping beachsong.mp4 as still gave z-stat of 0.06574514161398914
+Dropping pingu.mp4 as still gave z-stat of 0.04471466190548819
+Iteration 48 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.061724145619473605
+Dropping real_cars.mp4 as still gave z-stat of 0.058840333010764065
+Dropping our_planet.mp4 as still gave z-stat of 0.06021507855910978
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.0862313250002737
+Dropping bathsong.mp4 as still gave z-stat of 0.05200584730970691
+Dropping new_orleans.mp4 as still gave z-stat of 0.05120328535541205
+Dropping pingu.mp4 as still gave z-stat of 0.07191701942041402
+Dropping forest.mp4 as still gave z-stat of 0.02763904716436405
+Iteration 49 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.08324446087951355
+Dropping real_cars.mp4 as still gave z-stat of 0.07398399283310102
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06964931627581955
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05274929003533264
+Dropping bathsong.mp4 as still gave z-stat of 0.054112107910959495
+Dropping moana.mp4 as still gave z-stat of 0.06523262876869741
+Dropping ratatouille.mp4 as still gave z-stat of 0.06813510988290652
+Dropping beachsong.mp4 as still gave z-stat of 0.06734818791958358
+Iteration 50 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping bathsong.mp4 as still gave z-stat of 0.06732738679335741
+Dropping pingu.mp4 as still gave z-stat of 0.07128105862297872
+Dropping our_planet.mp4 as still gave z-stat of 0.0969034387693437
+Dropping moana.mp4 as still gave z-stat of 0.08480136729543566
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0725878232523261
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.03900731097230516
+Dropping ratatouille.mp4 as still gave z-stat of 0.05060165709270188
+Dropping forest.mp4 as still gave z-stat of 0.049847567043115514
+Iteration 51 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'beachsong.mp4']
+Dropping forest.mp4 as still gave z-stat of 0.07335331254860324
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0554614361263038
+Dropping ratatouille.mp4 as still gave z-stat of 0.0703262257303059
+Dropping new_orleans.mp4 as still gave z-stat of 0.04573423534674867
+Dropping pingu.mp4 as still gave z-stat of 0.0744348427693756
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06958720152030395
+Dropping real_cars.mp4 as still gave z-stat of 0.036071206634224924
+Dropping bathsong.mp4 as still gave z-stat of 0.042333684710903235
+Iteration 52 final set is ['bedtime.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.044689156426371425
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.08084207990544692
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.050934198860251606
+Dropping our_planet.mp4 as still gave z-stat of 0.07179450992961867
+Dropping bedtime.mp4 as still gave z-stat of 0.04842543162510737
+Dropping new_orleans.mp4 as still gave z-stat of 0.05235199439580928
+Dropping real_cars.mp4 as still gave z-stat of 0.04919290789209714
+Dropping pingu.mp4 as still gave z-stat of 0.03816916285441543
+Iteration 53 final set is ['forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'beachsong.mp4']
+Dropping bedtime.mp4 as still gave z-stat of 0.08058399720186814
+Dropping new_orleans.mp4 as still gave z-stat of 0.07501743704566437
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.05776234153955997
+Dropping pingu.mp4 as still gave z-stat of 0.04845915772232657
+Dropping beachsong.mp4 as still gave z-stat of 0.05967708571556214
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.0489463110358858
+Dropping bathsong.mp4 as still gave z-stat of 0.061081627899343585
+Dropping real_cars.mp4 as still gave z-stat of 0.053356498444874334
+Iteration 54 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'our_planet.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.08011544228609381
+Dropping bedtime.mp4 as still gave z-stat of 0.05430801468033732
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.055807340280214134
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06868137405624176
+Dropping beachsong.mp4 as still gave z-stat of 0.05898905742627548
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.045491267694182304
+Dropping new_orleans.mp4 as still gave z-stat of 0.04714378230467041
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.04623362951481716
+Iteration 55 final set is ['forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping our_planet.mp4 as still gave z-stat of 0.06982246246758846
+Dropping new_orleans.mp4 as still gave z-stat of 0.07115030397292865
+Dropping pingu.mp4 as still gave z-stat of 0.06932202297159909
+Dropping bathsong.mp4 as still gave z-stat of 0.061093652369800265
+Dropping beachsong.mp4 as still gave z-stat of 0.07142682204689052
+Dropping real_cars.mp4 as still gave z-stat of 0.06455501428050378
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.042830458712734415
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07467345411376305
+Iteration 56 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.07457862470504947
+Dropping real_cars.mp4 as still gave z-stat of 0.05643678237317532
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04471057104770705
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.056437600736893245
+Dropping forest.mp4 as still gave z-stat of 0.032991488841835406
+Dropping pingu.mp4 as still gave z-stat of 0.08701801964179125
+Dropping new_orleans.mp4 as still gave z-stat of 0.039783749652081465
+Dropping our_planet.mp4 as still gave z-stat of 0.046849940415644414
+Iteration 57 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping bathsong.mp4 as still gave z-stat of 0.04767095127232054
+Dropping bedtime.mp4 as still gave z-stat of 0.05061141088629773
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04542877620310305
+Dropping beachsong.mp4 as still gave z-stat of 0.06037770145640592
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07600791170906512
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.043026579085078544
+Dropping new_orleans.mp4 as still gave z-stat of 0.05328603366976597
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.03939716105265982
+Iteration 58 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'our_planet.mp4']
+Dropping our_planet.mp4 as still gave z-stat of 0.07586897693904547
+Dropping ratatouille.mp4 as still gave z-stat of 0.06607197381016211
+Dropping bedtime.mp4 as still gave z-stat of 0.07860675618821461
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.04997028428347529
+Dropping new_orleans.mp4 as still gave z-stat of 0.07466834605396498
+Dropping moana.mp4 as still gave z-stat of 0.06806971091709114
+Dropping pingu.mp4 as still gave z-stat of 0.05032127323998405
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.022106171385198804
+Iteration 59 final set is ['forest.mp4', 'kids_kitchen.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.0621855471931155
+Dropping bedtime.mp4 as still gave z-stat of 0.055599591861137186
+Dropping bathsong.mp4 as still gave z-stat of 0.07719088153783284
+Dropping beachsong.mp4 as still gave z-stat of 0.06288146579679844
+Dropping our_planet.mp4 as still gave z-stat of 0.04065204083271984
+Dropping moana.mp4 as still gave z-stat of 0.05260439934029582
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.04749348967174086
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.029391476620839806
+Iteration 60 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.06643148711000464
+Dropping bedtime.mp4 as still gave z-stat of 0.06882176808606416
+Dropping new_orleans.mp4 as still gave z-stat of 0.05143838968728545
+Dropping forest.mp4 as still gave z-stat of 0.04424279468201012
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.042176955384931214
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0461705749430714
+Dropping bathsong.mp4 as still gave z-stat of 0.04629631230661644
+Dropping ratatouille.mp4 as still gave z-stat of 0.037189623290604504
+Iteration 61 final set is ['rio_jungle_jig.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.05727317751163109
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06881400696994541
+Dropping our_planet.mp4 as still gave z-stat of 0.04826664808717424
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.04389696387697586
+Dropping bedtime.mp4 as still gave z-stat of 0.08052145998033677
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05517918464499517
+Dropping bathsong.mp4 as still gave z-stat of 0.050352626365510966
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.04064076216304063
+Iteration 62 final set is ['forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'beachsong.mp4']
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07074700175189935
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07293771969004302
+Dropping our_planet.mp4 as still gave z-stat of 0.06475480779341561
+Dropping moana.mp4 as still gave z-stat of 0.05700240564840611
+Dropping pingu.mp4 as still gave z-stat of 0.06138576708850392
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04081319605426414
+Dropping bedtime.mp4 as still gave z-stat of 0.08866317425475316
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.0635514236504412
+Iteration 63 final set is ['forest.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping bathsong.mp4 as still gave z-stat of 0.06349018460493917
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.05711861252537531
+Dropping bedtime.mp4 as still gave z-stat of 0.05347614116495289
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.04369992977115636
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.07255953908328039
+Dropping beachsong.mp4 as still gave z-stat of 0.020946646642366153
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04939177303421422
+Dropping ratatouille.mp4 as still gave z-stat of 0.05461887015076813
+Iteration 64 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'our_planet.mp4']
+Dropping bathsong.mp4 as still gave z-stat of 0.059112516867747086
+Dropping pingu.mp4 as still gave z-stat of 0.0793919047360381
+Dropping our_planet.mp4 as still gave z-stat of 0.04991143247930777
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.056615917998470024
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.08283047707719596
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07618504505935975
+Dropping beachsong.mp4 as still gave z-stat of 0.03861540968810386
+Dropping moana.mp4 as still gave z-stat of 0.026801991032701224
+Iteration 65 final set is ['bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'new_orleans.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.08134618930215164
+Dropping ratatouille.mp4 as still gave z-stat of 0.08121840940090096
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06819908580105374
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.04832052153454752
+Dropping new_orleans.mp4 as still gave z-stat of 0.07369494805427985
+Dropping bathsong.mp4 as still gave z-stat of 0.04469007482425144
+Dropping forest.mp4 as still gave z-stat of 0.060095012938979106
+Dropping moana.mp4 as still gave z-stat of 0.04659263281177841
+Iteration 66 final set is ['bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.05955267385559687
+Dropping moana.mp4 as still gave z-stat of 0.0765345508208973
+Dropping bedtime.mp4 as still gave z-stat of 0.08354848154350397
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06188254991430989
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.034594405584492324
+Dropping pingu.mp4 as still gave z-stat of 0.0585402652354678
+Dropping bathsong.mp4 as still gave z-stat of 0.05897295183673069
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.04407264201735875
+Iteration 67 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07412428756257493
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06515690890701586
+Dropping ratatouille.mp4 as still gave z-stat of 0.042922485445485443
+Dropping bathsong.mp4 as still gave z-stat of 0.041518137859546625
+Dropping bedtime.mp4 as still gave z-stat of 0.05874291438628564
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.056269946339711635
+Dropping new_orleans.mp4 as still gave z-stat of 0.04003608429222601
+Dropping real_cars.mp4 as still gave z-stat of 0.06311322906308899
+Iteration 68 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'real_cars.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.0841641872763394
+Dropping ratatouille.mp4 as still gave z-stat of 0.05742730956441443
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05858571954392559
+Dropping beachsong.mp4 as still gave z-stat of 0.07150653346376311
+Dropping bathsong.mp4 as still gave z-stat of 0.04397155385390256
+Dropping moana.mp4 as still gave z-stat of 0.0513882314689912
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.027002115987344005
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.056332543728805744
+Iteration 69 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.05833053420332852
+Dropping our_planet.mp4 as still gave z-stat of 0.06504112262132168
+Dropping moana.mp4 as still gave z-stat of 0.06656647761119729
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.05451394804783513
+Dropping new_orleans.mp4 as still gave z-stat of 0.05226571155671152
+Dropping pingu.mp4 as still gave z-stat of 0.02506880473430587
+Dropping bathsong.mp4 as still gave z-stat of 0.06584300068546983
+Dropping ratatouille.mp4 as still gave z-stat of 0.04492753460644562
+Iteration 70 final set is ['bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping bathsong.mp4 as still gave z-stat of 0.06488528077809078
+Dropping our_planet.mp4 as still gave z-stat of 0.10895236135321854
+Dropping new_orleans.mp4 as still gave z-stat of 0.051308200797770535
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.061517326384813116
+Dropping ratatouille.mp4 as still gave z-stat of 0.04229573803603553
+Dropping forest.mp4 as still gave z-stat of 0.06162169603015919
+Dropping bedtime.mp4 as still gave z-stat of 0.035595972790333844
+Dropping pingu.mp4 as still gave z-stat of 0.03690827618724878
+Iteration 71 final set is ['rio_jungle_jig.mp4', 'pingu.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.07868845517626841
+Dropping new_orleans.mp4 as still gave z-stat of 0.03867797298133522
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06516738400757587
+Dropping real_cars.mp4 as still gave z-stat of 0.06399228855701458
+Dropping bathsong.mp4 as still gave z-stat of 0.07102861551291972
+Dropping pingu.mp4 as still gave z-stat of 0.059856425987034854
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.030871336921606003
+Dropping our_planet.mp4 as still gave z-stat of 0.06345722602259646
+Iteration 72 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.07572325007941481
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07280959756251065
+Dropping new_orleans.mp4 as still gave z-stat of 0.06099248047292754
+Dropping real_cars.mp4 as still gave z-stat of 0.05555483833526658
+Dropping bathsong.mp4 as still gave z-stat of 0.05649997815425982
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.04776161082753823
+Dropping bedtime.mp4 as still gave z-stat of 0.03615157701333681
+Dropping beachsong.mp4 as still gave z-stat of 0.08321045627793312
+Iteration 73 final set is ['forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05843122680799178
+Dropping moana.mp4 as still gave z-stat of 0.06190493443390466
+Dropping ratatouille.mp4 as still gave z-stat of 0.05902968790735548
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06174426236334372
+Dropping new_orleans.mp4 as still gave z-stat of 0.055735766123392344
+Dropping beachsong.mp4 as still gave z-stat of 0.0544631042730704
+Dropping forest.mp4 as still gave z-stat of 0.041702952209159344
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.03897854638823195
+Iteration 74 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'pingu.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.07700029785431574
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.054140798462946574
+Dropping new_orleans.mp4 as still gave z-stat of 0.06350510737767891
+Dropping ratatouille.mp4 as still gave z-stat of 0.06890700217095835
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.07334470289532116
+Dropping beachsong.mp4 as still gave z-stat of 0.04210236089973591
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.05119418152526557
+Dropping bathsong.mp4 as still gave z-stat of 0.027504809419262102
+Iteration 75 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'real_cars.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping our_planet.mp4 as still gave z-stat of 0.05027228820586101
+Dropping new_orleans.mp4 as still gave z-stat of 0.04844691710798942
+Dropping pingu.mp4 as still gave z-stat of 0.07606333959562422
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07240488422177467
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04450105291161415
+Dropping real_cars.mp4 as still gave z-stat of 0.04940186773542679
+Dropping bathsong.mp4 as still gave z-stat of 0.04699229076428165
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.08790606729993487
+Iteration 76 final set is ['bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping pingu.mp4 as still gave z-stat of 0.06434375980929041
+Dropping bathsong.mp4 as still gave z-stat of 0.06343327235764312
+Dropping beachsong.mp4 as still gave z-stat of 0.07137765026378735
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.08308079790139045
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.062984298749416
+Dropping ratatouille.mp4 as still gave z-stat of 0.052463328425871585
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.03676515677668425
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.036359565292855195
+Iteration 77 final set is ['bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07349012596207749
+Dropping beachsong.mp4 as still gave z-stat of 0.05347271205691405
+Dropping real_cars.mp4 as still gave z-stat of 0.046431835995719775
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.08374057340600335
+Dropping our_planet.mp4 as still gave z-stat of 0.05015082521877718
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.05163762092244441
+Dropping bathsong.mp4 as still gave z-stat of 0.049683835417529014
+Dropping moana.mp4 as still gave z-stat of 0.03176183831399862
+Iteration 78 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05673292962415541
+Dropping pingu.mp4 as still gave z-stat of 0.08047738780949075
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0840804269844273
+Dropping our_planet.mp4 as still gave z-stat of 0.05777015882146645
+Dropping real_cars.mp4 as still gave z-stat of 0.06204180228713324
+Dropping forest.mp4 as still gave z-stat of 0.06130439485833085
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.044087049897969015
+Dropping beachsong.mp4 as still gave z-stat of 0.04572448582610947
+Iteration 79 final set is ['bedtime.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.058467841347730254
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06997815877338488
+Dropping new_orleans.mp4 as still gave z-stat of 0.05903894357846308
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.08031515329994227
+Dropping bedtime.mp4 as still gave z-stat of 0.07062446908694119
+Dropping our_planet.mp4 as still gave z-stat of 0.07737164065832985
+Dropping pingu.mp4 as still gave z-stat of 0.044954136051306194
+Dropping ratatouille.mp4 as still gave z-stat of 0.049894448571834386
+Iteration 80 final set is ['forest.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.07455490406951983
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0902019027590137
+Dropping beachsong.mp4 as still gave z-stat of 0.06930498666284833
+Dropping pingu.mp4 as still gave z-stat of 0.07425230270940916
+Dropping new_orleans.mp4 as still gave z-stat of 0.059053723879751246
+Dropping ratatouille.mp4 as still gave z-stat of 0.03986204369851791
+Dropping our_planet.mp4 as still gave z-stat of 0.07506356630865975
+Dropping bathsong.mp4 as still gave z-stat of 0.03419431447437751
+Iteration 81 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06442501371668637
+Dropping forest.mp4 as still gave z-stat of 0.07276029341331608
+Dropping our_planet.mp4 as still gave z-stat of 0.0700008184190716
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.048312271367512524
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.06484616334122514
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0438088332608547
+Dropping new_orleans.mp4 as still gave z-stat of 0.061313369365281
+Dropping real_cars.mp4 as still gave z-stat of 0.022110071753916147
+Iteration 82 final set is ['bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'bathsong.mp4', 'beachsong.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.09210789598234405
+Dropping new_orleans.mp4 as still gave z-stat of 0.07939778121305625
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04899551190533858
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.08736860008634813
+Dropping beachsong.mp4 as still gave z-stat of 0.07650861200090754
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.052284365434099846
+Dropping bathsong.mp4 as still gave z-stat of 0.049826175268637654
+Dropping bedtime.mp4 as still gave z-stat of 0.05318543581033885
+Iteration 83 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.06439497215204916
+Dropping bathsong.mp4 as still gave z-stat of 0.06602809312299258
+Dropping our_planet.mp4 as still gave z-stat of 0.08089187217157788
+Dropping real_cars.mp4 as still gave z-stat of 0.07032864740422312
+Dropping beachsong.mp4 as still gave z-stat of 0.0583909926114981
+Dropping forest.mp4 as still gave z-stat of 0.05404071969685204
+Dropping bedtime.mp4 as still gave z-stat of 0.03094339191515976
+Dropping new_orleans.mp4 as still gave z-stat of 0.07344905069966788
+Iteration 84 final set is ['rio_jungle_jig.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4']
+Dropping ratatouille.mp4 as still gave z-stat of 0.07725683289418336
+Dropping forest.mp4 as still gave z-stat of 0.05353136850097859
+Dropping beachsong.mp4 as still gave z-stat of 0.07346930688673084
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06631627692040303
+Dropping bathsong.mp4 as still gave z-stat of 0.07585868700492741
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.0528596317413431
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.04682449034651369
+Dropping moana.mp4 as still gave z-stat of 0.07106936443650713
+Iteration 85 final set is ['bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4']
+Dropping new_orleans.mp4 as still gave z-stat of 0.0661402698299858
+Dropping bathsong.mp4 as still gave z-stat of 0.07479695805916188
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.08142017233965067
+Dropping bedtime.mp4 as still gave z-stat of 0.05103682931077145
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.06338649607206083
+Dropping pingu.mp4 as still gave z-stat of 0.050384029424303256
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.08013535004693569
+Dropping ratatouille.mp4 as still gave z-stat of 0.03864667814740883
+Iteration 86 final set is ['forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.06009810355803711
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.055817798820071804
+Dropping our_planet.mp4 as still gave z-stat of 0.06449246875817272
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05629213991355369
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.08001584174082169
+Dropping new_orleans.mp4 as still gave z-stat of 0.05619925242200429
+Dropping ratatouille.mp4 as still gave z-stat of 0.044705262107063076
+Dropping moana.mp4 as still gave z-stat of 0.025721278100013074
+Iteration 87 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'beachsong.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.055111191354052895
+Dropping new_orleans.mp4 as still gave z-stat of 0.0742031072696823
+Dropping ratatouille.mp4 as still gave z-stat of 0.07301263219175722
+Dropping pingu.mp4 as still gave z-stat of 0.05911091188964949
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04303614488768091
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.03866674524200485
+Dropping beachsong.mp4 as still gave z-stat of 0.044001275967848995
+Dropping our_planet.mp4 as still gave z-stat of 0.03814830808261675
+Iteration 88 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'real_cars.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.06974389419313443
+Dropping new_orleans.mp4 as still gave z-stat of 0.05215753536458287
+Dropping pingu.mp4 as still gave z-stat of 0.08469480825842556
+Dropping our_planet.mp4 as still gave z-stat of 0.060343850646582015
+Dropping ratatouille.mp4 as still gave z-stat of 0.05176314600388085
+Dropping bathsong.mp4 as still gave z-stat of 0.07262348506908259
+Dropping bedtime.mp4 as still gave z-stat of 0.033300802755961346
+Dropping real_cars.mp4 as still gave z-stat of 0.05891664558653342
+Iteration 89 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping real_cars.mp4 as still gave z-stat of 0.0604744711022655
+Dropping bathsong.mp4 as still gave z-stat of 0.08061232547637318
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.060349484073400045
+Dropping moana.mp4 as still gave z-stat of 0.054995361832579616
+Dropping bedtime.mp4 as still gave z-stat of 0.046192240513181576
+Dropping pingu.mp4 as still gave z-stat of 0.05410410488631183
+Dropping forest.mp4 as still gave z-stat of 0.03360413978700857
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06231517300876376
+Iteration 90 final set is ['rio_jungle_jig.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping pingu.mp4 as still gave z-stat of 0.06979756613924788
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.07308015150687748
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07212965682694755
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.0668153022773391
+Dropping real_cars.mp4 as still gave z-stat of 0.05125526169726359
+Dropping new_orleans.mp4 as still gave z-stat of 0.05117595072184609
+Dropping beachsong.mp4 as still gave z-stat of 0.04975617628954521
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.022959810846614127
+Iteration 91 final set is ['bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'bathsong.mp4', 'our_planet.mp4', 'up_kevin_social.mp4']
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.048859198317468454
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.054021655482925354
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.07517932815425747
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05446860946612167
+Dropping pingu.mp4 as still gave z-stat of 0.05758379138444909
+Dropping ratatouille.mp4 as still gave z-stat of 0.042680604750230125
+Dropping new_orleans.mp4 as still gave z-stat of 0.0655715236040371
+Dropping bedtime.mp4 as still gave z-stat of 0.059163781434712584
+Iteration 92 final set is ['bedtime.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'real_cars.mp4', 'bathsong.mp4', 'our_planet.mp4', 'beachsong.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.05142640992689296
+Dropping pingu.mp4 as still gave z-stat of 0.05200922039552546
+Dropping real_cars.mp4 as still gave z-stat of 0.07461450731605729
+Dropping our_planet.mp4 as still gave z-stat of 0.05229299196404558
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.05232699275146449
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.05945309149305596
+Dropping moana.mp4 as still gave z-stat of 0.044436607519500494
+Dropping bathsong.mp4 as still gave z-stat of 0.03708192890968569
+Iteration 93 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'forest.mp4', 'ratatouille.mp4', 'bathsong.mp4', 'new_orleans.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.06802129967958517
+Dropping bathsong.mp4 as still gave z-stat of 0.05318858293791038
+Dropping pingu.mp4 as still gave z-stat of 0.05494986895363502
+Dropping forest.mp4 as still gave z-stat of 0.05815957696886682
+Dropping moana.mp4 as still gave z-stat of 0.07200871678372323
+Dropping our_planet.mp4 as still gave z-stat of 0.0978679469136606
+Dropping new_orleans.mp4 as still gave z-stat of 0.045991827920697205
+Dropping bedtime.mp4 as still gave z-stat of 0.04974861513676285
+Iteration 94 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'kids_kitchen.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.0954036477629059
+Dropping beachsong.mp4 as still gave z-stat of 0.0621308760411483
+Dropping bedtime.mp4 as still gave z-stat of 0.05968982936243498
+Dropping bathsong.mp4 as still gave z-stat of 0.07171777483191827
+Dropping forest.mp4 as still gave z-stat of 0.09620466477897004
+Dropping real_cars.mp4 as still gave z-stat of 0.040781123533857995
+Dropping our_planet.mp4 as still gave z-stat of 0.03883281790609144
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04982685031013183
+Iteration 95 final set is ['rio_jungle_jig.mp4', 'pingu.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'new_orleans.mp4', 'up_kevin_nonsocial.mp4']
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.0838650855494665
+Dropping forest.mp4 as still gave z-stat of 0.054616515769877305
+Dropping beachsong.mp4 as still gave z-stat of 0.0747455954402233
+Dropping new_orleans.mp4 as still gave z-stat of 0.06823531111140908
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.0746038075046762
+Dropping real_cars.mp4 as still gave z-stat of 0.06091306773620865
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.03751219226463458
+Dropping ratatouille.mp4 as still gave z-stat of 0.04989302481110396
+Iteration 96 final set is ['rio_jungle_jig.mp4', 'bedtime.mp4', 'pingu.mp4', 'moana.mp4', 'ratatouille.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'our_planet.mp4']
+Dropping moana.mp4 as still gave z-stat of 0.0955472851398811
+Dropping bathsong.mp4 as still gave z-stat of 0.06287632526855437
+Dropping new_orleans.mp4 as still gave z-stat of 0.07436512307017795
+Dropping minions_supermarket.mp4 as still gave z-stat of 0.04532203790608175
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.08409155747718622
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.11505522628249375
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.07768850967746206
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.07046489577813364
+Iteration 97 final set is ['bedtime.mp4', 'forest.mp4', 'pingu.mp4', 'ratatouille.mp4', 'real_cars.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Dropping pingu.mp4 as still gave z-stat of 0.04882490661748091
+Dropping new_orleans.mp4 as still gave z-stat of 0.07533383903630045
+Dropping our_planet.mp4 as still gave z-stat of 0.06281919706798275
+Dropping ratatouille.mp4 as still gave z-stat of 0.06410695976890074
+Dropping bathsong.mp4 as still gave z-stat of 0.06237947199270485
+Dropping beachsong.mp4 as still gave z-stat of 0.054725340528635445
+Dropping bedtime.mp4 as still gave z-stat of 0.05289930616900368
+Dropping up_kevin_nonsocial.mp4 as still gave z-stat of 0.04214460996597521
+Iteration 98 final set is ['rio_jungle_jig.mp4', 'forest.mp4', 'kids_kitchen.mp4', 'moana.mp4', 'minions_supermarket.mp4', 'real_cars.mp4', 'up_kevin_nonsocial.mp4', 'up_kevin_social.mp4']
+Dropping bedtime.mp4 as still gave z-stat of 0.06278684193456731
+Dropping moana.mp4 as still gave z-stat of 0.0711476621136623
+Dropping new_orleans.mp4 as still gave z-stat of 0.06332858636114765
+Dropping real_cars.mp4 as still gave z-stat of 0.053170163927484165
+Dropping rio_jungle_jig.mp4 as still gave z-stat of 0.056428054691755644
+Dropping ratatouille.mp4 as still gave z-stat of 0.041326854467563574
+Dropping kids_kitchen.mp4 as still gave z-stat of 0.04577766789969472
+Dropping up_kevin_social.mp4 as still gave z-stat of 0.05613301489166138
+Iteration 99 final set is ['forest.mp4', 'pingu.mp4', 'minions_supermarket.mp4', 'bathsong.mp4', 'up_kevin_nonsocial.mp4', 'our_planet.mp4', 'up_kevin_social.mp4', 'beachsong.mp4']
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Failing as not all columns in model!
+Failing as not all columns in model!
+/home/clionaodoherty/nilearn/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
+  warn('The nilearn.glm module is experimental. '
+/home/clionaodoherty/nilearn/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
